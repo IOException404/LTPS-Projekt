@@ -1,0 +1,13 @@
+<div class="ui middle sligned selection divided list">
+  <div class="content">
+    <div *ngFor="let question of mcFragen" class="header">
+      <!-- {{ question.mcFrage }} -->
+      <output>{{ question.mcFrage }}</output>
+
+        <div class="check" *ngFor="let answer of question.mcAntwort">
+          <input class="inputCheck" type="checkbox">{{ answer }}
+
+      </div>
+    </div>
+  </div>
+</div>
