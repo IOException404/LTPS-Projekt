@@ -5,7 +5,7 @@
       <output>{{ frage.txt }}</output>
       <div class="check">
         <div *ngFor="let answer of frage.ans">
-          <input name="{{ answer }}" type="checkbox" (change)="toggleChoosen($event, answer)">{{ answer.txt }}
+          <input name="{{ answer }}" type="checkbox" (change)="toggleChoosen(answer)">{{ answer.txt }}
         </div>
         <button (click)="CheckAnswers()">submit</button>
       </div>

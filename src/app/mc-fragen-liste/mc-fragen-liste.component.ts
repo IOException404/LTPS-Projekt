@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { element } from 'protractor';
 import { LPIsimService } from '../shared/lpisim.service';
 import { mcQuestion } from '../shared/questions';
 
@@ -71,18 +70,27 @@ export class McFragenListeComponent implements OnInit {
   }
 
   CheckAnswers(){
+    let fehler:boolean = false;
     for(let ele of this.frage.ans)
-      if(ele.choosen == true && ele.right == true){
+    {
+    if(ele.choosen == true && ele.right == true){
         console.log("Sie haben die Antwort " + ele.txt + "  korrekt angeklickt " + ele.choosen);
       } else {
         console.log("Sie haben die Antwort " + ele.txt + "  gerraten " + ele.choosen);
       }
 
+      if((ele.choosen && !ele.right) || (!ele.choosen && ele.right))
+      {
+        fehler = true;
+      }
+    }
   }
 
-  toggleChoosen($event, answer){
+  toggleChoosen(answer: any){
     answer.choosen = !answer.choosen;
   }
+
+
 }
 
 // pop und push array
