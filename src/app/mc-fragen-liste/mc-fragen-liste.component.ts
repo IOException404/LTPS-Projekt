@@ -73,9 +73,7 @@ export class McFragenListeComponent implements OnInit {
   CheckAnswers(){
     for(let ele of this.frage.ans)
       if(ele.choosen == true && ele.right == true){
-        if(ele.choosen != ele.right) {
         console.log("Sie haben die Antwort " + ele.txt + "  korrekt angeklickt " + ele.choosen);
-        }
       } else {
         console.log("Sie haben die Antwort " + ele.txt + "  gerraten " + ele.choosen);
       }
