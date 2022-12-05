@@ -86,3 +86,5 @@ export class McFragenListeComponent implements OnInit {
     answer.choosen = !answer.choosen;
   }
 }
+
+// pop und push array
