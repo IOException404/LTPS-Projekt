@@ -1,12 +1,14 @@
+<!--Home-Menu des Lernmodus-->
 <div *ngIf="viewState == 'default'">
   <div class="homeBox">
       <output class="ausgabe"><p class="textLern">Lernmodus</p></output>
       <button class="lernButton" (click)="changeMode('Lernmodus')">Starten</button><br>
-      <button class="lernButton" >Statistik</button><br>
+      <button class="lernButton" (click)="changeMode('Statistik')">Statistik</button><br>
       <button class="lernButton" routerLink="../home">Home</button>
   </div>
 </div>
 
+<!--Lern-Menu-->
 <div *ngIf="viewState == 'Lernmodus'">
   <div> {{ viewState }} </div>
   <div class="homeBox">
@@ -19,7 +21,15 @@
   </div>
 </div>
 
+<!-- Statistics -->
+<div *ngIf="viewState == 'Statistik'">
 
+  <div><h2>Multiple-Choice:</h2></div>
+  <button class="statistics">Zurück</button>
+</div>
+
+
+<!-- MULTIPLE CHOICE -->
 <div *ngIf="viewState == 'Multiple Choice'">
   <div>
     {{ viewState }}
@@ -44,12 +54,12 @@
   <div class="contentButton">
       <tr>
         <th >
-          <button (click)="prevFrage()">Zurück</button>
-          <button (click)="infoText()">Info</button>
+          <button (click)="prevFrage()">Zurück</button> <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
+          <button (click)="infoText()">Info</button>    <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
         </th>
         <th>
-          <button><a href="../lernen">Abbrechen</a></button>
-          <button (click)="checkAnswers()">Weiter</button>
+          <button (click)="sure()">Abbrechen</button> <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
+          <button (click)="checkAnswers()">Weiter</button>  <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
         </th>
       </tr>
   </div>

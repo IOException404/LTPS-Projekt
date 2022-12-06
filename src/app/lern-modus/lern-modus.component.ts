@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LPIsimService } from '../shared/lpisim.service';
 import { mcQuestion } from '../shared/questions';
 
-type ViewState = 'default' | 'Lernmodus' | 'Single Choice' | 'Fill-In' | 'Alle Fragen' | 'Multiple Choice'
+type ViewState = 'default' | 'Lernmodus' | 'Single Choice' | 'Fill-In' | 'Alle Fragen' | 'Multiple Choice' | 'Statistik'
 
 @Component({
   selector: 'lpic-lern-modus',
@@ -13,27 +14,25 @@ type ViewState = 'default' | 'Lernmodus' | 'Single Choice' | 'Fill-In' | 'Alle F
 export class LernModusComponent implements OnInit {
   // viewState
   viewState: ViewState = "default";
-
   // Alle Fragen
   mcFragen: mcQuestion[];
   // Einzelne Frage
   frage: mcQuestion;
   // Klick prev und next Variable
   currentArrayId: number = 0
-
   // Info und Inhalt Variable
   info: boolean = false;
-
   // Antworten richtig oder falsch
   solution: boolean;
 
-  constructor(private fs: LPIsimService) {
+
+  constructor(private fs: LPIsimService, public router: Router) {
 
   }
 
+  // Funktion zum navigieren des Menüs
   changeMode(eingabe: ViewState) {
     this.viewState = eingabe;
-    console.log(this.viewState);
   }
 
   ngOnInit(): void {
@@ -45,7 +44,7 @@ export class LernModusComponent implements OnInit {
     this.frage = this.mcFragen[this.currentArrayId];
   }
 
-  // Nächste Frage Button
+  // Nächste Frage-Button
   nextFrage() {
     // Solange der Zähler der Array Position nicht größer ist als die Positionen
     // der vorhanden Array-Fragen-Liste [0-9]
@@ -75,7 +74,7 @@ export class LernModusComponent implements OnInit {
   infoText() {
     this.info = !this.info;
   }
-
+  // Fragen richtig oder falsch Funktion
   checkAnswers() {
     let fehler:boolean = false;
     for(let ele of this.frage.ans) {
@@ -89,12 +88,21 @@ export class LernModusComponent implements OnInit {
     } else {
       window.confirm('Super, die Antwort war richtig!');
       fehler = false;
-
       this.nextFrage();
     }
   }
 
+  // Hier werden in der Checkbox die Boolean-werte beim auswählen ausgetauscht
   toggleChoosen(answer: any){
     answer.choosen = !answer.choosen;
+  }
+
+  // Wenn mitten in der Fragestellung abgebrochen wird
+  sure() {
+    let yes = window.confirm('Sind Sie sicher?');
+    if (yes == true) {
+      this.router.navigate(['../home']);
+      alert('Ihr Fortschritt wurde verworfen');
+    }
   }
 }

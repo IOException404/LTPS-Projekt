@@ -59,3 +59,10 @@
   border-width: 2px;
   border-color: red;
 }
+
+.statistics {
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  text-align: left;
+}

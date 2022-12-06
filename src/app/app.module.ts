@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { HomeMenuComponent } from './home-menu/home-menu.component';
 import { TestModusComponent } from './test-modus/test-modus.component';
 import { ExamModusComponent } from './exam-modus/exam-modus.component';
-import { StatistikComponent } from './statistik/statistik.component';
 import { LernModusComponent } from './lern-modus/lern-modus.component';
 
 @NgModule({
@@ -16,7 +15,6 @@ import { LernModusComponent } from './lern-modus/lern-modus.component';
     HomeMenuComponent,
     TestModusComponent,
     ExamModusComponent,
-    StatistikComponent,
     LernModusComponent
   ],
   imports: [
