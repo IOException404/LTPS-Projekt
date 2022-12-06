@@ -12,23 +12,15 @@ type ViewState = 'default' | 'Lernmodus' | 'Single Choice' | 'Fill-In' | 'Alle F
 })
 
 export class LernModusComponent implements OnInit {
-
   viewState: ViewState = "default"; // Menü Nagivationsvariable, default ist das Home-menü des jeweiligen Modies
   mcFragen: mcQuestion[]; // Alle Fragen
   frage: mcQuestion; // Einzelne Frage
   currentArrayId: number = 0  // Klick prev und next Variable
   info: boolean = false; // Info und Inhalt Variable
-
-
   falsch: number; // Variable zur Auswertung der Statistik
   richtig: number = 0; // Variable zur Auswertung der Statistik
 
-
-  constructor(private fs: LPIsimService, public router: Router) { // Routerfunktion für das Navigieren innerhalb von Typescript
-
-  }
-
-
+  constructor(private fs: LPIsimService, public router: Router) {} // Routerfunktion für das Navigieren innerhalb von Typescript und LPIsimService für die Fragenliste
 
   ngOnInit(): void {
     this.mcFragen = this.fs.getAll(); // Service Variable für alle Fragen, fs wird vom Constructor übergeben
@@ -36,18 +28,16 @@ export class LernModusComponent implements OnInit {
     this.frage = this.mcFragen[this.currentArrayId]; // Variable zum Auslesen der einzelnen Fragen
     }
 
-  // Funktion zum navigieren des Menüs
-  changeMode(eingabe: ViewState) {
+  changeMode(eingabe: ViewState) { // Funktion zum navigieren des Menüs
     this.viewState = eingabe; // Die Wertübergabe der 'eingabe' erfolgt durch das Klicken der Navigationsbuttons
   }
 
-  // Neu Starten
-  reload() {
-    window.location.reload(); // Alle Werte werden zurück gesetzt in dem die Seite komplett neu geladen wird!
+  reload() { // Restart-Funktion
+    window.location.reload(); // Alle Werte werden auf default gesetzt indem die Seite komplett neu geladen wird!
   }
 
   // Nächste Frage-Button
-  truelies: boolean; // Globale Variable für den Zurück-Button innerhalb der Fragestellungen
+  truelies: boolean; // Globale Variable für den Zurück-Button innerhalb der Fragestellungen, er erscheint erst wenn bereits eine Frage beantwortet wurde!
   targetReached: boolean = false; // Anfangs sind nicht alle Fragen beantwortet, daher 'false'
   nextFrage() {
     this.truelies = true; // <-- Zurück-Button erzeugen
@@ -85,7 +75,7 @@ export class LernModusComponent implements OnInit {
     for(let ele of this.frage.ans) { // Hier wird eine künstliche Liste der Antworten erstellt, szsgn. als Maske!
       if((ele.choosen && !ele.right) || (!ele.choosen && ele.right)) // Wenn die gewählte Antwort ungleich der Richtigen und die falsche Antwort ungleich der Richtigen ist, dann...
       {
-        fehler = true; // Fehler...
+        fehler = true; // Falsche Antwort!!!
       }
     }
     if(fehler) { // Die 'fehler'-Variable='false' wird hier übergeben!
@@ -102,13 +92,12 @@ export class LernModusComponent implements OnInit {
     answer.choosen = !answer.choosen; // Beim Auswählen und abwählen werden die Werte jeweil auf 'true' oder 'false'
   }
 
-
   exit() { // Wenn mitten in der Fragestellung abgebrochen wird, wird diese Funktion aufgerufen!
     let yes = window.confirm('Sind Sie sicher?'); // Popup für eine 'true'- oder 'false'-Eingabe
     if (yes == true) { // Sobald 'Ok' geklickt wird!
-      this.router.navigate(['../home']); // Nach dem 'Ok' Klick wird zum Home-Template Navigiert, wenn nicht passiert nichts...
+      this.router.navigate(['../home']); // Nachdem 'Ok'-Klick wird zum Home-Template Navigiert, wenn nicht passiert nichts...
       alert('Ihr Fortschritt wurde verworfen'); // Hinweis für die Verwerfung aller bisher eingebenen Antworten
-      window.location.reload(); // Seite wird neu geladen und alle Werte auf default gesetzt!!!
+      window.location.reload(); // Template wird neu geladen und alle Werte auf default gesetzt!!!
     }
   }
 
