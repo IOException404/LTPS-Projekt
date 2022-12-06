@@ -10,9 +10,8 @@
 
 <!--Lern-Menu-->
 <div *ngIf="viewState == 'Lernmodus'">
-  <div> {{ viewState }} </div>
   <div class="homeBox">
-    <output class="ausgabe"><p class="textStart">Lernmodus</p></output>
+    <output class="ausgabe"><p class="textLern">Lernmodus</p></output>
       <button class="lernButton" (click)="changeMode('Multiple Choice')">Multiple Choice</button><br>
       <button class="lernButton" (click)="changeMode('Single Choice')">Single Choice</button><br>
       <button class="lernButton" (click)="changeMode('Fill-In')">Fill-In</button><br>
@@ -23,11 +22,16 @@
 
 <!-- Statistics -->
 <div *ngIf="viewState == 'Statistik'">
-  <div><h2>Multiple-Choice:</h2><br><h3>Werte</h3></div>
-  <div><h2>Single-Choice:</h2><br><h3>Werte</h3></div>
-  <div><h2>Fill-In:</h2><br><h3>Werte</h3></div>
-  <div><h2>Insgesamt:</h2><br><h3>Werte</h3></div>
-  <button class="statistics" routerLink="../home">Zurück</button>
+  <output class="ausgabe"><p class="textLern">Lernmodus</p></output>
+  <div><h2>Multiple-Choice:</h2>
+    <h3 [ngStyle]="{'color':'green'}"> {{ this.richtig }} von {{ mcFragen.length }} richtig! </h3><br></div><br>
+  <div><h2>Single-Choice:</h2>
+    <h3 [ngStyle]="{'color':'green'}">Werte</h3><br></div><br>
+  <div><h2>Fill-In:</h2>
+    <h3 [ngStyle]="{'color':'green'}">Werte</h3><br></div><br>
+  <div><h2>Insgesamt:</h2>
+    <h3 [ngStyle]="{'color':'green'}">Werte</h3><br></div><br>
+  <button class="statistics" (click)="changeMode('default')">Zurück</button>
 </div>
 
 
@@ -35,6 +39,7 @@
 <div *ngIf="viewState == 'Multiple Choice'">
   <div>
     {{ viewState }}
+    <p>{{currentArrayId+1}} of {{ mcFragen.length }}</p>
     <div class="header">
       <output>{{ frage.txt }}</output>
       <div class="check">
@@ -42,7 +47,7 @@
           <!-- Checked if else Anweisung über Angular -->
            <!-- Falls Antworten nicht angeklickt, dann hier -->
           <div *ngIf="!answer.choosen; else elseblock">
-            <input name="{{ answer }}" type="checkbox" (change)="toggleChoosen(answer)">{{ answer.txt }}
+            <input name="{{ answer }}" type="checkbox" (change)="toggleChoosen(answer); calc(answer)">{{ answer.txt }}
           </div>
           <!-- Falls Antworten angeklickt wurden, dann ersetzt der Template-Block den Input im darüberliegenden Div -->
           <ng-template #elseblock>
@@ -52,7 +57,7 @@
       </div>
     </div>
   </div>
-
+  <!-- Buttonbereich und Funktionsbereich von Multiple-Choice -->
   <div class="contentButton">
       <tr>
         <th>
@@ -60,8 +65,9 @@
           <button (click)="infoText()">Info</button>    <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
         </th>
         <th>
-          <button (click)="sure()">Abbrechen</button> <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
-          <button (click)="checkAnswers()">Weiter</button>  <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
+          <button (click)="exit()">Abbrechen</button> <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
+          <button *ngIf="!targetReached; else elseblock" (click)="checkAnswers()">Weiter</button>  <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
+          <button (click)="checkAnswers(); changeMode('Statistik')">Auswerten</button> <!-- Button zum auswerten und springt in die Statistik wenn alle Fragen beantwortet wurden -->
         </th>
       </tr>
   </div>

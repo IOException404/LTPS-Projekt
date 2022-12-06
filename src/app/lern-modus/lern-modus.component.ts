@@ -22,18 +22,17 @@ export class LernModusComponent implements OnInit {
   currentArrayId: number = 0
   // Info und Inhalt Variable
   info: boolean = false;
-  // Antworten richtig oder falsch
-  solution: boolean;
+
+
+  falsch: number; // Variable zur Auswertung der Statistik
+  richtig: number = 0; // Variable zur Auswertung der Statistik
 
 
   constructor(private fs: LPIsimService, public router: Router) {
 
   }
 
-  // Funktion zum navigieren des Menüs
-  changeMode(eingabe: ViewState) {
-    this.viewState = eingabe;
-  }
+
 
   ngOnInit(): void {
     // Service Variable für alle Fragen
@@ -42,19 +41,30 @@ export class LernModusComponent implements OnInit {
     this.currentArrayId = 0;
     // Variable zum Auslesen der einzelnen Fragen
     this.frage = this.mcFragen[this.currentArrayId];
+    }
+
+  // Funktion zum navigieren des Menüs
+  changeMode(eingabe: ViewState) {
+    this.viewState = eingabe;
+  }
+
+  // Neu Starten
+  reload() {
+    window.location.reload();
   }
 
   // Nächste Frage-Button
   truelies: boolean; // <-- Variable für den Zurück-Button
+  targetReached: boolean = false;
   nextFrage() {
     this.truelies = true; // <-- Zurück-Button erzeugen
-    // Solange der Zähler der Array Position nicht größer ist als die Positionen
-    // der vorhanden Array-Fragen-Liste [0-9]
-    if(this.currentArrayId < this.mcFragen.length-1) {
-      // Frage hochzählen
-      this.currentArrayId += 1;
+    if(this.currentArrayId < this.mcFragen.length-1) { // Zähler ist nicht größer als ArrayAnzahl/Position der Fragen
+      this.currentArrayId += 1; // Frage hochzählen
       this.frage = this.mcFragen[this.currentArrayId];
       this.info = false; // Info Text zurücksetzen
+    }
+    if(this.currentArrayId >= this.mcFragen.length-1) {
+      this.targetReached = true;
     }
   }
 
@@ -66,17 +76,19 @@ export class LernModusComponent implements OnInit {
       this.currentArrayId -= 1; // Frage zurück zählen
       this.frage = this.mcFragen[this.currentArrayId];
       this.info = false; // Info Text zurück setzen
+      this.richtig -= 1;
     }
     if(this.currentArrayId < 1){ // <-- Zurück Button wieder verstecken
       this.truelies = false;
     }
   }
 
-  // Info Text für die richtigen Antworten
+  // Info Text für die richtigen Antworten ein- und ausschalten
   infoText() {
     this.info = !this.info;
   }
   // Fragen richtig oder falsch Funktion
+
   checkAnswers() {
     let fehler:boolean = false;
     for(let ele of this.frage.ans) {
@@ -90,23 +102,29 @@ export class LernModusComponent implements OnInit {
     } else {
       window.confirm('Super, die Antwort war richtig!');
       fehler = false;
+      this.richtig += 1;
       this.nextFrage();
     }
   }
 
-  // Hier werden in der Checkbox die Boolean-werte beim auswählen ausgetauscht
+  // Hier werden in der Checkbox die Boolean-Werte beim auswählen ausgetauscht
   toggleChoosen(answer: any){
     answer.choosen = !answer.choosen;
   }
 
   // Wenn mitten in der Fragestellung abgebrochen wird
-  sure() {
+  exit() {
     let yes = window.confirm('Sind Sie sicher?');
     if (yes == true) {
-      this.router.navigate(['../home']);
-      alert('Ihr Fortschritt wurde verworfen');
+      this.router.navigate(['../home']); // Nach dem Click zurück zum Home-Template
+      alert('Ihr Fortschritt wurde verworfen'); // Statistik Berechnung wird verworfen
+      window.location.reload();
     }
   }
 
-  // Werte berechnen
+  // Ergebnisse berechnen
+  calc() {
+    let ergebnis = this.richtig;
+    return ergebnis;
+  }
 }

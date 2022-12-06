@@ -66,3 +66,10 @@
   align-items: left;
   text-align: left;
 }
+
+.countQuestions {
+  display: flex;
+  justify-content: right;
+  align-items: right;
+  text-align: right;
+}
