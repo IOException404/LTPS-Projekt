@@ -105,4 +105,6 @@ export class LernModusComponent implements OnInit {
       alert('Ihr Fortschritt wurde verworfen');
     }
   }
+
+  // Werte berechnen
 }
