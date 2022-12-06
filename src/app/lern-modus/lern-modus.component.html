@@ -24,7 +24,7 @@
 <div *ngIf="viewState == 'Statistik'">
   <output class="ausgabe"><p class="textLern">Lernmodus</p></output>
   <div><h2>Multiple-Choice:</h2>
-    <h3 [ngStyle]="{'color':'green'}"> {{ this.richtig }} von {{ mcFragen.length }} richtig! </h3><br></div><br>
+    <h3 [ngStyle]="{'color':'green'}"> {{ this.richtig }} von {{ mcFragen.length }} richtig!<br> {{ calc() }} % </h3><br></div><br>
   <div><h2>Single-Choice:</h2>
     <h3 [ngStyle]="{'color':'green'}">Werte</h3><br></div><br>
   <div><h2>Fill-In:</h2>
@@ -67,7 +67,7 @@
         <th>
           <button (click)="exit()">Abbrechen</button> <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
           <button *ngIf="!targetReached; else elseblock" (click)="checkAnswers()">Weiter</button>  <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
-          <button (click)="checkAnswers(); changeMode('Statistik')">Auswerten</button> <!-- Button zum auswerten und springt in die Statistik wenn alle Fragen beantwortet wurden -->
+          <button  (click)="checkAnswers(); changeMode('Statistik')">Auswerten</button> <!-- Button zum auswerten und springt in die Statistik wenn alle Fragen beantwortet wurden -->
         </th>
       </tr>
   </div>
