@@ -1,7 +1,59 @@
+<div *ngIf="viewState == 'default'">
   <div class="homeBox">
-    <output class="ausgabe"><p class="textLern">Lernmodus</p></output>
-      <button class="lernButton" routerLink="../starten">Starten</button><br>
-      <button class="lernButton">Options</button><br>
-      <button class="lernButton">Statistik</button><br>
+      <output class="ausgabe"><p class="textLern">Lernmodus</p></output>
+      <button class="lernButton" (click)="changeMode('Lernmodus')">Starten</button><br>
+      <button class="lernButton" >Statistik</button><br>
       <button class="lernButton" routerLink="../home">Home</button>
   </div>
+</div>
+
+<div *ngIf="viewState == 'Lernmodus'">
+  <div> {{ viewState }} </div>
+  <div class="homeBox">
+    <output class="ausgabe"><p class="textStart">Lernmodus</p></output>
+      <button class="lernButton" (click)="changeMode('Multiple Choice')">Multiple Choice</button><br>
+      <button class="lernButton" (click)="changeMode('Single Choice')">Single Choice</button><br>
+      <button class="lernButton" (click)="changeMode('Fill-In')">Fill-In</button><br>
+      <button class="lernButton" (click)="changeMode('Alle Fragen')">Alle Fragen</button><br>
+      <button class="lernButton" (click)="changeMode('default')">Abbrechen</button>
+  </div>
+</div>
+
+
+<div *ngIf="viewState == 'Multiple Choice'">
+  <div>
+    {{ viewState }}
+    <div class="header">
+      <output>{{ frage.txt }}</output>
+      <div class="check">
+        <div *ngFor="let answer of frage.ans">
+          <!-- Checked if else Anweisung über Angular -->
+           <!-- Falls Antworten nicht angeklickt, dann hier -->
+          <div *ngIf="!answer.choosen; else elseblock">
+            <input name="{{ answer }}" type="checkbox" (change)="toggleChoosen(answer)">{{ answer.txt }}
+          </div>
+          <!-- Falls Antworten angeklickt wurden, dann ersetzt der Template-Block den Input im darüberliegenden Div -->
+          <ng-template #elseblock>
+            <input name="{{ answer }}" type="checkbox" checked (change)="toggleChoosen(answer)">{{ answer.txt }}
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contentButton">
+      <tr>
+        <th >
+          <button (click)="prevFrage()">Zurück</button>
+          <button (click)="infoText()">Info</button>
+        </th>
+        <th>
+          <button><a href="../lernen">Abbrechen</a></button>
+          <button (click)="checkAnswers()">Weiter</button>
+        </th>
+      </tr>
+  </div>
+  <div class="solution" *ngIf="info">
+    {{ frage.info }}
+  </div>
+</div>

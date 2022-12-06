@@ -27,13 +27,13 @@ export class LPIsimService {
         id:1,
         txt:"QUESTION 7: Which of the following connection types, as seen in nmcli connection show, may exist in NetworkManager? (Choose three.)",
         ans: [ {txt:"A. tcp", right: false, choosen:false }, {txt:"B. ethernet", right: true, choosen:false }, {txt:"C. wifi", right: true, choosen:false }, {txt:"D. ipv6", right: false, choosen:false }, {txt:"E. bridge", right: true, choosen:false }],
-        info: "info"
+        info: "Die Antworten sind: B-C-E"
       },
       {
         id:2,
         txt:"QUESTION 10: Which of the following nmcli subcommands exist? (Choose two.)",
         ans: [{txt:'A. nmcli ethernet', right:false, choosen:false  },  { txt:'B. nmcli device', right: true, choosen:false }, { txt:'C. nmcli wifi', right: false, choosen:false  }, { txt:'D. nmcli address', right: false, choosen:false  }, { txt:'E. nmcli connection', right:true, choosen:false  }],
-        info: "info"
+        info: "Die Antworten sind: B-E"
       }
     ]
    }

@@ -1,9 +1,3 @@
-// export interface Question {
-//   mcFrage: string;
-//   mcAntwort: string[];
-//   solution: string;
-// }
-
 export interface mcQuestion{
   id:number;
   txt:string;
