@@ -45,28 +45,30 @@ export class LernModusComponent implements OnInit {
   }
 
   // Nächste Frage-Button
+  truelies: boolean; // <-- Variable für den Zurück-Button
   nextFrage() {
+    this.truelies = true; // <-- Zurück-Button erzeugen
     // Solange der Zähler der Array Position nicht größer ist als die Positionen
     // der vorhanden Array-Fragen-Liste [0-9]
     if(this.currentArrayId < this.mcFragen.length-1) {
       // Frage hochzählen
       this.currentArrayId += 1;
       this.frage = this.mcFragen[this.currentArrayId];
-      // Info Text zurück setzen
-      this.info = false;
+      this.info = false; // Info Text zurücksetzen
     }
   }
 
-  // Vorherige Frage Button
+  // Vorherige Frage-Button
   prevFrage() {
     // Solange der Zähler der Array Position nicht kleiner ist als die Positionen
     // der vorhanden Array-Fragen-Liste [0-9]
     if(this.currentArrayId > 0) {
-      // Frage zurück zählen
-      this.currentArrayId -= 1;
+      this.currentArrayId -= 1; // Frage zurück zählen
       this.frage = this.mcFragen[this.currentArrayId];
-      // Info Text zurück setzen
-      this.info = false;
+      this.info = false; // Info Text zurück setzen
+    }
+    if(this.currentArrayId < 1){ // <-- Zurück Button wieder verstecken
+      this.truelies = false;
     }
   }
 

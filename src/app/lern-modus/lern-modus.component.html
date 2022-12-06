@@ -55,8 +55,8 @@
 
   <div class="contentButton">
       <tr>
-        <th >
-          <button (click)="prevFrage()">Zurück</button> <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
+        <th>
+          <button *ngIf="truelies == true"  (click)="prevFrage()">Zurück</button><!-- Manipulation von viewState in Lern-Modus.Component.ts -->
           <button (click)="infoText()">Info</button>    <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
         </th>
         <th>
