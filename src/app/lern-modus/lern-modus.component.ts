@@ -28,7 +28,7 @@ export class LernModusComponent implements OnInit {
 
   ngOnInit(): void {
     this.mcFragen = this.fs.mcAll(); // Service Callback-Funktion Multiple-Choice
-    this.scFragen = this.fs.scAll(); // Service Callback-Funktion Single-Choilce
+    this.scFragen = this.fs.scAll(); // Service Callback-Funktion Single-Choice
     this.currentArrayId = 0; // Varibale zum setzen der Array Position
     this.mcQuest = this.mcFragen[this.currentArrayId]; // Variable zum Auslesen der einzelnen Fragen
     }
@@ -56,10 +56,7 @@ export class LernModusComponent implements OnInit {
     }
   }
 
-  // Vorherige Frage-Button
-  prevFrage() {
-    // Solange der Zähler der Array Position nicht kleiner ist als die Positionen
-    // der vorhanden Array-Fragen-Liste [0-9]
+  prevFrage() { // Vorherige Frage-Button
     if(this.currentArrayId > 0) { // Unter Null gibt es keine Fragen!!!
       this.currentArrayId -= 1; // Frage zurück zählen
       this.mcQuest = this.mcFragen[this.currentArrayId]; // Id der mcFragen werden gleichgesetzt
