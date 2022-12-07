@@ -31,7 +31,7 @@
     <h3 [ngStyle]="{'color':'green'}">Werte</h3><br></div><br>
   <div><h2>Insgesamt:</h2>
     <h3 [ngStyle]="{'color':'green'}">Werte</h3><br></div><br>
-  <button class="statistics" (click)="changeMode('default')">Zurück</button>
+  <button class="statistics" (click)="reset(); changeMode('default')">Zurück</button>
 </div>
 
 
@@ -66,8 +66,8 @@
         </th>
         <th>
           <button (click)="exit()">Abbrechen</button> <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
-          <button *ngIf="!targetReached; else elseblock" (click)="checkAnswers()">Weiter</button>  <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
-          <button  (click)="checkAnswers(); changeMode('Statistik')">Auswerten</button> <!-- Button zum auswerten und springt in die Statistik wenn alle Fragen beantwortet wurden -->
+          <button *ngIf="!targetReached" (click)="checkAnswers()">Weiter</button>  <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
+          <button *ngIf="targetReached" (click)="checkAnswers(); changeMode('Statistik')">Auswerten</button> <!-- Button zum auswerten und springt in die Statistik wenn alle Fragen beantwortet wurden -->
         </th>
       </tr>
   </div>
@@ -75,3 +75,5 @@
     {{ mcQuest.info }}
   </div>
 </div>
+
+<!-- SINGLE CHOICE -->

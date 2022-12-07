@@ -102,6 +102,10 @@ export class LernModusComponent implements OnInit {
     }
   }
 
+  reset() {
+    window.location.reload();
+  }
+
   calc() { // Funktion für die Berechnung der Ergebnisse
     let prozent = this.richtig * 100 / this.mcFragen.length; // Prozentsatz der richtig beantworteten Fragen!
     return prozent; // Wert muss zurückgeben werden um diese im Template zu realisieren!
