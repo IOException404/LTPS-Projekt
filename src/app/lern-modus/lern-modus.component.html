@@ -41,9 +41,9 @@
     {{ viewState }}
     <p>{{currentArrayId+1}} of {{ mcFragen.length }}</p>
     <div class="header">
-      <output>{{ frage.txt }}</output>
+      <output>{{ mcQuest.txt }}</output>
       <div class="check">
-        <div *ngFor="let answer of frage.ans">
+        <div *ngFor="let answer of mcQuest.ans">
           <!-- Checked if else Anweisung über Angular -->
            <!-- Falls Antworten nicht angeklickt, dann hier -->
           <div *ngIf="!answer.choosen; else elseblock">
@@ -72,6 +72,6 @@
       </tr>
   </div>
   <div class="solution" *ngIf="info">
-    {{ frage.info }}
+    {{ mcQuest.info }}
   </div>
 </div>
