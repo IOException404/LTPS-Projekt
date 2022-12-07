@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { mcQuestion } from '../shared/questions';
+import { mcQuestion, scQuestion } from '../shared/questions';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +7,7 @@ import { mcQuestion } from '../shared/questions';
 
 export class LPIsimService {
   mcFragen: mcQuestion[];
+  scFragen: scQuestion[];
 
   constructor() {
     this.mcFragen = [
@@ -31,10 +32,31 @@ export class LPIsimService {
       {
         id:4,
         txt:"QUESTION 13: Which of the following IPv4 networks are reserved by IANA for private address assignment and private routing? (Choose three.)",
-        ans: [{txt:'A. 10.0.0.0/8', right:true, choosen:false},  { txt:'B. 127.0.0.0/8', right: false, choosen:false}, { txt:'C. 169.255.0.0/16', right: false, choosen:false  }, { txt:'D. 172.16.0.0/12', right: true, choosen:false  }, { txt:'E. 192.168.0.0/16', right:true, choosen:false  }],
+        ans: [{txt:'A. 10.0.0.0/8', right:true, choosen:false},  { txt:'B. 127.0.0.0/8', right: false, choosen:false }, { txt:'C. 169.255.0.0/16', right: false, choosen:false  }, { txt:'D. 172.16.0.0/12', right: true, choosen:false  }, { txt:'E. 192.168.0.0/16', right:true, choosen:false  }],
         info: "Die Antworten sind: A-D-E"
       }
     ]
+    this.scFragen = [
+      {
+        id:1,
+        txt:"QUESTION 2: Which of the following is a valid IPv6 address?",
+        ans: [{txt:'A. 2001:db8:0g21::1', right: false, choosen:false }, {txt:'B. 2001::db8:4581::1', right: false, choosen:false }, {txt:'C. 2001:db8:3241::1', right: true, choosen:false }, {txt:'D. 2001%db8%9990%%1', right: false, choosen:false }, {txt:'E. 2001.db8.819f..1', right: false, choosen:false }],
+        info: "Die Antwort ist: C"
+      },
+      {
+        id:1,
+        txt:"QUESTION 5: Which of the following tools, used for DNS debugging, reports not only the response from the name sever but also details about the query?",
+        ans: [{txt:'A. dnsq', right: false, choosen:false }, {txt:'B. hostname', right: false, choosen:false }, {txt:'C. dig', right: true, choosen:false }, {txt:'D. dnslookup', right: false, choosen:false }, {txt:'E. zoneinfo', right: false, choosen:false }],
+        info: "Die Antwort ist: C"
+      },
+      {
+        id:1,
+        txt:"QUESTION 6: Which of the following statements is valid in the file /etc/nsswitch.conf?",
+        ans: [{txt:'A. multi on', right: false, choosen:false }, {txt:'B. 192.168.168.4 dns-server', right: false, choosen:false }, {txt:'C. namespaces: net mount procs', right: false, choosen:false }, {txt:'D. include /etc/nsswitch.d/', right: false, choosen:false }, {txt:'E. hosts: files dns', right: true, choosen:false }],
+        info: "Die Antwort ist: C"
+      }
+    ]
+
    }
    getAll(): mcQuestion[] {
     return this.mcFragen;
