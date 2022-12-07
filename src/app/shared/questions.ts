@@ -12,7 +12,6 @@ export interface scQuestion{
   info:string;
 }
 
-
 export interface Answer{
   txt:string;
   right:boolean;

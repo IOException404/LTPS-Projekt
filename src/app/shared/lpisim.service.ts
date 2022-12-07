@@ -58,7 +58,10 @@ export class LPIsimService {
     ]
 
    }
-   getAll(): mcQuestion[] {
+   mcAll(): mcQuestion[] {
     return this.mcFragen;
+   }
+   scAll(): scQuestion[] {
+    return this.scFragen;
    }
 }

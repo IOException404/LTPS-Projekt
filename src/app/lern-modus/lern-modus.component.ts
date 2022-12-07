@@ -15,7 +15,10 @@ export class LernModusComponent implements OnInit {
   viewState: ViewState = "default"; // Menü Nagivationsvariable, default ist das Home-menü des jeweiligen Modies
   mcFragen: mcQuestion[]; // Alle Multiple-Choice-Fragen
   scFragen: scQuestion[]; // Alle Single-Choice-Fragen
-  mcQuest: mcQuestion; // Einzelne  Frage
+
+  mcQuest: mcQuestion; // Einzelne Multiple-Choice-Frage
+  scQuest: scQuestion; // Einzelne Single-Choice-Frage
+
   currentArrayId: number = 0  // Klick prev und next Variable
   info: boolean = false; // Info und Inhalt Variable
   falsch: number; // Variable zur Auswertung der Statistik
@@ -24,7 +27,8 @@ export class LernModusComponent implements OnInit {
   constructor(private fs: LPIsimService, public router: Router) {} // Routerfunktion für das Navigieren innerhalb von Typescript und LPIsimService für die Fragenliste
 
   ngOnInit(): void {
-    this.mcFragen = this.fs.getAll(); // Service Variable für alle Fragen, fs wird vom Constructor übergeben
+    this.mcFragen = this.fs.mcAll(); // Service Callback-Funktion Multiple-Choice
+    this.scFragen = this.fs.scAll(); // Service Callback-Funktion Single-Choilce
     this.currentArrayId = 0; // Varibale zum setzen der Array Position
     this.mcQuest = this.mcFragen[this.currentArrayId]; // Variable zum Auslesen der einzelnen Fragen
     }
