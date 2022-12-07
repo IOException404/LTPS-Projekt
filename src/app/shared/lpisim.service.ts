@@ -40,7 +40,7 @@ export class LPIsimService {
       {
         id:1,
         txt:"QUESTION 2: Which of the following is a valid IPv6 address?",
-        ans: [{txt:'A. 2001:db8:0g21::1', right: false, choosen:false }, {txt:'B. 2001::db8:4581::1', right: false, choosen:false }, {txt:'C. 2001:db8:3241::1', right: true, choosen:false }, {txt:'D. 2001%db8%9990%%1', right: false, choosen:false }, {txt:'E. 2001.db8.819f..1', right: false, choosen:false }],
+        ans: [{txt:'A. 2001:db8:0g21::1', right:false, choosen:false }, {txt:'B. 2001::db8:4581::1', right: false, choosen:false }, {txt:'C. 2001:db8:3241::1', right: true, choosen:false }, {txt:'D. 2001%db8%9990%%1', right: false, choosen:false }, {txt:'E. 2001.db8.819f..1', right: false, choosen:false }],
         info: "Die Antwort ist: C"
       },
       {
