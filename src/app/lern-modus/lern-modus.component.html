@@ -7,6 +7,7 @@
       <button class="lernButton" routerLink="../home">Home</button>
   </div>
 </div>
+<!-- ENDE -->
 
 <!--Lern-Menu-->
 <div *ngIf="viewState == 'Lernmodus'">
@@ -19,21 +20,23 @@
       <button class="lernButton" (click)="changeMode('default')">Abbrechen</button>
   </div>
 </div>
+<!-- ENDE -->
+
 
 <!-- Statistics -->
 <div *ngIf="viewState == 'Statistik'">
   <output class="ausgabe"><p class="textLern">Lernmodus</p></output>
   <div><h2>Multiple-Choice:</h2>
-    <h3 [ngStyle]="{'color':'green'}"> {{ this.richtig }} von {{ mcFragen.length }} richtig!<br> {{ calc() }} % </h3><br></div><br>
+    <h3 *ngIf="multi == true" [ngStyle]="{'color':'green'}"> {{ this.currentArrayId+1 }} von {{ mcFragen.length }} richtig!<br> {{ this.mcProzent }} % </h3><br></div><br>
   <div><h2>Single-Choice:</h2>
-    <h3 [ngStyle]="{'color':'green'}">Werte</h3><br></div><br>
+    <h3 *ngIf="single == true" [ngStyle]="{'color':'green'}"> {{ this.currentArrayId+1 }} von {{ scFragen.length }} richtig<br> {{ this.scProzent }} %</h3><br></div><br>
   <div><h2>Fill-In:</h2>
     <h3 [ngStyle]="{'color':'green'}">Werte</h3><br></div><br>
   <div><h2>Insgesamt:</h2>
     <h3 [ngStyle]="{'color':'green'}">Werte</h3><br></div><br>
-  <button class="statistics" (click)="reset(); changeMode('default')">Zurück</button>
+  <button class="statistics" (click)="changeMode('default')">Zurück</button>
 </div>
-
+<!-- ENDE -->
 
 <!-- MULTIPLE CHOICE -->
 <div *ngIf="viewState == 'Multiple Choice'">
@@ -57,17 +60,17 @@
       </div>
     </div>
   </div>
-  <!-- Buttonbereich und Funktionsbereich von Multiple-Choice -->
+  <!-- Button- und Funktionsbereich von Multiple-Choice -->
   <div class="contentButton">
       <tr>
         <th>
-          <button *ngIf="truelies == true"  (click)="prevFrage()">Zurück</button><!-- Manipulation von viewState in Lern-Modus.Component.ts -->
+          <button *ngIf="back == true"  (click)="prevFrage()">Zurück</button><!-- Manipulation von viewState in Lern-Modus.Component.ts -->
           <button (click)="infoText()">Info</button>    <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
         </th>
         <th>
           <button (click)="exit()">Abbrechen</button> <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
-          <button *ngIf="!targetReached" (click)="checkAnswers()">Weiter</button>  <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
-          <button *ngIf="targetReached" (click)="checkAnswers(); changeMode('Statistik')">Auswerten</button> <!-- Button zum auswerten und springt in die Statistik wenn alle Fragen beantwortet wurden -->
+          <button *ngIf="!targetReached" (click)="mcAnswersCheck()">Weiter</button>  <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
+          <button *ngIf="targetReached" (click)="mcAnswersCheck(); changeMode('Statistik')">Auswerten</button> <!-- Button zum auswerten und springt in die Statistik wenn alle Fragen beantwortet wurden -->
         </th>
       </tr>
   </div>
@@ -75,5 +78,44 @@
     {{ mcQuest.info }}
   </div>
 </div>
+<!-- ENDE -->
 
 <!-- SINGLE CHOICE -->
+<div *ngIf="viewState == 'Single Choice'">
+  <div>
+    {{ viewState }}
+    <p>{{currentArrayId+1}} of {{ scFragen.length }}</p>
+    <div class="header">
+      <output>{{ scQuest.txt }}</output>
+      <div class="check">
+        <div *ngFor="let answer of scQuest.ans">
+          <div>
+            <input name="{{ answer }}" type="radio" (change)="checkRadio(answer); calc(answer)">{{ answer.txt }}
+          </div>
+          <!-- Falls Antworten angeklickt wurden, dann ersetzt der Template-Block den Input im darüberliegenden Div -->
+          <!-- <ng-template #elseblock>
+            <input name="{{ answer }}" type="radio" checked (change)="choosenRadio(answer)">{{ answer.txt }}
+          </ng-template> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Button- und Funktionsbereich von Single Choice -->
+  <div class="contentButton">
+      <tr>
+        <th>
+          <button *ngIf="back == true"  (click)="prevFrage()">Zurück</button><!-- Manipulation von viewState in Lern-Modus.Component.ts -->
+          <button (click)="infoText()">Info</button>    <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
+        </th>
+        <th>
+          <button (click)="exit()">Abbrechen</button> <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
+          <button *ngIf="!targetReached" (click)="scAnswersCheck()">Weiter</button>  <!-- Manipulation von viewState in Lern-Modus.Component.ts -->
+          <button *ngIf="targetReached" (click)="scAnswersCheck(); changeMode('Statistik')">Auswerten</button> <!-- Button zum auswerten und springt in die Statistik wenn alle Fragen beantwortet wurden -->
+        </th>
+      </tr>
+  </div>
+  <div class="solution" *ngIf="info">
+    {{ scQuest.info }}
+  </div>
+</div>
+<!-- ENDE -->

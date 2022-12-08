@@ -53,7 +53,7 @@ export class LPIsimService {
         id:1,
         txt:"QUESTION 6: Which of the following statements is valid in the file /etc/nsswitch.conf?",
         ans: [{txt:'A. multi on', right: false, choosen:false }, {txt:'B. 192.168.168.4 dns-server', right: false, choosen:false }, {txt:'C. namespaces: net mount procs', right: false, choosen:false }, {txt:'D. include /etc/nsswitch.d/', right: false, choosen:false }, {txt:'E. hosts: files dns', right: true, choosen:false }],
-        info: "Die Antwort ist: C"
+        info: "Die Antwort ist: E"
       }
     ]
 
