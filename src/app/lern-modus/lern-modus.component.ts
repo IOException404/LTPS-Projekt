@@ -26,14 +26,20 @@ export class LernModusComponent implements OnInit {
 
   allQuest = [];
   pushAll() {
-    this.allQuest.push(this.mcFragen);
-    this.allQuest.push(this.scFragen);
-    this.allQuest.push(this.fillFragen);
-    console.log(this.allQuest)
+    for (let ele of this.mcFragen) {
+      this.allQuest.push(ele);
+    }
+    for (let ele of this.scFragen) {
+      this.allQuest.push(ele);
+    }
+    for (let ele of this.fillFragen) {
+      this.allQuest.push(ele);
+    }
   }
 
 
-  constructor(private fs: LPIsimService, public router: Router) {} // Routerfunktion für das Navigieren innerhalb von Typescript und LPIsimService für die Fragenliste
+
+  constructor(private fs: LPIsimService, public router: Router) { } // Routerfunktion für das Navigieren innerhalb von Typescript und LPIsimService für die Fragenliste
 
   ngOnInit(): void {
     this.mcFragen = this.fs.mcAll(); // Service Callback-Funktion Multiple-Choice
@@ -43,16 +49,18 @@ export class LernModusComponent implements OnInit {
     this.mcQuest = this.mcFragen[this.currentArrayId]; // Variable zum Auslesen der einzelnen mcFragen
     this.scQuest = this.scFragen[this.currentArrayId];  // Variable zum Auslesen der einzelnen scFragen
     this.fillQuest = this.fillFragen[this.currentArrayId]; // Variable zum Auslesen der einzelnen fillFragen
-    }
+  }
 
-  single:boolean = false; // Navigations-Status
+  single: boolean = false; // Navigations-Status
   multi: boolean = false; // Navigations-Status
   fill: boolean = false; // Navigations-Status
+  all: boolean = false; // Navigations-Status
   changeMode(eingabe: ViewState) { // Funktion zum Navigieren des Menüs
     this.viewState = eingabe; // Die Wertübergabe der 'eingabe' erfolgt durch das Klicken der Navigationsbuttons
     if (eingabe == 'Single Choice') { this.single = true; }
     if (eingabe == 'Multiple Choice') { this.multi = true; }
     if (eingabe == 'Fill-In') { this.fill = true; }
+    if (eingabe == 'Alle Fragen') { this.all = true }
   }
 
   reload() { // Restart-Funktion
@@ -64,37 +72,44 @@ export class LernModusComponent implements OnInit {
   targetReached: boolean = false; // Anfangs sind nicht alle Fragen beantwortet, daher 'false'
   nextFrage() {  // Nächste Frage-Button
     this.back = true; // <-- Zurück-Button erzeugen
-    if (this.multi == true && this.currentArrayId < this.mcFragen.length-1) {
+    if (this.multi == true && this.currentArrayId < this.mcFragen.length - 1) {
       this.currentArrayId += 1; this.mcQuest = this.mcFragen[this.currentArrayId];
-        if(this.currentArrayId >= this.mcFragen.length-1) {
-          this.targetReached = true; // sobald die höchst ID aller Fragen erreicht ist, ist das Ziel erreicht und es kann kalkuliert werden
-        }
-      }
-    if (this.single == true && this.currentArrayId < this.scFragen.length-1)
-      {this.currentArrayId += 1; this.scQuest = this.scFragen[this.currentArrayId];
-        if(this.currentArrayId >= this.scFragen.length-1) {
-          this.targetReached = true;  // sobald die höchst ID aller Fragen erreicht ist, ist das Ziel erreicht und es kann kalkuliert werden
+      if (this.currentArrayId >= this.mcFragen.length - 1) {
+        this.targetReached = true; // sobald die höchst ID aller Fragen erreicht ist, ist das Ziel erreicht und es kann kalkuliert werden
       }
     }
-    if (this.fill == true && this.currentArrayId < this.fillFragen.length-1)
-      {this.currentArrayId += 1; this.fillQuest = this.fillFragen[this.currentArrayId];
-        if(this.currentArrayId >= this.fillFragen.length-1) {
-          this.targetReached = true;
-        }
+    if (this.single == true && this.currentArrayId < this.scFragen.length - 1) {
+      this.currentArrayId += 1; this.scQuest = this.scFragen[this.currentArrayId];
+      if (this.currentArrayId >= this.scFragen.length - 1) {
+        this.targetReached = true;  // sobald die höchst ID aller Fragen erreicht ist, ist das Ziel erreicht und es kann kalkuliert werden
       }
+    }
+    if (this.fill == true && this.currentArrayId < this.fillFragen.length - 1) {
+      this.currentArrayId += 1; this.fillQuest = this.fillFragen[this.currentArrayId];
+      if (this.currentArrayId >= this.fillFragen.length - 1) {
+        this.targetReached = true;
+      }
+    }
+    if (this.all == true && this.currentArrayId < this.allQuest.length - 1) {
+      this.currentArrayId += 1;
+      if (this.currentArrayId >= this.allQuest.length - 1) {
+        this.targetReached = true;
+      }
+    }
     this.info = false; // Info Text ausblenden, Tipps gibt es nur bei Bedarf :)
   }
 
   prevFrage() { // Vorherige Frage-Button
-    if(this.currentArrayId > 0) { // Unter Null gibt es keine Fragen!!!
+    if (this.currentArrayId > 0) { // Unter Null gibt es keine Fragen!!!
       this.currentArrayId -= 1; // Frage zurück zählen
-      if (this.viewState == "Multiple Choice")  {this.mcQuest = this.mcFragen[this.currentArrayId];}
-      if (this.viewState == "Single Choice") {this.scQuest = this.scFragen[this.currentArrayId];}
-      if (this.viewState == "Fill-In") {this.fillQuest = this.fillFragen[this.currentArrayId];}
+      if (this.viewState == "Multiple Choice") { this.mcQuest = this.mcFragen[this.currentArrayId]; }
+      if (this.viewState == "Single Choice") { this.scQuest = this.scFragen[this.currentArrayId]; }
+      if (this.viewState == "Fill-In") { this.fillQuest = this.fillFragen[this.currentArrayId]; }
+      if (this.viewState == "Alle Fragen") { this.allQuest[this.currentArrayId]; }
       this.info = false; // Info Text zurück setzen
       this.richtig -= 1; // Variable rechnet richtige Antwort weg, ansonsten drohen zuviele richtige Antworten die nicht sein können!!!
     }
-    if(this.currentArrayId < 1){ // <-- Zurück-Button wieder löschen
+    if (this.currentArrayId < 1) { // <-- Zurück-Button wieder löschen
       this.back = false;  // <-- Zurück-Button wieder löschen
     }
     this.targetReached = false;
@@ -104,18 +119,18 @@ export class LernModusComponent implements OnInit {
     this.info = !this.info;
   }
 
-  toggleChoosen(answer: any){ // Hier werden in der Checkbox die Boolean-Werte beim auswählen ausgetauscht
+  toggleChoosen(answer: any) { // Hier werden in der Checkbox die Boolean-Werte beim auswählen ausgetauscht
     answer.choosen = !answer.choosen; // Beim Auswählen und abwählen werden die Werte jeweils auf 'true' oder 'false' gesetzt
   }
   mcAnswersCheck() { // Richtig oder Falsch-Funktion der Fragen
-    let fehler:boolean = false; // Am Anfang gibt es weder richtig, noch falsch!
-    for(let ele of this.mcQuest.ans) { // Hier wird eine künstliche Liste der Antworten erstellt, szsgn. als Maske!
-      if((ele.choosen && !ele.right) || (!ele.choosen && ele.right)) // Wenn die gewählte Antwort ungleich der Richtigen und die falsche Antwort ungleich der Richtigen ist, dann...
+    let fehler: boolean = false; // Am Anfang gibt es weder richtig, noch falsch!
+    for (let ele of this.mcQuest.ans) { // Hier wird eine künstliche Liste der Antworten erstellt, szsgn. als Maske!
+      if ((ele.choosen && !ele.right) || (!ele.choosen && ele.right)) // Wenn die gewählte Antwort ungleich der Richtigen und die falsche Antwort ungleich der Richtigen ist, dann...
       {
         fehler = true; // Falsche Antwort!!!
       }
     }
-    if(fehler) { // Die 'fehler'-Variable='false' wird hier übergeben!
+    if (fehler) { // Die 'fehler'-Variable='false' wird hier übergeben!
       alert('Sie haben eine oder mehrere Antworten geraten!');
     } else { // Andererseits ist alles richtig!
       window.confirm('Super, die Antwort war richtig!'); // Popup nach Aufgabenstellung
@@ -127,12 +142,13 @@ export class LernModusComponent implements OnInit {
 
   scAnswer: boolean = false; // Zusätzliche Public-Variable für die SC Antwortenabfrage, war im MC nicht nötig!
   checkRadio(answer: any) { // Funktion zum überprüfen von Wahrheitswerten der Antworten
-    if(answer.choosen != answer.right){ // Wenn die Antwort aus right und choosen ungleich ist, ist es automatisch wahr!
+    if (answer.choosen != answer.right) { // Wenn die Antwort aus right und choosen ungleich ist, ist es automatisch wahr!
       this.scAnswer = true; // Schalter für die scAnswersCheck-Funktion
     }
   }
+
   scAnswersCheck() { // Richtig oder Falsch-Funktion der Fragen
-    if(!this.scAnswer) { // Wenn die Antwort falsch ist, dann...
+    if (!this.scAnswer) { // Wenn die Antwort falsch ist, dann...
       alert('Sie haben die Antwort geraten!');
     }
     else { // Andererseits ist alles richtig!
@@ -143,14 +159,13 @@ export class LernModusComponent implements OnInit {
     }
   }
 
-
   fillAnswerCheck(answerText: string) {
     let fehler: boolean = false; // Am Anfang gibt es weder richtig, noch falsch!
-    if(answerText != this.fillQuest.ans) // Wenn die gewählte Antwort ungleich der Richtigen und die falsche Antwort ungleich der Richtigen ist, dann...
+    if (answerText != this.fillQuest.ans) // Wenn die gewählte Antwort ungleich der Richtigen und die falsche Antwort ungleich der Richtigen ist, dann...
     {
       fehler = true; // Falsche Antwort!!!
     }
-    if(fehler) { // Die 'fehler'-Variable='false' wird hier übergeben!
+    if (fehler) { // Die 'fehler'-Variable='false' wird hier übergeben!
       alert('Sie haben geraten, bitte überprüfen Sie ihre Eingabe noch einmal!');
     } else { // Andererseits ist alles richtig!
 
@@ -162,6 +177,46 @@ export class LernModusComponent implements OnInit {
     }
   }
 
+
+  allSC: boolean = false;
+  allRadioCheck(answer: any) {
+    if (this.allQuest[this.currentArrayId].art == 'sc') {
+      if (this.allQuest[this.currentArrayId].choosen != this.allQuest[this.currentArrayId].right){
+        this.allSC = true;
+      }
+    }
+  }
+
+  allAnswersCheck(answerText: string) { // Richtig oder Falsch-Funktion der Fragen
+    let fehler: boolean = false;
+    if (this.allQuest[this.currentArrayId].art == 'mc') {
+      for (let ele of this.allQuest[this.currentArrayId].ans) { // Hier wird eine künstliche Liste der Antworten erstellt, szsgn. als Maske!
+        if ((ele.choosen && !ele.right) || (!ele.choosen && ele.right)) // Wenn die gewählte Antwort ungleich der Richtigen und die falsche Antwort ungleich der Richtigen ist, dann...
+        {
+          fehler = true; // Falsche Antwort!!!
+        }
+      }
+    }
+    if (this.allQuest[this.currentArrayId].art == 'sc') {
+      if (!this.allSC) { // Wenn die Antwort falsch ist, dann...
+        fehler = true;
+      }
+    }
+    if (this.allQuest[this.currentArrayId].art == 'fill') {
+      if (answerText != this.allQuest[this.currentArrayId].ans) {
+        fehler = true;
+      }
+    }
+    if (fehler) { // Die 'fehler'-Variable='false' wird hier übergeben!
+      alert('Sie haben eine oder mehrere Antworten geraten!');
+    } else { // Andererseits ist alles richtig!
+      window.confirm('Super, die Antwort war richtig!'); // Popup nach Aufgabenstellung
+      fehler = false; // Der Wert wird standardmäßig zurück gesetzt um ihn nochmals auslösen zu können!
+      this.richtig += 1; // Variable rechnet für die Statistik die richtigen Antworten hoch
+      console.log(this.allQuest[this.currentArrayId].art);
+      this.nextFrage(); // Die Funktion wiederholt sich, ich aber mich nicht ;)
+    }
+  }
 
   exit() { // Wenn mitten in der Fragestellung abgebrochen wird, wird diese Funktion aufgerufen!
     let yes = window.confirm('Sind Sie sicher?'); // Popup für eine 'true'- oder 'false'-Eingabe
@@ -175,9 +230,11 @@ export class LernModusComponent implements OnInit {
   mcProzent: string;
   scProzent: string;
   fillProzent: string;
+  allProzent: string;
   calc() { // Funktion für die Berechnung der Ergebnisse
-    if(this.multi == true) { this.mcProzent = (this.richtig * 100 / this.mcFragen.length).toFixed(2); }
-    if(this.single == true) { this.scProzent = (this.richtig * 100 / this.scFragen.length).toFixed(2); }
-    if(this.fill == true) { this.fillProzent = (this.richtig * 100 / this.fillFragen.length).toFixed(2); }
+    if (this.multi == true) { this.mcProzent = (this.richtig * 100 / this.mcFragen.length).toFixed(2); } // Berechnug der richtigen Fragen in Prozent Multiple Choice
+    if (this.single == true) { this.scProzent = (this.richtig * 100 / this.scFragen.length).toFixed(2); } // Berechnug der richtigen Fragen in Prozent Single Choice
+    if (this.fill == true) { this.fillProzent = (this.richtig * 100 / this.fillFragen.length).toFixed(2); } // Berechnug der richtigen Fragen in Prozent Fill-In
+    if (this.fill == true) { this.allProzent = (this.richtig * 100 / this.allQuest.length).toFixed(2); } // Berechnung der richtigen Fragen in Prozent Alle Fragen
   }
 }

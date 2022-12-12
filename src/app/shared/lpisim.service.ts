@@ -88,9 +88,4 @@ export class LPIsimService {
    fillAll(): fillQuestion[] {
     return this.fillFragen;
    }
-  //  pushAll() {
-  //   let allQuest = [];
-  //   this.mcFragen = allQuest;
-  //   return allQuest;
-  //  }
 }
