@@ -142,7 +142,7 @@ export class LernModusComponent implements OnInit {
 
   scAnswer: boolean = false; // Zusätzliche Public-Variable für die SC Antwortenabfrage, war im MC nicht nötig!
   checkRadio(answer: any) { // Funktion zum überprüfen von Wahrheitswerten der Antworten
-    if (answer.choosen != answer.right) { // Wenn die Antwort aus right und choosen ungleich ist, ist es automatisch wahr!
+    if (answer.right) { // Wenn die Antwort aus right und choosen ungleich ist, ist es automatisch wahr!
       this.scAnswer = true; // Schalter für die scAnswersCheck-Funktion
     }
   }
@@ -181,8 +181,9 @@ export class LernModusComponent implements OnInit {
   allSC: boolean = false;
   allRadioCheck(answer: any) {
     if (this.allQuest[this.currentArrayId].art == 'sc') {
-      if (this.allQuest[this.currentArrayId].choosen != this.allQuest[this.currentArrayId].right){
+      if (!answer.choosen && answer.right){
         this.allSC = true;
+        console.log(answer.right, answer.choosen);
       }
     }
   }
@@ -197,16 +198,21 @@ export class LernModusComponent implements OnInit {
         }
       }
     }
+
     if (this.allQuest[this.currentArrayId].art == 'sc') {
+      console.log("SINGLE CHOICE MOTHERFUCKER!!!");
       if (!this.allSC) { // Wenn die Antwort falsch ist, dann...
         fehler = true;
+        console.log("SINGLE CHOICE !!!");
       }
     }
+
     if (this.allQuest[this.currentArrayId].art == 'fill') {
-      if (answerText != this.allQuest[this.currentArrayId].ans) {
+      if (this.allSC == true) {
         fehler = true;
       }
     }
+
     if (fehler) { // Die 'fehler'-Variable='false' wird hier übergeben!
       alert('Sie haben eine oder mehrere Antworten geraten!');
     } else { // Andererseits ist alles richtig!
