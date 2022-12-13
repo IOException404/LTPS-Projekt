@@ -215,7 +215,7 @@
         <div class="check">
           <div *ngFor="let answer of allQuest[currentArrayId].ans">
             <div>
-              <input name="{{ answer }}" type="radio" (change)="allRadioCheck(answer); calc(answer)">{{ answer.txt }}
+              <input name="{{ answer }}" type="radio" (change)="checkRadio(answer); calc(answer)">{{ answer.txt }}
             </div>
           </div>
         </div>
@@ -232,7 +232,7 @@
         <div class="check">
           <div>
             <div>
-              <input type="text" #box (change)="calc()" placeholder="Answer">
+              <input type="text" id="allBox" (change)="calc()" placeholder="Answer">
             </div>
           </div>
         </div>
@@ -248,8 +248,10 @@
       </th>
       <th>
         <button (click)="exit()">Abbrechen</button>
-        <button *ngIf="!targetReached" (click)="allAnswersCheck();">Weiter</button>
-        <button *ngIf="targetReached" (click)="allAnswersCheck(); changeMode('Statistik')">Auswerten</button>
+        <button *ngIf="!targetReached && allQuest[currentArrayId].art != 'fill'" (click)="allAnswersCheck();">Weiter</button>
+        <button *ngIf="targetReached && allQuest[currentArrayId].art != 'fill'" (click)="allAnswersCheck(); changeMode('Statistik')">Auswerten</button>
+        <button *ngIf="!targetReached && allQuest[currentArrayId].art == 'fill'" (click)="test(allBox.value);">Weiter</button>
+        <button *ngIf="targetReached && allQuest[currentArrayId].art == 'fill'" (click)="allAnswersCheck(allBox.value); changeMode('Statistik')">Auswerten</button>
       </th>
     </tr>
   </div>

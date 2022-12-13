@@ -45,7 +45,7 @@ export class LernModusComponent implements OnInit {
     this.mcFragen = this.fs.mcAll(); // Service Callback-Funktion Multiple-Choice
     this.scFragen = this.fs.scAll(); // Service Callback-Funktion Single-Choice
     this.fillFragen = this.fs.fillAll(); // Service Callback-Funktion Fill-In
-    this.currentArrayId = 0; // Varibale zum setzen der Array Position
+    this.currentArrayId = 7; // Varibale zum setzen der Array Position
     this.mcQuest = this.mcFragen[this.currentArrayId]; // Variable zum Auslesen der einzelnen mcFragen
     this.scQuest = this.scFragen[this.currentArrayId];  // Variable zum Auslesen der einzelnen scFragen
     this.fillQuest = this.fillFragen[this.currentArrayId]; // Variable zum Auslesen der einzelnen fillFragen
@@ -142,7 +142,7 @@ export class LernModusComponent implements OnInit {
 
   scAnswer: boolean = false; // Zusätzliche Public-Variable für die SC Antwortenabfrage, war im MC nicht nötig!
   checkRadio(answer: any) { // Funktion zum überprüfen von Wahrheitswerten der Antworten
-    if (answer.right) { // Wenn die Antwort aus right und choosen ungleich ist, ist es automatisch wahr!
+    if (answer.right && !answer.choosen) { // Wenn die Antwort aus right und choosen ungleich ist, ist es automatisch wahr!
       this.scAnswer = true; // Schalter für die scAnswersCheck-Funktion
     }
   }
@@ -178,16 +178,6 @@ export class LernModusComponent implements OnInit {
   }
 
 
-  allSC: boolean = false;
-  allRadioCheck(answer: any) {
-    if (this.allQuest[this.currentArrayId].art == 'sc') {
-      if (!answer.choosen && answer.right){
-        this.allSC = true;
-        console.log(answer.right, answer.choosen);
-      }
-    }
-  }
-
   allAnswersCheck(answerText: string) { // Richtig oder Falsch-Funktion der Fragen
     let fehler: boolean = false;
     if (this.allQuest[this.currentArrayId].art == 'mc') {
@@ -200,15 +190,13 @@ export class LernModusComponent implements OnInit {
     }
 
     if (this.allQuest[this.currentArrayId].art == 'sc') {
-      console.log("SINGLE CHOICE MOTHERFUCKER!!!");
-      if (!this.allSC) { // Wenn die Antwort falsch ist, dann...
+      if (!this.scAnswer) { // Wenn die Antwort falsch ist, dann...
         fehler = true;
-        console.log("SINGLE CHOICE !!!");
       }
     }
 
     if (this.allQuest[this.currentArrayId].art == 'fill') {
-      if (this.allSC == true) {
+      if (answerText != this.allQuest[this.currentArrayId].ans) {
         fehler = true;
       }
     }
@@ -218,6 +206,7 @@ export class LernModusComponent implements OnInit {
     } else { // Andererseits ist alles richtig!
       window.confirm('Super, die Antwort war richtig!'); // Popup nach Aufgabenstellung
       fehler = false; // Der Wert wird standardmäßig zurück gesetzt um ihn nochmals auslösen zu können!
+      this.scAnswer = false;
       this.richtig += 1; // Variable rechnet für die Statistik die richtigen Antworten hoch
       console.log(this.allQuest[this.currentArrayId].art);
       this.nextFrage(); // Die Funktion wiederholt sich, ich aber mich nicht ;)
@@ -231,6 +220,10 @@ export class LernModusComponent implements OnInit {
       alert('Ihr Fortschritt wurde verworfen'); // Hinweis für die Verwerfung aller bisher eingebenen Antworten
       window.location.reload(); // Template wird neu geladen und alle Werte auf default gesetzt!!!
     }
+  }
+
+  test(answer: string) {
+    console.log(answer);
   }
 
   mcProzent: string;
