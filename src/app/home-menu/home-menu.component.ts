@@ -8,18 +8,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeMenuComponent implements OnInit {
 
-  lernHandler() {
-    alert('Lernmodus wurde geklickt');
-  }
-
-  testHandler() {
-    alert('Testmodus wurde geklickt');
-  }
-
-  examHandler() {
-    alert('Prüfmodus wurde geklickt');
-  }
-
   constructor() { }
 
   ngOnInit(): void {

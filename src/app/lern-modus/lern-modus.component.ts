@@ -24,8 +24,8 @@ export class LernModusComponent implements OnInit {
   falsch: number; // Variable zur Auswertung der Statistik
   richtig: number = 1; // Variable zur Auswertung der Statistik
 
-  allQuest = [];
-  pushAll() {
+  allQuest = []; // Leeres Alle Fragen Array
+  pushAll() { // Push-Funktion
     for (let ele of this.mcFragen) {
       this.allQuest.push(ele);
     }
@@ -37,15 +37,13 @@ export class LernModusComponent implements OnInit {
     }
   }
 
-
-
   constructor(private fs: LPIsimService, public router: Router) { } // Routerfunktion für das Navigieren innerhalb von Typescript und LPIsimService für die Fragenliste
 
   ngOnInit(): void {
     this.mcFragen = this.fs.mcAll(); // Service Callback-Funktion Multiple-Choice
     this.scFragen = this.fs.scAll(); // Service Callback-Funktion Single-Choice
     this.fillFragen = this.fs.fillAll(); // Service Callback-Funktion Fill-In
-    this.currentArrayId = 7; // Varibale zum setzen der Array Position
+    this.currentArrayId = 0; // Varibale zum setzen der Array Position
     this.mcQuest = this.mcFragen[this.currentArrayId]; // Variable zum Auslesen der einzelnen mcFragen
     this.scQuest = this.scFragen[this.currentArrayId];  // Variable zum Auslesen der einzelnen scFragen
     this.fillQuest = this.fillFragen[this.currentArrayId]; // Variable zum Auslesen der einzelnen fillFragen
@@ -208,7 +206,6 @@ export class LernModusComponent implements OnInit {
       fehler = false; // Der Wert wird standardmäßig zurück gesetzt um ihn nochmals auslösen zu können!
       this.scAnswer = false;
       this.richtig += 1; // Variable rechnet für die Statistik die richtigen Antworten hoch
-      console.log(this.allQuest[this.currentArrayId].art);
       this.nextFrage(); // Die Funktion wiederholt sich, ich aber mich nicht ;)
     }
   }
@@ -222,10 +219,6 @@ export class LernModusComponent implements OnInit {
     }
   }
 
-  test(answer: string) {
-    console.log(answer);
-  }
-
   mcProzent: string;
   scProzent: string;
   fillProzent: string;
@@ -234,6 +227,6 @@ export class LernModusComponent implements OnInit {
     if (this.multi == true) { this.mcProzent = (this.richtig * 100 / this.mcFragen.length).toFixed(2); } // Berechnug der richtigen Fragen in Prozent Multiple Choice
     if (this.single == true) { this.scProzent = (this.richtig * 100 / this.scFragen.length).toFixed(2); } // Berechnug der richtigen Fragen in Prozent Single Choice
     if (this.fill == true) { this.fillProzent = (this.richtig * 100 / this.fillFragen.length).toFixed(2); } // Berechnug der richtigen Fragen in Prozent Fill-In
-    if (this.fill == true) { this.allProzent = (this.richtig * 100 / this.allQuest.length).toFixed(2); } // Berechnung der richtigen Fragen in Prozent Alle Fragen
+    if (this.all == true) { this.allProzent = (this.richtig * 100 / this.allQuest.length).toFixed(2); } // Berechnung der richtigen Fragen in Prozent Alle Fragen
   }
 }
