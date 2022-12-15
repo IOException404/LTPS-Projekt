@@ -33,27 +33,39 @@
   </output>
   <div *ngIf="this.multi == true">
     <h2>Multiple-Choice results:</h2>
+    <h3 [ngStyle]="{'color':'green'}">
+      {{ this.totalTrue }} of {{ mcFragen.length }} correct!<br> {{ this.trueProzent }} %</h3><br>
       <h3 [ngStyle]="{'color':'green'}">
-        {{ this.totalTrue }} of {{ this.currentArrayId+1 }} correct!<br> {{ this.mcProzent }} % </h3><br>
+        {{ this.trys }} of {{ mcFragen.length }} wrong!<br> {{ this.falseProzent }} %</h3><br>
+        <h3 [ngStyle]="{'color':'green'}">
+          {{ this.totalSkip }} of {{ mcFragen.length }} skipped!<br> {{ this.skipProzent }} %</h3><br>
   </div><br>
   <div *ngIf="this.single == true">
     <h2>Single-Choice:</h2>
       <h3 [ngStyle]="{'color':'green'}">
-        {{ this.totalTrue }} of {{ scFragen.length }} correct!<br> {{ this.scProzent }} %</h3><br>
+        {{ this.totalTrue }} of {{ scFragen.length }} correct!<br> {{ this.trueProzent }} %</h3><br>
         <h3 [ngStyle]="{'color':'green'}">
-          {{ this.trys }} of {{ scFragen.length }} wrong!<br> {{ this.scProzent }} %</h3><br>
+          {{ this.trys }} of {{ scFragen.length }} wrong!<br> {{ this.falseProzent }} %</h3><br>
           <h3 [ngStyle]="{'color':'green'}">
-            {{ this.totalSkip }} of {{ scFragen.length }} skipped!<br> {{ this.scProzent }} %</h3><br>
+            {{ this.totalSkip }} of {{ scFragen.length }} skipped!<br> {{ this.skipProzent }} %</h3><br>
   </div><br>
   <div *ngIf="this.fill == true">
     <h2>Fill-In:</h2>
       <h3 [ngStyle]="{'color':'green'}">
-        {{ this.totalTrue }} of {{ fillFragen.length }} correct!<br> {{ this.fillProzent }} %</h3><br>
+        {{ this.totalTrue }} of {{ fillFragen.length }} correct!<br> {{ this.trueProzent }} %</h3><br>
+        <h3 [ngStyle]="{'color':'green'}">
+          {{ this.trys }} of {{ fillFragen.length }} wrong!<br> {{ this.falseProzent }} %</h3><br>
+          <h3 [ngStyle]="{'color':'green'}">
+            {{ this.totalSkip }} of {{ fillFragen.length }} skipped!<br> {{ this.skipProzent }} %</h3><br>
   </div><br>
   <div *ngIf="this.all == true">
     <h2>All Questions:</h2>
+    <h3 [ngStyle]="{'color':'green'}">
+      {{ this.totalTrue }} of {{ allQuest.length }} correct!<br> {{ this.trueProzent }} %</h3><br>
       <h3 [ngStyle]="{'color':'green'}">
-        {{ this.totalTrue }} of {{ allQuest.length }} correct!<br> {{ this.allProzent }} %</h3><br>
+        {{ this.trys }} of {{ allQuest.length }} wrong!<br> {{ this.falseProzent }} %</h3><br>
+        <h3 [ngStyle]="{'color':'green'}">
+          {{ this.totalSkip }} of {{ allQuest.length }} skipped!<br> {{ this.skipProzent }} %</h3><br>
     </div><br>
   <button class="statistics" (click)="changeMode('default'); reload()">Zurück</button>
 </div>
@@ -86,7 +98,9 @@
       <th>
         <button (click)="exit()">Abbrechen</button>
         <button *ngIf="!targetReached" (click)="mcAnswersCheck()">Weiter</button>
-        <button *ngIf="targetReached" (click)="mcAnswersCheck(); results(); changeMode('Statistik')">Auswerten</button>
+        <button *ngIf="!targetReached" (click)="skip()">Skip</button>
+        <button *ngIf="targetReached" (click)="mcAnswersCheck(); results(); calc(); changeMode('Statistik')">Auswerten</button>
+        <button *ngIf="targetReached" (click)="skip(); results(); calc(); changeMode('Statistik');">Skip</button>
       </th>
     </tr>
   </div>
@@ -124,7 +138,8 @@
         <button (click)="exit()">Abbrechen</button>
         <button *ngIf="!targetReached" (click)="scAnswersCheck()">Weiter</button>
         <button *ngIf="!targetReached" (click)="skip()">Skip</button>
-        <button *ngIf="targetReached" (click)="scAnswersCheck(); results(); changeMode('Statistik')">Auswerten</button>
+        <button *ngIf="targetReached" (click)="scAnswersCheck(); results(); calc(); changeMode('Statistik')">Auswerten</button>
+        <button *ngIf="targetReached" (click)="skip(); results(); calc(); changeMode('Statistik');">Skip</button>
       </th>
     </tr>
   </div>
@@ -160,8 +175,10 @@
       </th>
       <th>
         <button (click)="exit()">Abbrechen</button>
-        <button *ngIf="!targetReached" (click)="fillAnswerCheck(box.value)">Weiter</button>
-        <button *ngIf="targetReached" (click)="fillAnswerCheck(box.value); results(); changeMode('Statistik')">Auswerten</button>
+        <button *ngIf="!targetReached" (click)="fillAnswersCheck(box.value)">Weiter</button>
+        <button *ngIf="!targetReached" (click)="skip()">Skip</button>
+        <button *ngIf="targetReached" (click)="fillAnswersCheck(box.value); results(); calc(); changeMode('Statistik')">Auswerten</button>
+        <button *ngIf="targetReached" (click)="skip(); results(); calc(); changeMode('Statistik');">Skip</button>
       </th>
     </tr>
   </div>
@@ -185,7 +202,7 @@
         <div class="check">
           <div *ngFor="let answer of allQuest[currentArrayId].ans">
             <div>
-              <input name="{{ answer }}" type="checkbox" (change)="toggleChoosen(answer)">{{ answer.txt }} <!-- calc(answer) -->
+              <input name="{{ answer }}" type="checkbox" (change)="toggleChoosen(answer)" [checked]="answer.choosen">{{ answer.txt }} <!-- calc(answer) -->
             </div>
           </div>
         </div>
@@ -218,8 +235,10 @@
           <button (click)="exit()">Abbrechen</button>
           <button *ngIf="!targetReached && allQuest[currentArrayId].art != 'fill'"
             (click)="allAnswersCheck();">Weiter</button>
+          <button *ngIf="!targetReached" (click)="skip()">Skip</button>
           <button *ngIf="targetReached && allQuest[currentArrayId].art != 'fill'"
-            (click)="allAnswersCheck(); results(); changeMode('Statistik')">Auswerten</button>
+            (click)="allAnswersCheck(); results(); calc(); changeMode('Statistik')">Auswerten</button>
+          <button *ngIf="targetReached" (click)="skip(); results(); calc(); changeMode('Statistik');">Skip</button>
         </th>
       </tr>
     </div>
@@ -253,8 +272,10 @@
           <button (click)="exit()">Abbrechen</button>
           <button *ngIf="!targetReached && allQuest[currentArrayId].art == 'fill'"
             (click)="allAnswersCheck(box.value);">Weiter</button>
+          <button *ngIf="!targetReached" (click)="skip()">Skip</button>
           <button *ngIf="targetReached && allQuest[currentArrayId].art == 'fill'"
-            (click)="allAnswersCheck(box.value); results(); changeMode('Statistik')">Auswerten</button>
+            (click)="allAnswersCheck(box.value); results(); calc(); changeMode('Statistik')">Auswerten</button>
+          <button *ngIf="targetReached" (click)="skip(); results(); calc(); changeMode('Statistik');">Skip</button>
         </th>
       </tr>
     </div>

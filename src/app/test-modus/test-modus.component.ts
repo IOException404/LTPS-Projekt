@@ -23,9 +23,14 @@ export class TestModusComponent implements OnInit {
   info: boolean = false; // Info und Inhalt Variable
   fehler: boolean = false; // Am Anfang gibt es weder richtig, noch falsch!
   try: number = 7; // Variable für den Testmodus, nach 7 abgezogenen Leben ist der Test vorbei
-  trys: number = 0;
-
-  bewerten = []; // Array für die Auswertung des Testmoduses
+  trys: number = 0; // Spezielle Fehler-Variable die Statistik
+  totalTrue = 0;
+  totalFalse = 0;
+  totalSkip = 0;
+  trueProzent: string;
+  falseProzent: string;
+  skipProzent: string;
+  bewerten = []; // Array für die Auswertung der einzelnen Fragen des Testmoduses
 
   allQuest = []; // Leeres Alle Fragen Array
   pushAll() { // Push-Funktion
@@ -83,7 +88,7 @@ export class TestModusComponent implements OnInit {
     }
     if (this.single == true && this.currentArrayId < this.scFragen.length - 1) {
       this.currentArrayId += 1; this.scQuest = this.scFragen[this.currentArrayId];
-      if (this.currentArrayId >= this.scFragen.length - 1) {
+      if (this.currentArrayId >= this.scFragen.length-1) {
         this.targetReached = true;  // sobald die höchst ID aller Fragen erreicht ist, ist das Ziel erreicht und es kann kalkuliert werden
       }
     }
@@ -137,7 +142,6 @@ export class TestModusComponent implements OnInit {
     if (this.fehler) { // Die 'fehler'-Variable='false' wird hier übergeben!
       alert('Diese Frage wurde falsch beantwortet!');
       let arrayindexOfCurrentQuestion =0;
-      //Fisch
       for(let i=0; i< this.mcFragen.length; i++){
         if(this.mcFragen[i]== this.mcQuest){
           arrayindexOfCurrentQuestion = i
@@ -154,6 +158,7 @@ export class TestModusComponent implements OnInit {
       this.trys += 1;
       this.noTry();
       this.bewerten.push("falsch");
+
       this.prevFrage();
     } else { // Andererseits ist alles richtig!
       window.confirm('Super, die Antwort war richtig!'); // Popup nach Aufgabenstellung
@@ -177,6 +182,7 @@ export class TestModusComponent implements OnInit {
       this.trys += 1;
       this.noTry();
       this.bewerten.push("falsch");
+      this.bewerten.pop();
       this.prevFrage();
     }
     else { // Andererseits ist alles richtig!
@@ -185,6 +191,7 @@ export class TestModusComponent implements OnInit {
       this.bewerten.push("richtig");
       this.nextFrage(); // Die Funktion wiederholt sich, ich aber mich nicht ;)
     }
+    console.log(this.bewerten);
   }
 
   fillAnswerCheck(answerText: string) {
@@ -197,6 +204,7 @@ export class TestModusComponent implements OnInit {
       alert('Diese Frage wurde falsch beantwortet!');
       this.trys += 1;
       this.bewerten.push("falsch");
+      this.bewerten.pop();
       this.noTry();
       this.prevFrage();
     } else { // Andererseits ist alles richtig!
@@ -217,29 +225,27 @@ export class TestModusComponent implements OnInit {
           this.fehler = true; // Falsche Antwort!!!
         }
       }
-      let arrayindexOfCurrentQuestion =0;
+      let arrayindexOfCurrentQuestion = 0;
       //Fisch
       for(let i=0; i< this.mcFragen.length; i++){
-        if(this.mcFragen[i]== this.mcQuest){
-          arrayindexOfCurrentQuestion = i
+        if(this.mcFragen[i] == this.mcQuest){
+          arrayindexOfCurrentQuestion = i;
         }
       }
       for(let ele of this.mcFragen[arrayindexOfCurrentQuestion].ans){
-        ele.choosen=false
+        ele.choosen=false;
       }
       if(arrayindexOfCurrentQuestion!=0){
       for(let ele of this.mcFragen[arrayindexOfCurrentQuestion-1].ans){
-        ele.choosen=false
+        ele.choosen=false;
       }
     }
   }
-
     if (this.allQuest[this.currentArrayId].art == 'sc') {
       if (!this.scAnswer) { // Wenn die Antwort falsch ist, dann...
         this.fehler = true;
       }
     }
-
     if (this.allQuest[this.currentArrayId].art == 'fill') {
       if (answerText != this.allQuest[this.currentArrayId].ans) {
         this.fehler = true;
@@ -250,6 +256,7 @@ export class TestModusComponent implements OnInit {
       alert('Diese Frage wurde falsch beantwortet!');
       this.trys += 1;
       this.bewerten.push("falsch");
+      this.bewerten.pop();
       this.noTry(); // Funktion für den Fall, dass das Leben auf 0 fällt
       this.prevFrage();
     } else { // Andererseits ist alles richtig!
@@ -275,25 +282,39 @@ export class TestModusComponent implements OnInit {
     if(this.try == 0) {
       let end = window.confirm('Sie haben alle Ihre Versuche verbraucht, Sie sollten erst den Lernmodus nutzen');
       if(end == true || end == false) {
-        this.viewState = 'Statistik';
         this.results();
+        this.viewState = 'Statistik';
       }
     }
   }
 
   skip() {
-    this.bewerten.push("skipped");
-    this.nextFrage();
+      this.bewerten.push("skipped");
+      this.nextFrage();
   }
 
-  totalTrue = 0;
-  totalFalse = 0;
-  totalSkip = 0;
-  calc() { // Funktion für die Berechnung der Ergebnisse
-    if (this.multi == true) {  } // Berechnug der richtigen Fragen in Prozent Multiple Choice
-    if (this.single == true) { } // Berechnug der richtigen Fragen in Prozent Single Choice
-    if (this.fill == true) { } // Berechnug der richtigen Fragen in Prozent Fill-In
-    if (this.all == true) { } // Berechnung der richtigen Fragen in Prozent Alle Fragen
+
+  calc() { // Funktion für die Berechnung der Ergebnisse in Prozent
+    if (this.multi == true) {
+      this.trueProzent = (this.totalTrue * 100 / this.mcFragen.length).toFixed(2);
+      this.falseProzent = (this.trys * 100 / this.mcFragen.length).toFixed(2);
+      this.skipProzent = (this.totalSkip * 100 / this.mcFragen.length).toFixed(2);
+    }
+    if (this.single == true) {
+      this.trueProzent = (this.totalTrue * 100 / this.scFragen.length).toFixed(2);
+      this.falseProzent = (this.trys * 100 / this.scFragen.length).toFixed(2);
+      this.skipProzent = (this.totalSkip * 100 / this.scFragen.length).toFixed(2);
+    }
+    if (this.fill == true) {
+      this.trueProzent = (this.totalTrue * 100 / this.fillFragen.length).toFixed(2);
+      this.falseProzent = (this.trys * 100 / this.fillFragen.length).toFixed(2);
+      this.skipProzent = (this.totalSkip * 100 / this.fillFragen.length).toFixed(2);
+    }
+    if (this.all == true) {
+      this.trueProzent = (this.totalTrue * 100 / this.allQuest.length).toFixed(2);
+      this.falseProzent = (this.trys * 100 / this.allQuest.length).toFixed(2);
+      this.skipProzent = (this.totalSkip * 100 / this.allQuest.length).toFixed(2);
+    }
   }
 
   results() {
@@ -304,11 +325,9 @@ export class TestModusComponent implements OnInit {
       if(check == "falsch") {
         this.totalFalse++;
       }
-      if(check == "skipped") {
+      if(check == "skipped" ) {
         this.totalSkip++;
       }
     });
-    console.log("Richtig: " + this.totalTrue + " Falsch: " + this.totalFalse + " Übersprungen: " + this.totalSkip);
   }
 }
-
