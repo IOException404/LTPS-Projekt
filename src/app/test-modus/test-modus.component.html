@@ -1,3 +1,4 @@
+
 <!-- HOME-MENU -->
 <div *ngIf="viewState == 'default'">
   <div class="homeBox">
@@ -32,22 +33,27 @@
   </output>
   <div *ngIf="this.multi == true">
     <h2>Multiple-Choice results:</h2>
-    <h3 [ngStyle]="{'color':'green'}">
-      {{ this.currentArrayId+1 }} of {{ mcFragen.length }} correct!<br> {{ this.mcProzent }} % </h3><br>
+      <h3 [ngStyle]="{'color':'green'}">
+        {{ this.totalTrue }} of {{ this.currentArrayId+1 }} correct!<br> {{ this.mcProzent }} % </h3><br>
   </div><br>
   <div *ngIf="this.single == true">
     <h2>Single-Choice:</h2>
-    <h3 [ngStyle]="{'color':'green'}">
-      {{ this.currentArrayId+1 }} of {{ scFragen.length }} correct!<br> {{ this.scProzent }} %</h3><br>
+      <h3 [ngStyle]="{'color':'green'}">
+        {{ this.totalTrue }} of {{ scFragen.length }} correct!<br> {{ this.scProzent }} %</h3><br>
+        <h3 [ngStyle]="{'color':'green'}">
+          {{ this.trys }} of {{ scFragen.length }} wrong!<br> {{ this.scProzent }} %</h3><br>
+          <h3 [ngStyle]="{'color':'green'}">
+            {{ this.totalSkip }} of {{ scFragen.length }} skipped!<br> {{ this.scProzent }} %</h3><br>
   </div><br>
   <div *ngIf="this.fill == true">
     <h2>Fill-In:</h2>
-    <h3 [ngStyle]="{'color':'green'}">
-      {{ this.currentArrayId+1 }} of {{ fillFragen.length }} correct!<br> {{ this.fillProzent }} %</h3><br>
-  </div><br>
-  <div *ngIf="this.all == true"><h2>All Questions:</h2>
       <h3 [ngStyle]="{'color':'green'}">
-        {{ this.currentArrayId+1 }} of {{ allQuest.length }} correct!<br> {{ this.allProzent }} %</h3><br>
+        {{ this.totalTrue }} of {{ fillFragen.length }} correct!<br> {{ this.fillProzent }} %</h3><br>
+  </div><br>
+  <div *ngIf="this.all == true">
+    <h2>All Questions:</h2>
+      <h3 [ngStyle]="{'color':'green'}">
+        {{ this.totalTrue }} of {{ allQuest.length }} correct!<br> {{ this.allProzent }} %</h3><br>
     </div><br>
   <button class="statistics" (click)="changeMode('default'); reload()">Zurück</button>
 </div>
@@ -58,12 +64,13 @@
   <div>
     {{ viewState }}
     <p>{{currentArrayId+1}} of {{ mcFragen.length }}</p>
+    <p>Versuche: {{ this.try }}</p>
     <div class="header">
       <output>{{ mcQuest.txt }}</output>
       <div class="check">
         <div *ngFor="let answer of mcQuest.ans">
           <div>
-            <input name="{{ answer }}" type="checkbox" (change)="toggleChoosen(answer); calc(answer)">{{ answer.txt }}
+            <input name="{{ answer }}" type="checkbox" (change)="toggleChoosen(answer)" [checked]="answer.choosen">{{ answer.txt }}
           </div>
         </div>
       </div>
@@ -79,7 +86,7 @@
       <th>
         <button (click)="exit()">Abbrechen</button>
         <button *ngIf="!targetReached" (click)="mcAnswersCheck()">Weiter</button>
-        <button *ngIf="targetReached" (click)="mcAnswersCheck(); changeMode('Statistik')">Auswerten</button>
+        <button *ngIf="targetReached" (click)="mcAnswersCheck(); results(); changeMode('Statistik')">Auswerten</button>
       </th>
     </tr>
   </div>
@@ -94,17 +101,14 @@
   <div>
     {{ viewState }}
     <p>{{currentArrayId+1}} of {{ scFragen.length }}</p>
+    <p>Versuche: {{ this.try }}</p>
     <div class="header">
       <output>{{ scQuest.txt }}</output>
       <div class="check">
         <div *ngFor="let answer of scQuest.ans">
           <div>
-            <input name="{{ answer }}" type="radio" (change)="checkRadio(answer); calc(answer)">{{ answer.txt }}
+            <input name="{{ answer }}" type="radio" (change)="checkRadio(answer)">{{ answer.txt }}
           </div>
-          <!-- Falls Antworten angeklickt wurden, dann ersetzt der Template-Block den Input im darüberliegenden Div -->
-          <!-- <ng-template #elseblock>
-            <input name="{{ answer }}" type="checkbox" [checked]="answer.right" (change)="toggleChoosen(answer)">{{ answer.txt }}
-          </ng-template> -->
         </div>
       </div>
     </div>
@@ -119,7 +123,8 @@
       <th>
         <button (click)="exit()">Abbrechen</button>
         <button *ngIf="!targetReached" (click)="scAnswersCheck()">Weiter</button>
-        <button *ngIf="targetReached" (click)="scAnswersCheck(); changeMode('Statistik')">Auswerten</button>
+        <button *ngIf="!targetReached" (click)="skip()">Skip</button>
+        <button *ngIf="targetReached" (click)="scAnswersCheck(); results(); changeMode('Statistik')">Auswerten</button>
       </th>
     </tr>
   </div>
@@ -134,12 +139,13 @@
   <div>
     {{ viewState }}
     <p>{{currentArrayId+1}} of {{ fillFragen.length }}</p>
+    <p>Versuche: {{ this.try }}</p>
     <div class="header">
       <output>{{ fillQuest.txt }}</output>
       <div class="check">
         <div>
           <div>
-            <input type="text" #box (change)="calc()" placeholder="Answer">
+            <input type="text" #box  placeholder="Answer"> <!--(change)="calc()"-->
           </div>
         </div>
       </div>
@@ -155,7 +161,7 @@
       <th>
         <button (click)="exit()">Abbrechen</button>
         <button *ngIf="!targetReached" (click)="fillAnswerCheck(box.value)">Weiter</button>
-        <button *ngIf="targetReached" (click)="fillAnswerCheck(box.value); changeMode('Statistik')">Auswerten</button>
+        <button *ngIf="targetReached" (click)="fillAnswerCheck(box.value); results(); changeMode('Statistik')">Auswerten</button>
       </th>
     </tr>
   </div>
@@ -173,12 +179,13 @@
     <div *ngIf="allQuest[currentArrayId].art == 'mc'">
       {{ viewState }}
       <p>{{currentArrayId+1}} of {{ allQuest.length }}</p>
+      <p>Versuche: {{ this.try }}</p>
       <div class="header">
         <output>{{ allQuest[currentArrayId].txt }}</output>
         <div class="check">
           <div *ngFor="let answer of allQuest[currentArrayId].ans">
             <div>
-              <input name="{{ answer }}" type="checkbox" (change)="toggleChoosen(answer); calc(answer)">{{ answer.txt }}
+              <input name="{{ answer }}" type="checkbox" (change)="toggleChoosen(answer)">{{ answer.txt }} <!-- calc(answer) -->
             </div>
           </div>
         </div>
@@ -189,12 +196,13 @@
     <div *ngIf="allQuest[currentArrayId].art == 'sc'">
       {{ viewState }}
       <p>{{currentArrayId+1}} of {{ allQuest.length }}</p>
+      <p>Versuche: {{ this.try }}</p>
       <div class="header">
         <output>{{ allQuest[currentArrayId].txt }}</output>
         <div class="check">
           <div *ngFor="let answer of allQuest[currentArrayId].ans">
             <div>
-              <input name="{{ answer }}" type="radio" (change)="checkRadio(answer); calc(answer)">{{ answer.txt }}
+              <input name="{{ answer }}" type="radio" (change)="checkRadio(answer)">{{ answer.txt }} <!--  calc(answer) -->
             </div>
           </div>
         </div>
@@ -211,7 +219,7 @@
           <button *ngIf="!targetReached && allQuest[currentArrayId].art != 'fill'"
             (click)="allAnswersCheck();">Weiter</button>
           <button *ngIf="targetReached && allQuest[currentArrayId].art != 'fill'"
-            (click)="allAnswersCheck(); changeMode('Statistik')">Auswerten</button>
+            (click)="allAnswersCheck(); results(); changeMode('Statistik')">Auswerten</button>
         </th>
       </tr>
     </div>
@@ -223,12 +231,13 @@
   <div *ngIf="allQuest[currentArrayId].art == 'fill'">
     {{ viewState }}
     <p>{{currentArrayId+1}} of {{ allQuest.length }}</p>
+    <p>Versuche: {{ this.try }}</p>
     <div class="header">
       <output>{{ allQuest[currentArrayId].txt }}</output>
       <div class="check">
         <div>
           <div>
-            <input type="text" #box (change)="calc()" placeholder="Answer">
+            <input type="text" #box  placeholder="Answer"> <!--(change)="calc()"-->
           </div>
         </div>
       </div>
@@ -245,7 +254,7 @@
           <button *ngIf="!targetReached && allQuest[currentArrayId].art == 'fill'"
             (click)="allAnswersCheck(box.value);">Weiter</button>
           <button *ngIf="targetReached && allQuest[currentArrayId].art == 'fill'"
-            (click)="allAnswersCheck(box.value); changeMode('Statistik')">Auswerten</button>
+            (click)="allAnswersCheck(box.value); results(); changeMode('Statistik')">Auswerten</button>
         </th>
       </tr>
     </div>

@@ -21,8 +21,11 @@ export class TestModusComponent implements OnInit {
   fillQuest: fillQuestion; // Einzelne Fill-In-Frage
   currentArrayId: number = 0;  // Klick prev und next Variable
   info: boolean = false; // Info und Inhalt Variable
-  falsch: number = 0; // Variable zur Auswertung der Statistik
-  richtig: number = 1; // Variable zur Auswertung der Statistik
+  fehler: boolean = false; // Am Anfang gibt es weder richtig, noch falsch!
+  try: number = 7; // Variable für den Testmodus, nach 7 abgezogenen Leben ist der Test vorbei
+  trys: number = 0;
+
+  bewerten = []; // Array für die Auswertung des Testmoduses
 
   allQuest = []; // Leeres Alle Fragen Array
   pushAll() { // Push-Funktion
@@ -44,6 +47,7 @@ export class TestModusComponent implements OnInit {
     this.scFragen = this.fs.scAll(); // Service Callback-Funktion Single-Choice
     this.fillFragen = this.fs.fillAll(); // Service Callback-Funktion Fill-In
     this.currentArrayId = 0; // Varibale zum setzen der Array Position
+    this.fehler = false; // Am Anfang gibt es weder richtig, noch falsch!
     this.mcQuest = this.mcFragen[this.currentArrayId]; // Variable zum Auslesen der einzelnen mcFragen
     this.scQuest = this.scFragen[this.currentArrayId];  // Variable zum Auslesen der einzelnen scFragen
     this.fillQuest = this.fillFragen[this.currentArrayId]; // Variable zum Auslesen der einzelnen fillFragen
@@ -64,6 +68,7 @@ export class TestModusComponent implements OnInit {
   reload() { // Restart-Funktion
     window.location.reload(); // Alle Werte werden auf default gesetzt indem die Seite komplett neu geladen wird!
   }
+
 
 
   back: boolean; // Globale Variable für den Zurück-Button innerhalb der Fragestellungen, er erscheint erst wenn bereits eine Frage beantwortet wurde!
@@ -105,7 +110,7 @@ export class TestModusComponent implements OnInit {
       if (this.viewState == "Fill-In") { this.fillQuest = this.fillFragen[this.currentArrayId]; }
       if (this.viewState == "Alle Fragen") { this.allQuest[this.currentArrayId]; }
       this.info = false; // Info Text zurück setzen
-      this.richtig -= 1; // Variable rechnet richtige Antwort weg, ansonsten drohen zuviele richtige Antworten die nicht sein können!!!
+      this.bewerten.pop();
     }
     if (this.currentArrayId < 1) { // <-- Zurück-Button wieder löschen
       this.back = false;  // <-- Zurück-Button wieder löschen
@@ -120,20 +125,40 @@ export class TestModusComponent implements OnInit {
   toggleChoosen(answer: any) { // Hier werden in der Checkbox die Boolean-Werte beim auswählen ausgetauscht
     answer.choosen = !answer.choosen; // Beim Auswählen und abwählen werden die Werte jeweils auf 'true' oder 'false' gesetzt
   }
+
   mcAnswersCheck() { // Richtig oder Falsch-Funktion der Fragen
-    let fehler: boolean = false; // Am Anfang gibt es weder richtig, noch falsch!
+    this.fehler = false;
     for (let ele of this.mcQuest.ans) { // Hier wird eine künstliche Liste der Antworten erstellt, szsgn. als Maske!
       if ((ele.choosen && !ele.right) || (!ele.choosen && ele.right)) // Wenn die gewählte Antwort ungleich der Richtigen und die falsche Antwort ungleich der Richtigen ist, dann...
       {
-        fehler = true; // Falsche Antwort!!!
+        this.fehler = true; // Falsche Antwort!!!
       }
     }
-    if (fehler) { // Die 'fehler'-Variable='false' wird hier übergeben!
-      alert('Sie haben eine oder mehrere Antworten geraten!');
+    if (this.fehler) { // Die 'fehler'-Variable='false' wird hier übergeben!
+      alert('Diese Frage wurde falsch beantwortet!');
+      let arrayindexOfCurrentQuestion =0;
+      //Fisch
+      for(let i=0; i< this.mcFragen.length; i++){
+        if(this.mcFragen[i]== this.mcQuest){
+          arrayindexOfCurrentQuestion = i
+        }
+      }
+      for(let ele of this.mcFragen[arrayindexOfCurrentQuestion].ans){
+        ele.choosen=false
+      }
+      if(arrayindexOfCurrentQuestion!=0){
+      for(let ele of this.mcFragen[arrayindexOfCurrentQuestion-1].ans){
+        ele.choosen=false
+      }
+    }
+      this.trys += 1;
+      this.noTry();
+      this.bewerten.push("falsch");
+      this.prevFrage();
     } else { // Andererseits ist alles richtig!
       window.confirm('Super, die Antwort war richtig!'); // Popup nach Aufgabenstellung
-      fehler = false; // Der Wert wird standardmäßig zurück gesetzt um ihn nochmals auslösen zu können!
-      this.richtig += 1; // Variable rechnet für die Statistik die richtigen Antworten hoch
+      this.bewerten.push("richtig");
+      this.fehler = false; // Der Wert wird standardmäßig zurück gesetzt um ihn nochmals auslösen zu können!
       this.nextFrage(); // Die Funktion wiederholt sich, ich aber mich nicht ;)
     }
   }
@@ -146,66 +171,92 @@ export class TestModusComponent implements OnInit {
   }
 
   scAnswersCheck() { // Richtig oder Falsch-Funktion der Fragen
+
     if (!this.scAnswer) { // Wenn die Antwort falsch ist, dann...
-      alert('Sie haben die Antwort geraten!');
+      alert('Diese Frage wurde falsch beantwortet!');
+      this.trys += 1;
+      this.noTry();
+      this.bewerten.push("falsch");
+      this.prevFrage();
     }
     else { // Andererseits ist alles richtig!
       window.confirm('Super, die Antwort war richtig!'); // Popup nach Aufgabenstellung
       this.scAnswer = false; // Der Wert wird standardmäßig zurück gesetzt um ihn nochmals auslösen zu können!
-      this.richtig += 1; // Variable rechnet für die Statistik die richtigen Antworten hoch
+      this.bewerten.push("richtig");
       this.nextFrage(); // Die Funktion wiederholt sich, ich aber mich nicht ;)
     }
   }
 
   fillAnswerCheck(answerText: string) {
-    let fehler: boolean = false; // Am Anfang gibt es weder richtig, noch falsch!
+    this.fehler = false;
     if (answerText != this.fillQuest.ans) // Wenn die gewählte Antwort ungleich der Richtigen und die falsche Antwort ungleich der Richtigen ist, dann...
     {
-      fehler = true; // Falsche Antwort!!!
+      this.fehler = true; // Falsche Antwort!!!
     }
-    if (fehler) { // Die 'fehler'-Variable='false' wird hier übergeben!
-      alert('Sie haben geraten, bitte überprüfen Sie ihre Eingabe noch einmal!');
+    if (this.fehler) { // Die 'fehler'-Variable='false' wird hier übergeben!
+      alert('Diese Frage wurde falsch beantwortet!');
+      this.trys += 1;
+      this.bewerten.push("falsch");
+      this.noTry();
+      this.prevFrage();
     } else { // Andererseits ist alles richtig!
-
       window.confirm('Super, die Antwort war richtig!'); // Popup nach Aufgabenstellung
-      fehler = false; // Der Wert wird standardmäßig zurück gesetzt um ihn nochmals auslösen zu können!
-      // Variable rechnet für die Statistik die richtigen Antworten hoch
+      this.fehler = false; // Der Wert wird standardmäßig zurück gesetzt um ihn nochmals auslösen zu können!
+      this.bewerten.push("richtig");
       this.nextFrage(); // Die Funktion wiederholt sich, ich aber mich nicht ;)
-      this.richtig += 1;
     }
   }
 
 
   allAnswersCheck(answerText: string) { // Richtig oder Falsch-Funktion der Fragen
-    let fehler: boolean = false;
+    this.fehler = false;
     if (this.allQuest[this.currentArrayId].art == 'mc') {
       for (let ele of this.allQuest[this.currentArrayId].ans) { // Hier wird eine künstliche Liste der Antworten erstellt, szsgn. als Maske!
         if ((ele.choosen && !ele.right) || (!ele.choosen && ele.right)) // Wenn die gewählte Antwort ungleich der Richtigen und die falsche Antwort ungleich der Richtigen ist, dann...
         {
-          fehler = true; // Falsche Antwort!!!
+          this.fehler = true; // Falsche Antwort!!!
         }
       }
+      let arrayindexOfCurrentQuestion =0;
+      //Fisch
+      for(let i=0; i< this.mcFragen.length; i++){
+        if(this.mcFragen[i]== this.mcQuest){
+          arrayindexOfCurrentQuestion = i
+        }
+      }
+      for(let ele of this.mcFragen[arrayindexOfCurrentQuestion].ans){
+        ele.choosen=false
+      }
+      if(arrayindexOfCurrentQuestion!=0){
+      for(let ele of this.mcFragen[arrayindexOfCurrentQuestion-1].ans){
+        ele.choosen=false
+      }
     }
+  }
 
     if (this.allQuest[this.currentArrayId].art == 'sc') {
       if (!this.scAnswer) { // Wenn die Antwort falsch ist, dann...
-        fehler = true;
+        this.fehler = true;
       }
     }
 
     if (this.allQuest[this.currentArrayId].art == 'fill') {
       if (answerText != this.allQuest[this.currentArrayId].ans) {
-        fehler = true;
+        this.fehler = true;
       }
     }
 
-    if (fehler) { // Die 'fehler'-Variable='false' wird hier übergeben!
-      alert('Sie haben eine oder mehrere Antworten geraten!');
+    if (this.fehler) { // Die 'fehler'-Variable='false' wird hier übergeben!
+      alert('Diese Frage wurde falsch beantwortet!');
+      this.trys += 1;
+      this.bewerten.push("falsch");
+      this.noTry(); // Funktion für den Fall, dass das Leben auf 0 fällt
+      this.prevFrage();
     } else { // Andererseits ist alles richtig!
       window.confirm('Super, die Antwort war richtig!'); // Popup nach Aufgabenstellung
-      fehler = false; // Der Wert wird standardmäßig zurück gesetzt um ihn nochmals auslösen zu können!
-      this.scAnswer = false;
-      this.richtig += 1; // Variable rechnet für die Statistik die richtigen Antworten hoch
+      this.fehler = false; // Der Wert wird standardmäßig zurück gesetzt um ihn nochmals auslösen zu können!
+      this.scAnswer = false; // Fehler-Boolean für SC-Fragen zurücksetzen
+      this.bewerten.push("richtig");
       this.nextFrage(); // Die Funktion wiederholt sich, ich aber mich nicht ;)
     }
   }
@@ -219,14 +270,45 @@ export class TestModusComponent implements OnInit {
     }
   }
 
-  mcProzent: string;
-  scProzent: string;
-  fillProzent: string;
-  allProzent: string;
+  noTry() {
+    this.try -= 1;
+    if(this.try == 0) {
+      let end = window.confirm('Sie haben alle Ihre Versuche verbraucht, Sie sollten erst den Lernmodus nutzen');
+      if(end == true || end == false) {
+        this.viewState = 'Statistik';
+        this.results();
+      }
+    }
+  }
+
+  skip() {
+    this.bewerten.push("skipped");
+    this.nextFrage();
+  }
+
+  totalTrue = 0;
+  totalFalse = 0;
+  totalSkip = 0;
   calc() { // Funktion für die Berechnung der Ergebnisse
-    if (this.multi == true) { this.mcProzent = (this.richtig * 100 / this.mcFragen.length).toFixed(2); } // Berechnug der richtigen Fragen in Prozent Multiple Choice
-    if (this.single == true) { this.scProzent = (this.richtig * 100 / this.scFragen.length).toFixed(2); } // Berechnug der richtigen Fragen in Prozent Single Choice
-    if (this.fill == true) { this.fillProzent = (this.richtig * 100 / this.fillFragen.length).toFixed(2); } // Berechnug der richtigen Fragen in Prozent Fill-In
-    if (this.all == true) { this.allProzent = (this.richtig * 100 / this.allQuest.length).toFixed(2); } // Berechnung der richtigen Fragen in Prozent Alle Fragen
+    if (this.multi == true) {  } // Berechnug der richtigen Fragen in Prozent Multiple Choice
+    if (this.single == true) { } // Berechnug der richtigen Fragen in Prozent Single Choice
+    if (this.fill == true) { } // Berechnug der richtigen Fragen in Prozent Fill-In
+    if (this.all == true) { } // Berechnung der richtigen Fragen in Prozent Alle Fragen
+  }
+
+  results() {
+    this.bewerten.forEach(check => {
+      if(check == "richtig") {
+        this.totalTrue++;
+      }
+      if(check == "falsch") {
+        this.totalFalse++;
+      }
+      if(check == "skipped") {
+        this.totalSkip++;
+      }
+    });
+    console.log("Richtig: " + this.totalTrue + " Falsch: " + this.totalFalse + " Übersprungen: " + this.totalSkip);
   }
 }
+
