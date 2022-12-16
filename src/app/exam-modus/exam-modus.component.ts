@@ -154,34 +154,37 @@ export class ExamModusComponent implements OnInit {
     }
   }
 
-  scAnswer: boolean = false; // Zusätzliche Public-Variable für die SC Antwortenabfrage, war im MC nicht nötig!
+  scAnswer: any; // Zusätzliche Public-Variable für die SC Antwortenabfrage, war im MC nicht nötig!
   checkRadio(answer: any) { // Funktion zum überprüfen von Wahrheitswerten der Antworten
     if (answer.right && !answer.choosen) { // Wenn die Antwort aus right und choosen ungleich ist, ist es automatisch wahr!
-      this.scAnswer = true; // Schalter für die scAnswersCheck-Funktion
+      this.scAnswer = answer; // Schalter für die scAnswersCheck-Funktion
     }
   }
 
-  scAnswersCheck() { // Richtig oder Falsch-Funktion der Fragen
+  scAnswersCheck(answer: any) { // Richtig oder Falsch-Funktion der Fragen
+    console.log(answer);
     let qAnswered: boolean = false;
     let qCorrect: boolean = true;
 
-    console.log(qAnswered, qCorrect)
+    for (let antwort of this.scQuest.ans) {
+      if (antwort.choosen) {
+        qAnswered = true
+        if (antwort.right) {
+          qCorrect = false;
+        }
+      }
+    }
+
     if(qAnswered) {
-      qAnswered = false;
       if(qCorrect) {
         this.bewertung.push('Richtig');
-        this.nextFrage();
       } else {
         this.bewertung.push('Falsch');
-        this.nextFrage();
       }
     } else {
       this.bewertung.push('Skip');
-      this.nextFrage();
     }
    }
-
-
 
   fillAnswerCheck(answerText: string) {
     let qAnswered: boolean = false;

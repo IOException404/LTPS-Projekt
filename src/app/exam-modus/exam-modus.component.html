@@ -105,7 +105,7 @@
       <div class="check">
         <div *ngFor="let answer of scQuest.ans">
           <div>
-            <input name="{{ answer }}" type="radio" (change)="checkRadio(answer)">{{ answer.txt }}
+            <input name="{{ answer }}" type="radio" (change)="scAnswersCheck(answer)">{{ answer.txt }}
           </div>
         </div>
       </div>
