@@ -23,6 +23,12 @@ export class ExamModusComponent implements OnInit {
   info: boolean = false; // Info und Inhalt Variable
   bewertung = [];
   tooMuchFalse: number; // Abbruch-Variable, bei 20% wird der Prüfmodus beendet
+  totalTrue = 0;
+  totalFalse = 0;
+  totalSkip = 0;
+  trueProzent: string;
+  falseProzent: string;
+  skipProzent: string;
 
 
   allQuest = []; // Leeres Alle Fragen Array
@@ -45,6 +51,7 @@ export class ExamModusComponent implements OnInit {
     this.scFragen = this.fs.scAll(); // Service Callback-Funktion Single-Choice
     this.fillFragen = this.fs.fillAll(); // Service Callback-Funktion Fill-In
     this.currentArrayId = 0; // Varibale zum setzen der Array Position
+    this.tooMuchFalse = 0; // Variable zur Berechnung des Abbruchskriteriums
     this.mcQuest = this.mcFragen[this.currentArrayId]; // Variable zum Auslesen der einzelnen mcFragen
     this.scQuest = this.scFragen[this.currentArrayId];  // Variable zum Auslesen der einzelnen scFragen
     this.fillQuest = this.fillFragen[this.currentArrayId]; // Variable zum Auslesen der einzelnen fillFragen
@@ -64,6 +71,39 @@ export class ExamModusComponent implements OnInit {
 
   reload() { // Restart-Funktion
     window.location.reload(); // Alle Werte werden auf default gesetzt indem die Seite komplett neu geladen wird!
+  }
+
+  youFailed() {
+    let percent: number;
+    if(this.viewState == 'Multiple Choice') {
+      percent = this.tooMuchFalse * 100 / this.mcFragen.length;
+      if(percent >= 20) {
+        let reload = window.confirm('Du hast mehr als 20% der Fragen falsch geraten. Du solltest mehr üben');
+        this.reload();
+        }
+      }
+      if(this.viewState == 'Single Choice') {
+        percent = this.tooMuchFalse * 100 / this.scFragen.length;
+        if(percent >= 20) {
+          let reload = window.confirm('Du hast mehr als 20% der Fragen falsch geraten. Du solltest mehr üben');
+          this.reload();
+        }
+      }
+      if(this.viewState == 'Fill-In') {
+        percent = this.tooMuchFalse * 100 / this.fillFragen.length;
+        if(percent >= 20) {
+          let reload = window.confirm('Du hast mehr als 20% der Fragen falsch geraten. Du solltest mehr üben');
+          this.reload();
+        }
+      }
+      if(this.viewState == 'Fill-In') {
+        percent = this.tooMuchFalse * 100 / this.allQuest.length;
+        if(percent >= 20) {
+          let reload = window.confirm('Du hast mehr als 20% der Fragen falsch geraten. Du solltest mehr üben');
+          this.reload();
+       }
+     }
+     console.log('Fehler: ', percent, '%')
   }
 
 
@@ -132,7 +172,7 @@ export class ExamModusComponent implements OnInit {
       // default ist alle choosen sind false
       if (antwort.choosen) {
         // anwort wurde gegeben --> frage wurde beantwortet
-        qAnswered = true
+        qAnswered = true;
         if (antwort.right != antwort.choosen) {
           // antwort ist falsch --> frage ist falsch
           qCorrect = false;
@@ -141,49 +181,52 @@ export class ExamModusComponent implements OnInit {
     }
     // 3. aufgrund der Flags Actions durchführen
     if(qAnswered) {
+      qAnswered = false;
       if(qCorrect) {
         this.bewertung.push('Richtig');
-        this.nextFrage();
       } else {
         this.bewertung.push('Falsch');
-        this.nextFrage();
+        this.tooMuchFalse += 1;
       }
     } else {
       this.bewertung.push('Skip');
-      this.nextFrage();
     }
+    this.nextFrage();
   }
 
-  scAnswer: any; // Zusätzliche Public-Variable für die SC Antwortenabfrage, war im MC nicht nötig!
+  scAnswer: string; // Zusätzliche Public-Variable für die SC Antwortenabfrage, war im MC nicht nötig!
   checkRadio(answer: any) { // Funktion zum überprüfen von Wahrheitswerten der Antworten
     if (answer.right && !answer.choosen) { // Wenn die Antwort aus right und choosen ungleich ist, ist es automatisch wahr!
-      this.scAnswer = answer; // Schalter für die scAnswersCheck-Funktion
+      this.scAnswer = "richtig"; // Schalter für die scAnswersCheck-Funktion
+    } else {
+      this.scAnswer = "falsch";
     }
   }
 
-  scAnswersCheck(answer: any) { // Richtig oder Falsch-Funktion der Fragen
-    console.log(answer);
+  scAnswersCheck() { // Richtig oder Falsch-Funktion der Fragen
     let qAnswered: boolean = false;
     let qCorrect: boolean = true;
 
-    for (let antwort of this.scQuest.ans) {
-      if (antwort.choosen) {
-        qAnswered = true
-        if (antwort.right) {
-          qCorrect = false;
-        }
+    if (this.scAnswer == "richtig" || this.scAnswer == "falsch") {
+      qAnswered = true
+      if (this.scAnswer == "falsch") {
+        qCorrect = false;
       }
     }
 
     if(qAnswered) {
+      qAnswered = false;
+      this.scAnswer = " ";
       if(qCorrect) {
         this.bewertung.push('Richtig');
       } else {
         this.bewertung.push('Falsch');
+        this.tooMuchFalse += 1;
       }
     } else {
       this.bewertung.push('Skip');
     }
+    this.nextFrage();
    }
 
   fillAnswerCheck(answerText: string) {
@@ -191,7 +234,6 @@ export class ExamModusComponent implements OnInit {
     let qCorrect: boolean = true;
     if (answerText) {
         qAnswered = true;
-        console.log('nichts eingetragen')
       if (answerText != this.fillQuest.ans) {
           qCorrect = false;
       }
@@ -200,48 +242,68 @@ export class ExamModusComponent implements OnInit {
     if(qAnswered) {
       if(qCorrect) {
         this.bewertung.push('Richtig');
-        this.nextFrage();
       } else {
         this.bewertung.push('Falsch');
-        this.nextFrage();
+        this.tooMuchFalse += 1;
       }
     } else {
       this.bewertung.push('Skip');
-      this.nextFrage();
     }
+    this.nextFrage();
   }
 
   allAnswersCheck(answerText: string) { // Richtig oder Falsch-Funktion der Fragen
-    let fehler: boolean = false;
+    // All-MC-Fragen
     if (this.allQuest[this.currentArrayId].art == 'mc') {
-      for (let ele of this.allQuest[this.currentArrayId].ans) { // Hier wird eine künstliche Liste der Antworten erstellt, szsgn. als Maske!
-        if ((ele.choosen && !ele.right) || (!ele.choosen && ele.right)) // Wenn die gewählte Antwort ungleich der Richtigen und die falsche Antwort ungleich der Richtigen ist, dann...
-        {
-          fehler = true; // Falsche Antwort!!!
+      let qAnswered: boolean = false;
+      let qCorrect: boolean = true;
+
+      for (let antwort of this.allQuest[this.currentArrayId].ans) {
+        if (antwort.choosen) {
+          qAnswered = true;
+          if (antwort.right != antwort.choosen) {
+            qCorrect = false;
+          }
         }
       }
-    }
-
-    if (this.allQuest[this.currentArrayId].art == 'sc') {
-      if (!this.scAnswer) { // Wenn die Antwort falsch ist, dann...
-        fehler = true;
+      if(qAnswered) {
+        if(qCorrect) {
+          this.bewertung.push('Richtig');
+        } else {
+          this.bewertung.push('Falsch');
+          this.tooMuchFalse += 1;
+        }
+      } else {
+        this.bewertung.push('Skip');
       }
-    }
-
-    if (this.allQuest[this.currentArrayId].art == 'fill') {
-      if (answerText != this.allQuest[this.currentArrayId].ans) {
-        fehler = true;
-      }
-    }
-
-    if (fehler) { // Die 'fehler'-Variable='false' wird hier übergeben!
-      this.bewertung.push('Falsch');
       this.nextFrage();
-    } else { // Andererseits ist alles richtig!
-      fehler = false; // Der Wert wird standardmäßig zurück gesetzt um ihn nochmals auslösen zu können!
-      this.scAnswer = false;
-      this.bewertung.push('Richtig');
-      this.nextFrage(); // Die Funktion wiederholt sich, ich aber mich nicht ;)
+    }
+    // All-SC-Fragen
+    if (this.allQuest[this.currentArrayId].art == 'sc') {
+      this.scAnswersCheck();
+    }
+    // All-Fill-Fragen
+    if (this.allQuest[this.currentArrayId].art == 'fill') {
+      let qAnswered: boolean = false;
+      let qCorrect: boolean = true;
+
+      if (answerText) {
+        qAnswered = true;
+        if (answerText != this.allQuest[this.currentArrayId].ans) {
+          qCorrect = false;
+        }
+      }
+      if(qAnswered) {
+        if(qCorrect) {
+          this.bewertung.push('Richtig');
+        } else {
+          this.bewertung.push('Falsch');
+          this.tooMuchFalse += 1;
+        }
+      } else {
+        this.bewertung.push('Skip');
+      }
+      this.nextFrage();
     }
   }
 
@@ -254,15 +316,40 @@ export class ExamModusComponent implements OnInit {
     }
   }
 
-  mcProzent: string;
-  scProzent: string;
-  fillProzent: string;
-  allProzent: string;
-  //   calc() { // Funktion für die Berechnung der Ergebnisse
-  //     if (this.multi == true) { this.mcProzent = (this.richtig * 100 / this.mcFragen.length).toFixed(2); } // Berechnug der richtigen Fragen in Prozent Multiple Choice
-  //     if (this.single == true) { this.scProzent = (this.richtig * 100 / this.scFragen.length).toFixed(2); } // Berechnug der richtigen Fragen in Prozent Single Choice
-  //     if (this.fill == true) { this.fillProzent = (this.richtig * 100 / this.fillFragen.length).toFixed(2); } // Berechnug der richtigen Fragen in Prozent Fill-In
-  //     if (this.all == true) { this.allProzent = (this.richtig * 100 / this.allQuest.length).toFixed(2); } // Berechnung der richtigen Fragen in Prozent Alle Fragen
-  //   }
-  // }
+  calc() { // Funktion für die Berechnung der Ergebnisse in Prozent
+    if (this.multi == true) {
+      this.trueProzent = (this.totalTrue * 100 / this.mcFragen.length).toFixed(2);
+      // this.falseProzent = (this.trys * 100 / this.mcFragen.length).toFixed(2);
+      this.skipProzent = (this.totalSkip * 100 / this.mcFragen.length).toFixed(2);
+    }
+    if (this.single == true) {
+      this.trueProzent = (this.totalTrue * 100 / this.scFragen.length).toFixed(2);
+      this.falseProzent = (this.totalFalse * 100 / this.scFragen.length).toFixed(2);
+      this.skipProzent = (this.totalSkip * 100 / this.scFragen.length).toFixed(2);
+    }
+    if (this.fill == true) {
+      this.trueProzent = (this.totalTrue * 100 / this.fillFragen.length).toFixed(2);
+      this.falseProzent = (this.totalFalse * 100 / this.fillFragen.length).toFixed(2);
+      this.skipProzent = (this.totalSkip * 100 / this.fillFragen.length).toFixed(2);
+    }
+    if (this.all == true) {
+      this.trueProzent = (this.totalTrue * 100 / this.allQuest.length).toFixed(2);
+      this.falseProzent = (this.totalFalse * 100 / this.allQuest.length).toFixed(2);
+      this.skipProzent = (this.totalSkip * 100 / this.allQuest.length).toFixed(2);
+    }
+  }
+
+  results() {
+    this.bewertung.forEach(check => {
+      if(check == "Richtig") {
+        this.totalTrue++;
+      }
+      if(check == "Falsch") {
+        this.totalFalse++;
+      }
+      if(check == "Skip" ) {
+        this.totalSkip++;
+      }
+    });
+  }
 }
