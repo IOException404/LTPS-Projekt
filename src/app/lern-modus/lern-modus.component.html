@@ -192,7 +192,7 @@
 
     <div *ngIf="allQuest[currentArrayId].art == 'mc'">
       {{ viewState }}
-      <p>{{currentArrayId+1}} of {{ allQuest.length }}</p>
+      <p>{{currentArrayId+1}} of {{ allQuest.length+1 }}</p>
       <div class="header">
         <output>{{ allQuest[currentArrayId].txt }}</output>
         <div class="check">
@@ -214,7 +214,7 @@
     <!-- <div *ngIf="viewState == 'Alle Fragen'"> -->
     <div *ngIf="allQuest[currentArrayId].art == 'sc'">
       {{ viewState }}
-      <p>{{currentArrayId+1}} of {{ allQuest.length }}</p>
+      <p>{{currentArrayId+1}} of {{ allQuest.length+1 }}</p>
       <div class="header">
         <output>{{ allQuest[currentArrayId].txt }}</output>
         <div class="check">
@@ -248,7 +248,7 @@
   <!-- <div *ngIf="viewState == 'Alle Fragen'"> -->
   <div *ngIf="allQuest[currentArrayId].art == 'fill'">
     {{ viewState }}
-    <p>{{currentArrayId+1}} of {{ allQuest.length }}</p>
+    <p>{{currentArrayId+1}} of {{ allQuest.length+1 }}</p>
     <div class="header">
       <output>{{ allQuest[currentArrayId].txt }}</output>
       <div class="check">

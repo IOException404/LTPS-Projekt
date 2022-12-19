@@ -71,7 +71,7 @@
 <!-- ENDE -->
 
 <!-- MULTIPLE CHOICE -->
-<div *ngIf="viewState == 'Multiple Choice'">
+<div class="homeBox" *ngIf="viewState == 'Multiple Choice'" >
   <div>
     {{ viewState }}
     <p>{{currentArrayId+1}} of {{ mcFragen.length }}</p>
@@ -99,7 +99,7 @@
         <button *ngIf="back == true" (click)="prevFrage()">Zurück</button>
       </th>
       <th>
-        <button (click)="exit()">Abbrechen</button>
+        <button class="primary red button" (click)="exit()">Abbrechen</button>
         <button *ngIf="!targetReached" (click)="mcAnswersCheck(); youFailed()">Weiter</button>
         <button *ngIf="targetReached" (click)="mcAnswersCheck(); results(); calc(); changeMode('Statistik')">Auswerten</button>
       </th>
@@ -179,7 +179,7 @@
 
     <div *ngIf="allQuest[currentArrayId].art == 'mc'">
       {{ viewState }}
-      <p>{{currentArrayId+1}} of {{ allQuest.length }}</p>
+      <p>{{currentArrayId+1}} of {{ allQuest.length+1 }}</p>
       <div class="header">
         <output>{{ allQuest[currentArrayId].txt }}</output>
         <div class="check">
@@ -201,7 +201,7 @@
     <!-- <div *ngIf="viewState == 'Alle Fragen'"> -->
     <div *ngIf="allQuest[currentArrayId].art == 'sc'">
       {{ viewState }}
-      <p>{{currentArrayId+1}} of {{ allQuest.length }}</p>
+      <p>{{currentArrayId+1}} of {{ allQuest.length+1 }}</p>
       <div class="header">
         <output>{{ allQuest[currentArrayId].txt }}</output>
         <div class="check">
@@ -234,7 +234,7 @@
   <!-- <div *ngIf="viewState == 'Alle Fragen'"> -->
   <div *ngIf="allQuest[currentArrayId].art == 'fill'">
     {{ viewState }}
-    <p>{{currentArrayId+1}} of {{ allQuest.length }}</p>
+    <p>{{currentArrayId+1}} of {{ allQuest.length+1 }}</p>
     <div class="header">
       <output>{{ allQuest[currentArrayId].txt }}</output>
       <div class="check">
