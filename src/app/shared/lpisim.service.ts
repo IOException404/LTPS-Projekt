@@ -283,7 +283,224 @@ export class LPIsimService {
         ans: [{txt:'A. It is a plain text file containing a string such as Europe/Berlin', right:false, choosen:false }, {txt:'B. It is created and maintained by the NTP service based on the location of the systems IP address.', right: false, choosen:false }, {txt:'C. It is a symlink to /sys/device/clock/ltime and always contains the current local time.', right: false, choosen:false }, {txt:'D. After changing this file, newtzconfighas to be run to make the changes effective.', right: false, choosen:false }, {txt:'E. It is either a symlink to or a copy of a timezone information file such as /usr/share/zoneinfo/Europe/Berlin.', right: true, choosen:false }],
         info: "Die Antwort ist: E",
         art: "sc"
-      }
+      },
+      {
+        id: 24,
+        txt:"QUESTION 24: Which of the following commands should be executed when starting a login shell in order to change the language of messages for an internationalized program to Portuguese (pt)?",
+        ans: [{txt:'A. export LANGUAGE=“pt"', right:false, choosen:false }, {txt:'B. export LC_MESSAGES=“pt"', right: true, choosen:false }, {txt:'C. export UI_MESSAGES=“pt"', right: false, choosen:false }, {txt:'D. export MESSAGE=“pt"', right: false, choosen:false }, {txt:'E. export ALL_MESSAGES=“pt"', right: false, choosen:false }],
+        info: "Die Antwort ist: B",
+        art: "sc"
+      },
+      {
+        id: 25,
+        txt:"QUESTION 25: Which of the following files assigns a user to its primary group?",
+        ans: [{txt:'A. /etc/pgroup', right:false, choosen:false }, {txt:'B. /etc/shadow', right: false, choosen:false }, {txt:'C. /etc/passwd', right:true, choosen:false }, {txt:'D. /etc/group', right: false, choosen:false }, {txt:'E. /etc/gshadow', right: false, choosen:false }],
+        info: "Die Antwort ist: C",
+        art: "sc"
+      },
+      {
+        id: 26,
+        txt:"QUESTION 26: Which of the following steps prevents a user from obtaining an interactive login session?",
+        ans: [{txt:'A. Setting the UID for the user to 0.', right:false, choosen:false }, {txt:'B. Running the command chsh -s /bin/false with the user name.', right: true, choosen:false }, {txt:'C. Removing the user from the group staff.', right: false, choosen:false }, {txt:'D. Adding the user to /etc/noaccess.', right: false, choosen:false }, {txt:'E. Creating a .nologin file in the users home directory.', right: false, choosen:false }],
+        info: "Die Antwort ist: B",
+        art: "sc"
+      },
+      {
+        id: 30,
+        txt:"QUESTION 30: Which option in the chrony configuration file changes the initial interval of polls to a NTP server in order to speed up the initial synchronization?",
+        ans: [{txt:'A. iburst', right:true, choosen:false }, {txt:'B. quickstart', right: false, choosen:false }, {txt:'C. fast', right: false, choosen:false }, {txt:'D. fsync', right: false, choosen:false }, {txt:'E. flood', right: false, choosen:false }],
+        info: "Die Antwort ist: A",
+        art: "sc"
+      },
+      {
+        id: 31,
+        txt:"QUESTION 31: Which of the following commands is used to rotate, compress, and mail system logs?",
+        ans: [{txt:'A. logrotate', right:true, choosen:false }, {txt:'B. striplog', right: false, choosen:false }, {txt:'C. syslogd --rotate', right: false, choosen:false }, {txt:'D. rotatelog', right: false, choosen:false }, {txt:'E. logger', right: false, choosen:false }],
+        info: "Die Antwort ist: A",
+        art: "sc"
+      },
+      {
+        id: 32,
+        txt:"QUESTION 32: Why is the correct configuration of a system's time zone important?",
+        ans: [{txt:'A. Because the timezone is included in checksum calculations and timezone changes invalidate existing checksums.', right:false, choosen:false }, {txt:'B. Because the time zone is saved as part of the modification times of files and cannot be changed after a file is created.', right:true, choosen:false }, {txt:'C. Because the environment variables LANG and LC_MESSAGES are, by default, set according to the time zone.', right: false, choosen:false }, {txt:'D. Because NTP chooses servers nearby based on the configured time zone.', right: false, choosen:false }, {txt:'E. Because the conversion of Unix timestamps to local time relies on the time zone configuration.', right: false, choosen:false }],
+        info: "Die Antwort ist: E",
+        art: "sc"
+      },
+      {
+        id: 35,
+        txt:"QUESTION 35: Which of the following commands lists all queued print jobs?",
+        ans: [{txt:'A. lpd', right:false, choosen:false }, {txt:'B. lpr', right: false, choosen:false }, {txt:'C. lp', right: false, choosen:false }, {txt:'D. lsq', right: false, choosen:false }, {txt:'E. lpq', right:true, choosen:false }],
+        info: "Die Antwort ist: E",
+        art: "sc"
+      },
+      {
+        id: 36,
+        txt:"QUESTION 36: Which of the following entries in /etc/syslog.conf writes all mail related events to the file /var/log/maillog and sends all critical events to the remote server logger.example.com?",
+        ans: [{txt:'A. mail.* /var/log/maillog \n mail,crit @logger.example.org', right:false, choosen:false }, {txt:'B. mail.* /var/log/maillog \n mail.crit syslog://logger.example.org', right: false, choosen:false }, {txt:'C. mail /var/log/maillog \n mail.crit @logger.example.org', right: false, choosen:false }, {txt:'D. mail.* /var/log/maillog \n mail.crit @logger.example.org', right:true, choosen:false }, {txt:'E. mail * /var/log/maillog \n mail crit @logger.example.org', right: false, choosen:false }],
+        info: "Die Antwort ist: D",
+        art: "sc"
+      },
+      {
+        id: 38,
+        txt:"QUESTION 38: Which of the following protocols is related to the term open relay?",
+        ans: [{txt:'A. SMTP', right:true, choosen:false }, {txt:'B. POP3', right: false, choosen:false }, {txt:'C. NTP', right: false, choosen:false }, {txt:'D. IMAP', right: false, choosen:false }, {txt:'E. LDAP', right: false, choosen:false }],
+        info: "Die Antwort ist: A",
+        art: "sc"
+      },
+      {
+        id: 39,
+        txt:"QUESTION 39: Which of the following commands displays all environment and shell variables?",
+        ans: [{txt:'A. getargs', right:false, choosen:false }, {txt:'B. lsenv', right: false, choosen:false }, {txt:'C. ls', right: false, choosen:false }, {txt:'D. env', right: true, choosen:false }, {txt:'E. lsshell', right: false, choosen:false }],
+        info: "Die Antwort ist: D",
+        art: "sc"
+      },
+      {
+        id: 41,
+        txt:"QUESTION 41: What information is provided by the echo $$ command?",
+        ans: [{txt:'A. The process ID of the current shell.', right:true, choosen:false }, {txt:'B. The process ID for the following command.', right: false, choosen:false }, {txt:'C. The process ID of the last command executed.', right: false, choosen:false }, {txt:'D. The process ID of the last command which has been placed in the background.', right: false, choosen:false }, {txt:'E. The process ID of the echo command.', right: false, choosen:false }],
+        info: "Die Antwort ist: A",
+        art: "sc"
+      },
+      {
+        id: 42,
+        txt:"QUESTION 42: Which command makes the shell variable named VARIABLE visible to subshells?",
+        ans: [{txt:'A. export $VARIABLE', right:false, choosen:false }, {txt:'B. env VARIABLE', right: false, choosen:false }, {txt:'C. set $VARIABLE', right: false, choosen:false }, {txt:'D. set VARIABLE', right: false, choosen:false }, {txt:'E. export VARIABLE', right:true, choosen:false }],
+        info: "Die Antwort ist: E",
+        art: "sc"
+      },
+      {
+        id: 43,
+        txt:"QUESTION 43: What output is produced by the following command sequence? echo '1 2 3 4 5 6' | while read a b c; do echo result: $c $b $a; done",
+        ans: [{txt:'A. result: 6 5 4', right:false, choosen:false }, {txt:'B. result: 1 2 3 4 5 6', right: false, choosen:false }, {txt:'C. result: 3 4 5 6 2 1', right: true, choosen:false }, {txt:'D. result: 6 5 4 3 2 1', right: false, choosen:false }, {txt:'E. result: 3 2 1', right: false, choosen:false }],
+        info: "Die Antwort ist: C",
+        art: "sc"
+      },
+      {
+        id: 44,
+        txt:"QUESTION 44: Which of the following configuration files should be modified to globally set shell variables for all users?",
+        ans: [{txt:'A. /etc/profile', right:true, choosen:false }, {txt:'B. /etc/bashrc', right: false, choosen:false }, {txt:'C. ~/.bash_profile', right: false, choosen:false }, {txt:'D. /etc/.bashrc', right: false, choosen:false }, {txt:'E. /etc/shellenv', right: false, choosen:false }],
+        info: "Die Antwort ist: A",
+        art: "sc"
+      },
+      {
+        id: 45,
+        txt:"QUESTION 45: What output does the command seq 10 produce?",
+        ans: [{txt:'A. A continuous stream of numbers increasing in increments of 10 until the command is stopped.', right:false, choosen:false }, {txt:'B. It creates no output because a second parameter is missing.', right: false, choosen:false }, {txt:'C. The number 0 through 9 with one number per line.', right: false, choosen:false }, {txt:'D. The number 10 to standard output.', right: false, choosen:false }, {txt:'E. The numbers 1 through 10 with one number per line.', right:true, choosen:false }],
+        info: "Die Antwort ist: E",
+        art: "sc"
+      },
+      {
+        id: 47,
+        txt:"QUESTION 47: Which of the following commands can be used to limit the amount of memory a user may use?",
+        ans: [{txt:'A. umask', right:false, choosen:false }, {txt:'B. usermod', right: false, choosen:false }, {txt:'C. passwd', right: false, choosen:false }, {txt:'D. ulimit', right:true, choosen:false }, {txt:'E. chage', right: false, choosen:false }],
+        info: "Die Antwort ist: D",
+        art: "sc"
+      },
+      {
+        id: 48,
+        txt:"QUESTION 48: What is a purpose of an SSH host key?",
+        ans: [{txt:'A. It must be sent by any SSH client in addition to a user key in order to identify the clients host.', right:false, choosen:false }, {txt:'B. It is root key by which all user SSH keys must be signed.', right: false, choosen:false }, {txt:'C. It provides the servers identity information to connecting SSH clients.', right: true, choosen:false }, {txt:'D. It authenticates any user that logs into a remote machine from the keys host.', right: false, choosen:false }, {txt:'E. It is used by system services like cron, syslog or a backup job to automatically connect to remote hosts.', right: false, choosen:false }],
+        info: "Die Antwort ist: C",
+        art: "sc"
+      },
+      {
+        id: 49,
+        txt:"QUESTION 49: What is the purpose of TCP wrapper?",
+        ans: [{txt:'A. Manage and adjust bandwidth used by TCP services.', right:false, choosen:false }, {txt:'B. Bind a network service to a TCP port.', right: false, choosen:false }, {txt:'C. Encapsulate TCP messages in IP packets.', right: false, choosen:false }, {txt:'D. Add SSL support to plain text TCP services.', right: false, choosen:false }, {txt:'E. Limit access to a network service.', right:true, choosen:false }],
+        info: "Die Antwort ist: E",
+        art: "sc"
+      },
+      {
+        id: ,
+        txt:"",
+        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
+        info: "Die Antwort ist: ",
+        art: "sc"
+      },
+      {
+        id: ,
+        txt:"",
+        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
+        info: "Die Antwort ist: ",
+        art: "sc"
+      },
+      {
+        id: ,
+        txt:"",
+        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
+        info: "Die Antwort ist: ",
+        art: "sc"
+      },
+      {
+        id: ,
+        txt:"",
+        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
+        info: "Die Antwort ist: ",
+        art: "sc"
+      },
+      {
+        id: ,
+        txt:"",
+        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
+        info: "Die Antwort ist: ",
+        art: "sc"
+      },
+      {
+        id: ,
+        txt:"",
+        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
+        info: "Die Antwort ist: ",
+        art: "sc"
+      },
+      {
+        id: ,
+        txt:"",
+        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
+        info: "Die Antwort ist: ",
+        art: "sc"
+      },
+      {
+        id: ,
+        txt:"",
+        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
+        info: "Die Antwort ist: ",
+        art: "sc"
+      },
+      {
+        id: ,
+        txt:"",
+        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
+        info: "Die Antwort ist: ",
+        art: "sc"
+      },
+      {
+        id: ,
+        txt:"",
+        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
+        info: "Die Antwort ist: ",
+        art: "sc"
+      },
+      {
+        id: ,
+        txt:"",
+        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
+        info: "Die Antwort ist: ",
+        art: "sc"
+      },
+      {
+        id: ,
+        txt:"",
+        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
+        info: "Die Antwort ist: ",
+        art: "sc"
+      },
+      {
+        id: ,
+        txt:"",
+        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
+        info: "Die Antwort ist: ",
+        art: "sc"
+      },
     ];
 
 
