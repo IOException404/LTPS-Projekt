@@ -91,10 +91,10 @@ export class LPIsimService {
         art: "mc"
       },
       {
-        id: 40,
-        txt: "QUESTION 40: Which of the following comparison operators for test work on elements in the file system? (Choose two.)",
-        ans: [{txt: "A. -z", right:false, choosen:false}, {txt: "B. -eq", right:false, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "D. -f", right:true, choosen:false}, {txt: "E. -lt", right:false, choosen:false} ],
-        info: "Die Antworten sind: C-D",
+        id: 65,
+        txt: "QUESTION 65: Which of the following are syslog facilities? (Choose two.)",
+        ans: [{txt: "A. local5", right:true, choosen:false}, {txt: "B. accounting", right:false, choosen:false}, {txt: "C. mail", right:true, choosen:false}, {txt: "D. postmaster", right:false, choosen:false}, {txt: "E. remote", right:false, choosen:false}],
+        info: "Die Antworten sind: A-C",
         art: "mc"
       },
       {
@@ -105,55 +105,110 @@ export class LPIsimService {
         art: "mc"
       },
       {
-        id: 40,
-        txt: "QUESTION 40: Which of the following comparison operators for test work on elements in the file system? (Choose two.)",
-        ans: [{txt: "A. -z", right:false, choosen:false}, {txt: "B. -eq", right:false, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "D. -f", right:true, choosen:false}, {txt: "E. -lt", right:false, choosen:false} ],
+        id: 66,
+        txt: "QUESTION 66: Which of the following parameters are used for journalctl to limit the time frame of the output? (Choose two.)",
+        ans: [{txt: "A. --since=", right:true, choosen:false}, {txt: "B. --from=", right:false, choosen:false}, {txt: "C. --until=", right:true, choosen:false}, {txt: "D. --upto=", right:false, choosen:false}, {txt: "E. --date=", right:false, choosen:false} ],
+        info: "Die Antworten sind: A-C",
+        art: "mc"
+      },
+      {
+        id: 68,
+        txt: "QUESTION 68: Which of the following commands display a list of jobs in the print queue? (Choose two.)",
+        ans: [{txt: "A. cups --list", right:false, choosen:false}, {txt: "B. lprm -l", right:false, choosen:false}, {txt: "C. lpstat", right:true, choosen:false}, {txt: "D. lpr -q", right:false, choosen:false}, {txt: "E. lpq", right:true, choosen:false} ],
+        info: "Die Antworten sind: C-E",
+        art: "mc"
+      },
+      {
+        id: 69,
+        txt: "QUESTION 69: On a system using systemd-journald, which of the following commands add the message Howdy to the system log? (Choose two.)",
+        ans: [{txt: "A. append Howdy", right:false, choosen:false}, {txt: "B. logger Howdy", right:true, choosen:false}, {txt: "C. systemd-cat echo Howdy", right:true, choosen:false}, {txt: "D. echo Howdy > /dev/journal", right:false, choosen:false}, {txt: "E. journalctl add Howdy", right:false, choosen:false}],
+        info: "Die Antworten sind: B-C",
+        art: "mc"
+      },
+      {
+        id: 70,
+        txt: "QUESTION 70: Which of the following options in the chrony configuration file define remote time sources? (Choose two.)",
+        ans: [{txt: "A. source", right:false, choosen:false}, {txt: "B. clock", right:false, choosen:false}, {txt: "C. remote", right:false, choosen:false}, {txt: "D. pool", right:true, choosen:false}, {txt: "E. server", right:true, choosen:false} ],
+        info: "Die Antworten sind: D-E",
+        art: "mc"
+      },
+      {
+        id: 78,
+        txt: "QUESTION 78: What is true regarding the statement beginning with #! that is found in the first line of script? (Choose two.)",
+        ans: [{txt: "A. It prevents the scripts from being executed until the ! is removed.", right:false, choosen:false}, {txt: "B. It triggers the installation of the script's interpreter.", right:false, choosen:false}, {txt: "C. It specifies the path and the arguments of the interpreter used to run the script.", right:true, choosen:false}, {txt: "D. It defines the character encoding of the script.", right:false, choosen:false}, {txt:"E. It is a comment that is ignored by the script interpreter.", right:true, choosen:false} ],
+        info: "Die Antworten sind: C-E",
+        art: "mc"
+      },
+      {
+        id: 85,
+        txt: "QUESTION 85: What is true regarding public and private SSH keys? (Choose two.)",
+        ans: [{txt: "A. For each user account, there is exactly one key pair that can be used to log into that account.", right:false, choosen:false}, {txt: "B. The private key must never be revealed to anyone.", right:true, choosen:false}, {txt: "C. Several different public keys may be generated for the same private key.", right:false, choosen:false}, {txt: "D. To maintain the private key's confidentiality, the SSH key pair must be created by its owner.", right:true, choosen:false}, {txt: "E. To allow remote logins, the user's private key must be copied to the remote server.", right:false, choosen:false} ],
+        info: "Die Antworten sind: B-D",
+        art: "mc"
+      },
+      {
+        id: 95,
+        txt: "QUESTION 95: Which of the following states can NetworkManager show regarding the system's network connectivity? (Choose two.)",
+        ans: [{txt: "A. 203.0.113.64", right:false, choosen:false}, {txt: "B. 203.0.113.78", right:true, choosen:false}, {txt: "C. 203.0.113.65", right:true, choosen:false}, {txt: "D. 203.0.113.80", right:false, choosen:false}, {txt: "E. 203.0.113.81", right:false, choosen:false} ],
+        info: "Die Antworten sind: B-C",
+        art: "mc"
+      },
+      {
+        id: 96,
+        txt: "QUESTION 96: Which of the following are valid host addresses for the subnet 203.0.113.64/28? (Choose two.)",
+        ans: [{txt: "A. For each user account, there is exactly one key pair that can be used to log into that account.", right:false, choosen:false}, {txt: "B. The private key must never be revealed to anyone.", right:true, choosen:false}, {txt: "C. Several different public keys may be generated for the same private key.", right:false, choosen:false}, {txt: "D. To maintain the private key's confidentiality, the SSH key pair must be created by its owner.", right:true, choosen:false}, {txt: "E. To allow remote logins, the user's private key must be copied to the remote server.", right:false, choosen:false} ],
+        info: "Die Antworten sind: B-D",
+        art: "mc"
+      },
+      {
+        id: 97,
+        txt: "QUESTION 97: Which of the following keywords can be used in the file /etc/resolv.conf? (Choose two.)",
+        ans: [{txt: "A. substitute", right:false, choosen:false}, {txt: "B. lookup", right:false, choosen:false}, {txt: "C. search", right:true, choosen:false}, {txt: "D. nameserver", right:true, choosen:false}, {txt: "E. method", right:false, choosen:false} ],
         info: "Die Antworten sind: C-D",
         art: "mc"
       },
       {
-        id: 40,
-        txt: "QUESTION 40: Which of the following comparison operators for test work on elements in the file system? (Choose two.)",
-        ans: [{txt: "A. -z", right:false, choosen:false}, {txt: "B. -eq", right:false, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "D. -f", right:true, choosen:false}, {txt: "E. -lt", right:false, choosen:false} ],
-        info: "Die Antworten sind: C-D",
+        id: 99,
+        txt: "QUESTION 99: Which of the following commands displays the number of bytes transmitted and received via the eth0 network interface? (Choose two.)",
+        ans: [{txt: "A. route -v via eth0", right:false, choosen:false}, {txt: "B. ip stats show dev eth0", right:false, choosen:false}, {txt: "C. netstat -s -i eth0", right:false, choosen:false}, {txt: "D. ifconfig eth0", right:true, choosen:false}, {txt: "E. ip -s link show eth0", right:true, choosen:false} ],
+        info: "Die Antworten sind: D-E",
         art: "mc"
       },
       {
-        id: 40,
-        txt: "QUESTION 40: Which of the following comparison operators for test work on elements in the file system? (Choose two.)",
-        ans: [{txt: "A. -z", right:false, choosen:false}, {txt: "B. -eq", right:false, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "D. -f", right:true, choosen:false}, {txt: "E. -lt", right:false, choosen:false} ],
-        info: "Die Antworten sind: C-D",
+        id: 101,
+        txt: "QUESTION 101: Which of the following commands will delete the default gateway from the system's IP routing table? (Choose two.)",
+        ans: [{txt: "A. ifconfig unset default", right:false, choosen:false}, {txt: "B. route del default", right:true, choosen:false}, {txt: "C. ip route del default", right:true, choosen:false}, {txt: "D. netstat -r default", right:false, choosen:false}, {txt: "E. sysctl ipv4.default_gw=0", right:false, choosen:false} ],
+        info: "Die Antworten sind: B-C",
         art: "mc"
       },
       {
-        id: 40,
-        txt: "QUESTION 40: Which of the following comparison operators for test work on elements in the file system? (Choose two.)",
-        ans: [{txt: "A. -z", right:false, choosen:false}, {txt: "B. -eq", right:false, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "D. -f", right:true, choosen:false}, {txt: "E. -lt", right:false, choosen:false} ],
-        info: "Die Antworten sind: C-D",
+        id: 103,
+        txt: "QUESTION 103: What is true about NetworkManager on a Linux system that uses its distribution's mechanisms to configure network interfaces? (Choose two.)",
+        ans: [{txt: "A. NetworkManager reconfigures all network interfaces to use DHCP unless they are specifically managed by NetworkManager.", right:false, choosen:false}, {txt: "B. NetworkManager must be explicitly enabled for each interface it should manage.", right:false, choosen:false}, {txt: "C. NetworkManager by default does not change interfaces which are already configured.", right:true, choosen:false}, {txt: "D. NetworkManager disables all interfaces which were not configured by NetworkManager.", right:false, choosen:false}, {txt: "E. NetworkManager can be configured to use the distribution's network interface configuration.", right:true, choosen:false} ],
+        info: "Die Antworten sind: C-E",
         art: "mc"
       },
       {
-        id: 40,
-        txt: "QUESTION 40: Which of the following comparison operators for test work on elements in the file system? (Choose two.)",
-        ans: [{txt: "A. -z", right:false, choosen:false}, {txt: "B. -eq", right:false, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "D. -f", right:true, choosen:false}, {txt: "E. -lt", right:false, choosen:false} ],
-        info: "Die Antworten sind: C-D",
+        id: 105,
+        txt: "QUESTION 105: Which of the following environment variables can be defined in locale.conf? (Choose two.)",
+        ans: [{txt: "A. LC_ALL", right:true, choosen:false}, {txt: "B. LC_USERNAME", right:false, choosen:false}, {txt: "C. LC_UTF8", right:false, choosen:false}, {txt: "D. LC_GEOGRAPHY", right:false, choosen:false}, {txt: "E. LC_TIME", right:true, choosen:false} ],
+        info: "Die Antworten sind: A-E",
         art: "mc"
       },
       {
-        id: 40,
-        txt: "QUESTION 40: Which of the following comparison operators for test work on elements in the file system? (Choose two.)",
-        ans: [{txt: "A. -z", right:false, choosen:false}, {txt: "B. -eq", right:false, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "D. -f", right:true, choosen:false}, {txt: "E. -lt", right:false, choosen:false} ],
-        info: "Die Antworten sind: C-D",
+        id: 110,
+        txt: "QUESTION 110: Which of the following fields can be found in the /etc/group file? (Choose two.)",
+        ans: [{txt: "A. The home directory of the group.", right:false, choosen:false}, {txt: "B. The list of users that belong to the group.", right:true, choosen:false}, {txt: "C. The name of the group.", right:true, choosen:false}, {txt: "D. The default group ACL.", right:false, choosen:false}, {txt: "E. The description of the group.", right:false, choosen:false} ],
+        info: "Die Antworten sind: B-C",
         art: "mc"
       },
       {
-        id: 40,
-        txt: "QUESTION 40: Which of the following comparison operators for test work on elements in the file system? (Choose two.)",
-        ans: [{txt: "A. -z", right:false, choosen:false}, {txt: "B. -eq", right:false, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "D. -f", right:true, choosen:false}, {txt: "E. -lt", right:false, choosen:false} ],
-        info: "Die Antworten sind: C-D",
+        id: 119,
+        txt: "QUESTION 119: Which of the following tasks are handled by a display manager like XDM or KDM? (Choose two.)",
+        ans: [{txt: "A. Configure additional devices like new monitors or projectors when they are attached.", right:false, choosen:false}, {txt: "B. Start and prepare the desktop environment for the user.", right:true, choosen:false}, {txt: "C. Create an X11 configuration file for the current graphic devices and monitors.", right:false, choosen:false}, {txt: "D. Lock the screen when the user was inactive for a configurable amount of time.", right:false, choosen:false}, {txt: "E. Handle the login of a user.", right:true, choosen:false} ],
+        info: "Die Antworten sind: B-E",
         art: "mc"
-      },
-
+      }
     ];
 
 
