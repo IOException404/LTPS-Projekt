@@ -28,9 +28,6 @@ export class ExamModusComponent implements OnInit {
   trueProzent: string;
   falseProzent: string;
   skipProzent: string;
-  rightQuestions: string[] = [];
-  falseQuestions: string[] = [];
-  skippedQuestions: string[] = [];
 
 
   allQuest = []; // Leeres Alle Fragen Array
