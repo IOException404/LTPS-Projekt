@@ -734,7 +734,7 @@ export class LPIsimService {
       },
       {
         id: 120,
-        txt: `Which of the following protocols is designed to access the video card output of a virtual machine?`,
+        txt: `QUESTION 120: Which of the following protocols is designed to access the video card output of a virtual machine?`,
         ans: [{txt:`A. KDE`, right:false, choosen:false }, {txt:`B. X11`, right: false, choosen:false }, {txt:`C. Xfce`, right: false, choosen:false }, {txt:`D. SPICE`, right:true, choosen:false }, {txt:`E. XDMCP`, right: false, choosen:false }],
         info: "Die Antwort ist: D",
         art: "sc"
