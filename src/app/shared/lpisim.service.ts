@@ -411,94 +411,332 @@ export class LPIsimService {
         art: "sc"
       },
       {
-        id: ,
-        txt:"",
-        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
-        info: "Die Antwort ist: ",
+        id: 51,
+        txt:"QUESTION 51: Which configuration file contains the default options for SSH clients?",
+        ans: [{txt:'A. /etc/ssh/sshd_config', right:false, choosen:false }, {txt:'B. /etc/ssh/ssh', right: false, choosen:false }, {txt:'C. /etc/ssh/ssh_config', right: true, choosen:false }, {txt:'D. /etc/ssh/client', right: false, choosen:false }, {txt:'E. /etc/ssh/ssh_client', right: false, choosen:false }],
+        info: "Die Antwort ist: C",
         art: "sc"
       },
       {
-        id: ,
-        txt:"",
-        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
-        info: "Die Antwort ist: ",
+        id: 52,
+        txt:"QUESTION 52: Depending on a system's configuration, which of the following files can be used to enable and disable network services running on this host?",
+        ans: [{txt:'A. /etc/profile', right:false, choosen:false }, {txt:'B. /etc/xinetd.conf', right: true, choosen:false }, {txt:'C. /etc/ports', right: false, choosen:false }, {txt:'D. /etc/services', right: false, choosen:false }, {txt:'E. /etc/host.conf', right: false, choosen:false }],
+        info: "Die Antwort ist: B",
         art: "sc"
       },
       {
-        id: ,
-        txt:"",
-        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
-        info: "Die Antwort ist: ",
+        id: 53,
+        txt:"QUESTION 53: Which of the following commands can identify the PID or a process which opened a TCP port?",
+        ans: [{txt:'A. ptrace', right:false, choosen:false }, {txt:'B. strace', right: false, choosen:false }, {txt:'C. debug', right: false, choosen:false }, {txt:'D. lsof', right: true, choosen:false }, {txt:'E. nessus', right: false, choosen:false }],
+        info: "Die Antwort ist: D",
         art: "sc"
       },
       {
-        id: ,
-        txt:"",
-        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
-        info: "Die Antwort ist: ",
+        id: 56,
+        txt:"QUESTION 56: Which of the following commands preloads and manages existing SSH keys that are used for automatic authentication while logging in to other machines using SSH?",
+        ans: [{txt:'A. sshd', right:false, choosen:false }, {txt:'B. ssh-keyring', right: false, choosen:false }, {txt:'C. ssh-keygen', right: false, choosen:false }, {txt:'D. ssh-pki', right: false, choosen:false }, {txt:'E. ssh-agent', right:true, choosen:false }],
+        info: "Die Antwort ist: E",
         art: "sc"
       },
       {
-        id: ,
-        txt:"",
-        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
-        info: "Die Antwort ist: ",
+        id: 57,
+        txt:"QUESTION 57: On a machine running several X servers, how do programs identify the different instances of the X11 server?",
+        ans: [{txt:'A. By a fixed UUID that is defined in the X11 configuration file.', right:false, choosen:false }, {txt:'B. By a display name like :1 .', right: true, choosen:false }, {txt:'C. By the name of the user that runs the X server like x11: bob.', right: false, choosen:false }, {txt:'D. By a device name like /dev/X11/xservers/1.', right: false, choosen:false }, {txt:'E. By a unique IPv6 address from the fe80::/64subnet.', right: false, choosen:false }],
+        info: "Die Antwort ist: B",
         art: "sc"
       },
       {
-        id: ,
-        txt:"",
-        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
-        info: "Die Antwort ist: ",
+        id: 58,
+        txt:"QUESTION 58: What is the purpose of a screen reader?",
+        ans: [{txt:'A. It manages virtual keyboards on touch screen displays.', right:false, choosen:false }, {txt:'B. It reads the parameters of the attached monitors and creates an appropriate X11 configuration.', right: false, choosen:false }, {txt:'C. It displays lines and markers to help people use speed reading techniques.', right: false, choosen:false }, {txt:'D. It manages and displays files that contain e-books.', right: false, choosen:false }, {txt:'E. It reads displayed text to accommodate the needs of blind or visually impaired people.', right:true, choosen:false }],
+        info: "Die Antwort ist: E",
         art: "sc"
       },
       {
-        id: ,
-        txt:"",
-        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
-        info: "Die Antwort ist: ",
+        id: 59,
+        txt:"QUESTION 59: The X11 configuration file xorg.conf is grouped into sections. How is the content of the section SectionName represented?",
+        ans: [{txt:'A. It is placed in curly brackets as in Section SectionName {…}.', right:false, choosen:false }, {txt:'B. It is placed between the tags <Section name=“SectionName"> and </Section>.', right: false, choosen:false }, {txt:'C. It is placed between a line containing Section “SectionName" and a line containing EndSection.', right:true, choosen:false }, {txt:'D. It is placed after the row [SectionName].', right: false, choosen:false }, {txt:'E. It is placed after an initial unindented Section “SectionName" and must be indented by exactly one tab character.', right: false, choosen:false }],
+        info: "Die Antwort ist: C",
         art: "sc"
       },
       {
-        id: ,
-        txt:"",
-        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
-        info: "Die Antwort ist: ",
+        id: 61,
+        txt:"QUESTION 61: Where is the systemd journal stored?",
+        ans: [{txt:'A. /var/jlog/and /var/jlogd/', right:false, choosen:false }, {txt:'B. /proc/log/and /proc/klog/', right: false, choosen:false }, {txt:'C. /run/log/journal/ or /var/log/journal/', right:true, choosen:false }, {txt:'D. /var/log/syslog.binor /var/log/syslog.jrn', right: false, choosen:false }, {txt:'E. /etc/systemd/journal/or /usr/lib/systemd/journal/', right: false, choosen:false }],
+        info: "Die Antwort ist: C",
         art: "sc"
       },
       {
-        id: ,
-        txt:"",
-        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
-        info: "Die Antwort ist: ",
+        id: 62,
+        txt:"QUESTION 62: Which of the following is true regarding the command sendmail?",
+        ans: [{txt:'A. With any MTA, the sendmail command must be run periodically by the cron daemon.', right:false, choosen:false }, {txt:'B. When using systemd, sendmail is an alias to relayctl.', right: false, choosen:false }, {txt:'C. The sendmail command prints the MTAs queue history of which mails have been sent successfully.', right: false, choosen:false }, {txt:'D. It is only available when the sendmail MTA is installed.', right: false, choosen:false }, {txt:'E. All common MTAs, including Postfix and Exim, provide a sendmail command.', right:true, choosen:false }],
+        info: "Die Antwort ist: E",
         art: "sc"
       },
       {
-        id: ,
-        txt:"",
-        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
-        info: "Die Antwort ist: ",
+        id: 63,
+        txt:"QUESTION 63: Which file inside the CUPS configuration directory contains the settings of the printers?",
+        ans: [{txt:'A. cups-devices.conf', right:false, choosen:false }, {txt:'B. snmp.conf', right: false, choosen:false }, {txt:'C. printers.conf', right:true, choosen:false }, {txt:'D. printcap.conf', right: false, choosen:false }, {txt:'E. cupsd.conf', right: false, choosen:false }],
+        info: "Die Antwort ist: C",
         art: "sc"
       },
       {
-        id: ,
-        txt:"",
-        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
-        info: "Die Antwort ist: ",
+        id: 67,
+        txt:"QUESTION 67: What is true regarding the file ~/.forward?",
+        ans: [{txt:'A. When configured correctly ~/.forward can be used to forward each incoming mail to one or more other recipients.', right:true, choosen:false }, {txt:'B. After editing ~/.forward the user must run newaliases to make the mail server aware of the changes.', right: false, choosen:false }, {txt:'C. Using ~/.forward, root may configure any email address whereas all other users may configure only their own addresses.', right: false, choosen:false }, {txt:'D. As ~/.forward is owned by the MTA and not writable by the user, it must be edited using the editaliases command.', right: false, choosen:false }, {txt:'E. By default, only ~/.forward files of users in the group mailq are processed while all other users ~/.forward files are ignored.', right: false, choosen:false }],
+        info: "Die Antwort ist: A",
         art: "sc"
       },
       {
-        id: ,
-        txt:"",
-        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
-        info: "Die Antwort ist: ",
+        id: 72,
+        txt:"QUESTION 72: Which of the following situations is observed and corrected by an NTP client?",
+        ans: [{txt:'A. The skew in time between the system clock and the computers hardware clock.', right:false, choosen:false }, {txt:'B. The physical location and the time zone configuration.', right: false, choosen:false }, {txt:'C. Changes in the time zone of the current computers location.', right: false, choosen:false }, {txt:'D. Adjustment needed to support Daylight Saving Time.', right: false, choosen:false }, {txt:'E. The skew in time between the system clock and the reference clock.', right: true, choosen:false }],
+        info: "Die Antwort ist: E",
         art: "sc"
       },
       {
-        id: ,
-        txt:"",
-        ans: [{txt:'', right:false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }, {txt:'', right: false, choosen:false }],
-        info: "Die Antwort ist: ",
+        id: 73,
+        txt:"QUESTION 73: If an alias ls exists, which of the following commands updates the alias to point to the command ls -l instead of the alias's current target?",
+        ans: [{txt:`A. set ls='ls -l'`, right:false, choosen:false }, {txt:`B. alias ls='ls -l`, right: true, choosen:false }, {txt:`C. alias --force ls='ls -l'`, right: false, choosen:false }, {txt:`D. alias --update ls ls='ls -l'`, right: false, choosen:false }, {txt:`E. realias ls='ls -l'`, right: false, choosen:false }],
+        info: "Die Antwort ist: B",
+        art: "sc"
+      },
+      {
+        id: 74,
+        txt: `QUESTION 74: Which of the following commands puts the output of the command date into the shell variable mydate?`,
+        ans: [{txt:`A. mydate="date"`, right:false, choosen:false }, {txt:`B. mydate="exec date"`, right: false, choosen:false }, {txt:`C. mydate="$((date))"`, right: false, choosen:false }, {txt:`D. mydate="$(date)"`, right: true, choosen:false }, {txt:`E. mydate="${'date'}"`, right: false, choosen:false }],
+        info: "Die Antwort ist: D",
+        art: "sc"
+      },
+      {
+        id: 75,
+        txt: `QUESTION 75: What information is shown by the echo $? command?`,
+        ans: [{txt:`A. The process ID of the echo command.`, right:false, choosen:false }, {txt:`B. The exit value of the command executed immediately before echo.`, right: true, choosen:false }, {txt:`C. The process ID which will be used for the next command.`, right: false, choosen:false }, {txt:`D. The exit value of the echo command.`, right: false, choosen:false }, {txt:`E. The process ID of the current shell.`, right: false, choosen:false }],
+        info: "Die Antwort ist: B",
+        art: "sc"
+      },
+      {
+        id: 76,
+        txt: `QUESTION 76: Which of the following files is not read directly by a Bash login shell?`,
+        ans: [{txt:`A. ~/.bashrc`, right:true, choosen:false }, {txt:`B. ~/.bash_profile`, right: false, choosen:false }, {txt:`C. ~/.bash_login`, right: false, choosen:false }, {txt:`D. ~/.profile`, right: false, choosen:false }, {txt:`E. /etc/profile`, right: false, choosen:false }],
+        info: "Die Antwort ist: A",
+        art: "sc"
+      },
+      {
+        id: 77,
+        txt: `QUESTION 77: What is true about the file .profile in a user's home directory?`,
+        ans: [{txt:`A. It must be executable.`, right:false, choosen:false }, {txt:`B. It must call the binary of the login shell.`, right: false, choosen:false }, {txt:`C. It must use a valid shell script syntax.`, right: true, choosen:false }, {txt:`D. It must start with a shebang.`, right: false, choosen:false }, {txt:`E. It must be readable for its owner only.`, right: false, choosen:false }],
+        info: "Die Antwort ist: C",
+        art: "sc"
+      },
+      {
+        id: 79,
+        txt: `QUESTION 79: What output does the command seq 1 5 20 produce?`,
+        ans: [{txt:`A. 1 5 10 15`, right:false, choosen:false }, {txt:`B. 1 6 11 16`, right: true, choosen:false }, {txt:`C. 1 2 3 4`, right: false, choosen:false }, {txt:`D. 2 3 4 5`, right: false, choosen:false }, {txt:`E. 5 10 15 20`, right: false, choosen:false }],
+        info: "Die Antwort ist: B",
+        art: "sc"
+      },
+      {
+        id: 82,
+        txt: `QUESTION 82: Which command is used to set restrictions on the size of a core file that is created for a user when a program crashes?`,
+        ans: [{txt:`A. core`, right:false, choosen:false }, {txt:`B. edquota`, right: false, choosen:false }, {txt:`C. quota`, right: false, choosen:false }, {txt:`D. ulimit`, right:true, choosen:false }, {txt:`E. ktrace`, right: false, choosen:false }],
+        info: "Die Antwort ist: D",
+        art: "sc"
+      },
+      {
+        id: 80,
+        txt: `QUESTION 80: Which of the following commands lists all defines variables and functions within Bash?`,
+        ans: [{txt:`A. env`, right:false, choosen:false }, {txt:`B. export`, right: false, choosen:false }, {txt:`C. env -a`, right: false, choosen:false }, {txt:`D. set`, right:true, choosen:false }, {txt:`E. echo $ENV`, right: false, choosen:false }],
+        info: "Die Antwort ist: D",
+        art: "sc"
+      },
+      {
+        id: 81,
+        txt: `QUESTION 81: What information related to a user account is modified using the chage command?`,
+        ans: [{txt:`A. Default ownership for new files`, right:false, choosen:false }, {txt:`B. Group membership`, right: false, choosen:false }, {txt:`C. Set of commands available to the user`, right: false, choosen:false }, {txt:`D. Password expiry information`, right: true, choosen:false }, {txt:`E. Default permissions for new files`, right: false, choosen:false }],
+        info: "Die Antwort ist: D",
+        art: "sc"
+      },
+      {
+        id: 83,
+        txt: `QUESTION 83: How do shadow passwords improve the password security in comparison to standard no-shadow
+        password?`,
+        ans: [{txt:`A. Regular users do not have access to the password hashes of shadow passwords.`, right:true, choosen:false }, {txt:`B. Every shadow password is valid for 45 days and must be changed afterwards.`, right: false, choosen:false }, {txt:`C. The system's host key is used to encrypt all shadow passwords.`, right: false, choosen:false }, {txt:`D. Shadow passwords are always combined with a public key that has to match the user's private key.`, right: false, choosen:false }, {txt:`E. Shadow passwords are stored in plain text and can be checked for weak passwords.`, right: false, choosen:false }],
+        info: "Die Antwort ist: A",
+        art: "sc"
+      },
+      {
+        id: 86,
+        txt: `QUESTION 86: Which of the following commands finds all files owned by root that have the SetUID bit set?`,
+        ans: [{txt:`A. find / -user root -perm -4000`, right:true, choosen:false }, {txt:`B. find / -user 0 -mode +s`, right: false, choosen:false }, {txt:`C. find / -owner root -setuid`, right: false, choosen:false }, {txt:`D. find / -owner 0 -permbits 0x100000000`, right: false, choosen:false }, {txt:`E. find / --filter uid=1 --filter pers=u+s`, right: false, choosen:false }],
+        info: "Die Antwort ist: A",
+        art: "sc"
+      },
+      {
+        id: 84,
+        txt: `QUESTION 84: After editing the TCP wrapper configuration to grant specific hosts access to a service, when do these
+        changes become effective?`,
+        ans: [{txt:`A. The new configuration becomes effective after restarting the respective service.`, right:false, choosen:false }, {txt:`B. The new configuration becomes effective at the next system reboot.`, right: false, choosen:false }, {txt:`C. The new configuration becomes effective when the last established connection to the service is closed.`, right: false, choosen:false }, {txt:`D. The new configuration becomes effective after restarting the tcpd service.`, right: false, choosen:false }, {txt:`E. The new configuration becomes effective immediately for all new connections.`, right: true, choosen:false }],
+        info: "Die Antwort ist: E",
+        art: "sc"
+      },
+      {
+        id: 89,
+        txt: `QUESTION 89: Which mechanism does ssh use to interact with the SSH agent?`,
+        ans: [{txt:`A. Connecting to port 2222 which is used by the system-wide SSH agent.`, right:false, choosen:false }, {txt:`B. Using the fixed socket .ssh-agent/ipc.`, right: false, choosen:false }, {txt:`C. Creating an alias replacing ssh with calls to ssh-agent.`, right: false, choosen:false }, {txt:`D. Starting ssh-agent as a child process for each ssh invocation.`, right: false, choosen:false }, {txt:`E. Evaluating environment variables such as SSH_AUTH_SOCK.`, right: true, choosen:false }],
+        info: "Die Antwort ist: E",
+        art: "sc"
+      },
+      {
+        id: 92,
+        txt: `QUESTION 92: What is true about the following command?
+        nmcli device wifi connect WIFIoI`,
+        ans: [{txt:`A. NetworkManager opens a new public hotspot with the SSID WIFIoI.`, right:false, choosen:false }, {txt:`B. NetworkManager creates an unconfigured new virtual network interface named WIFIoI.`, right: false, choosen:false }, {txt:`C. NetworkManager creates a new wifi connection WIFIoI and activates it.`, right: true, choosen:false }, {txt:`D. NetworkManager returns an error in case the connection WIFIoI does not exist.`, right: false, choosen:false }, {txt:`E. NetworkManager returns an error because WIFIoI is an invalid wifi device.`, right: false, choosen:false }],
+        info: "Die Antwort ist: C",
+        art: "sc"
+      },
+      {
+        id: 93,
+        txt: `QUESTION 93: Which of the commands below might have produced the following output?
+        ;; global options: +cmd
+        ;; Got answer:
+        ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 14368
+        ;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1
+
+        ;; OPT PSEUDOSECTION:
+        ; EDNS: version: 0, flags:; udp: 4096
+        ;; QuESTION SECTION:
+        ;www.example.org.               IN      NS
+
+        ;; AUTHORITY SECTION:
+        example.org.            3600    IN      SOA     ns.icann.org. noc.dns.icann.org. 2019121418 7200 3600 1209600 3600
+
+        ;; Query time: 96 msec
+        ;; SERVER: 172.21.0.9#53(172.21.0.9)
+        ;; WHEN: Di Jun 23 13:57:34 CEST 2020
+        ;; MSG SIZE  rcvd: 97`,
+        ans: [{txt:`A. dig -t mx www.example.org`, right:false, choosen:false }, {txt:`B. dig www.example.org`, right: false, choosen:false }, {txt:`C. dig -t ns www.example.org`, right: true, choosen:false }, {txt:`D. dig -t a www.example.org`, right: false, choosen:false }, {txt:`E. dig -t soa www.example.org`, right: false, choosen:false }],
+        info: "Die Antwort ist: C",
+        art: "sc"
+      },
+      {
+        id: 91,
+        txt: `QUESTION 91: Which of the following is true about IPv6?`,
+        ans: [{txt:`A. IPv6 no longer supports broadcast addresses.`, right:true, choosen:false }, {txt:`B. With IPv6, the TCP port numbers of most services have changed.`, right: false, choosen:false }, {txt:`C. IPv4 addresses can be used without any change with IPv6.`, right: false, choosen:false }, {txt:`D. IPv6 no longer supports multicast addresses.`, right: false, choosen:false }, {txt:`E. For IPv6, UDP and TCP have been replaced by the Rapid Transmission Protocol RTP.`, right: false, choosen:false }],
+        info: "Die Antwort ist: A",
+        art: "sc"
+      },
+      {
+        id: 98,
+        txt: `QUESTION 98: How does the ping command work by default?`,
+        ans: [{txt:`A. Is sends an ICMP Echo Request to a remote host and waits to receive an ICMP Echo Response in return.`, right:true, choosen:false }, {txt:`B. It sends an ARP request to a remote host and waits to receive an ARP response in return.`, right: false, choosen:false }, {txt:`C. It sends a TCP SYN packet to a remote host and waits to receive an TCP ACK response in return.`, right: false, choosen:false }, {txt:`D. Is sends a broadcast packet to all hosts on the net and waits to receive, among others, a response from the target system.`, right: false, choosen:false }, {txt:`E. It sends a UDP packet to port 0 of the remote host and waits to receive a UDP error response in return.`, right: false, choosen:false }],
+        info: "Die Antwort ist: A",
+        art: "sc"
+      },
+      {
+        id: 100,
+        txt: `QUESTION 100:
+
+        Given the following routing table:
+         Kernel IP routing table
+         Destination   Gateway       Genmask       Flags Metric Ref Use Iface
+         0.0.0.0       192.168.178.1 0.0.0.0       UG    0      0   0   wlan0
+         192.168.1.0   0.0.0.0       255.255.255.0 U     0      0   0   eth0
+         192.168.2.0   192.168.1.1   255.255.255.0 U     0      0   0   eth0
+         192.168.178.0 0.0.0.0       255.255.255.0 U     9      0   0   wlan0
+
+        How would an outgoing packet to the destination 192.168.2.150 be handled?`,
+        ans: [{txt:`A. It would be passed to the default router 192.168.178.1 on wlan0.`, right:false, choosen:false }, {txt:`B. It would be directly transmitted on the device eth0.`, right: false, choosen:false }, {txt:`C. It would be passed to the default router 255.255.255.0 on eth0.`, right: false, choosen:false }, {txt:`D. It would be passed to the router 192.168.1.1 on eth0.`, right: true, choosen:false }, {txt:`E. It would be directly transmitted on the device wlan0.`, right: false, choosen:false }],
+        info: "Die Antwort ist: D",
+        art: "sc"
+      },
+      {
+        id: 104,
+        txt: `QUESTION 104: Which standardized TCP port is used by HTTPS services?`,
+        ans: [{txt:`A. 25`, right:false, choosen:false }, {txt:`B. 80`, right: false, choosen:false }, {txt:`C. 8080`, right: false, choosen:false }, {txt:`D. 443`, right: true, choosen:false }, {txt:`E. 636`, right: false, choosen:false }],
+        info: "Die Antwort ist: D",
+        art: "sc"
+      },
+      {
+        id: 106,
+        txt: `QUESTION 106: Which of the following commands sets the system's time zone to the Canadian Eastern Time?`,
+        ans: [{txt:`A. localegen -t -f /usr/share/zoneinfo/Canada/Eastern > /etc/locate.tz`, right:false, choosen:false }, {txt:`B. tzconf /etc/localtime`, right: false, choosen:false }, {txt:`C. sysctl -w clock.tz='Canada/Eastern'`, right: false, choosen:false }, {txt:`D. modprobe tz_ca_est`, right: false, choosen:false }, {txt:`E. ln -sf /usr/share/zoneinfo/Canada/Eastern /etc/localtime`, right:true, choosen:false }],
+        info: "Die Antwort ist: E",
+        art: "sc"
+      },
+      {
+        id: 108,
+        txt: `QUESTION 108: How can a specific user be prevented from scheduling tasks with at?`,
+        ans: [{txt:`A. By adding the specific user to the /etc/at.allow file.`, right:false, choosen:false }, {txt:`B. By adding the specific user to the [deny] section in the /etc/atd.conf file.`, right: false, choosen:false }, {txt:`C. By adding the specific user to the nojobs group.`, right: false, choosen:false }, {txt:`D. By adding the specific user to the /etc/at.deny file.`, right:true, choosen:false }, {txt:`E. By executing the atd --deny [user] command.`, right: false, choosen:false }],
+        info: "Die Antwort ist: D",
+        art: "sc"
+      },
+      {
+        id: 109,
+        txt: `QUESTION 109: Which file contains the data of the last change of a user's password?`,
+        ans: [{txt:`A. /etc/gshadow`, right:false, choosen:false }, {txt:`B. /etc/passwd`, right: false, choosen:false }, {txt:`C. /etc/pwdlog`, right: false, choosen:false }, {txt:`D. /var/log/shadow`, right:true, choosen:false }, {txt:`E. /etc/shadow`, right: false, choosen:false }],
+        info: "Die Antwort ist: E",
+        art: "sc"
+      },
+      {
+        id: 115,
+        txt: `QUESTION 115: What is the purpose of the iconv command?`,
+        ans: [{txt:`A. It converts bitmap images from one format to another such as PNG to JPEG.`, right:false, choosen:false }, {txt:`B. It verifies that the root directory tree compiles to all conventions from the Filesystem Hierarchy Standard (FHS).`, right: false, choosen:false }, {txt:`C. It converts files from one character set to an other.`, right: true, choosen:false }, {txt:`D. It changes the mode of an inode in the ext4 filesystem.`, right: false, choosen:false }, {txt:`E. It displays additional meta information from icon files ending in .ico.`, right: false, choosen:false }],
+        info: "Die Antwort ist: C",
+        art: "sc"
+      },
+      {
+        id: 111,
+        txt: `QUESTION 111: Which of the following sections exists in a systemd timer unit?`,
+        ans: [{txt:`A. [Events]`, right:false, choosen:false }, {txt:`B. [Timer]`, right: true, choosen:false }, {txt:`C. [cron]`, right: false, choosen:false }, {txt:`D. [Schedule]`, right: false, choosen:false }, {txt:`E. [Trigger]`, right: false, choosen:false }],
+        info: "Die Antwort ist: B",
+        art: "sc"
+      },
+      {
+        id: 112,
+        txt: `Which of the following getent invocations lists all existing users?`,
+        ans: [{txt:`A. getent homes`, right:false, choosen:false }, {txt:`B. getent uids`, right: false, choosen:false }, {txt:`C. getent passwd`, right: true, choosen:false }, {txt:`D. getent users`, right: false, choosen:false }, {txt:`E. getent logins`, right: false, choosen:false }],
+        info: "Die Antwort ist: C",
+        art: "sc"
+      },
+      {
+        id: 113,
+        txt: `QUESTION 113:
+
+        Given the following user's crontab entry:
+         15 14 * * 1-5 /usr/local/bin/example.sh
+        When will the script /usr/local/bin/example.sh be executed?`,
+        ans: [{txt:`A. At 14:15 local time, January till May.`, right:false, choosen:false }, {txt:`B. At 15:14 local time, 1st to 5th day of month.`, right: false, choosen:false }, {txt:`C. At 14:15 local time, February till June.`, right: false, choosen:false }, {txt:`D. At 14:15 local time, 1st to 5th day of month.`, right: false, choosen:false }, {txt:`E. At 14:15 local time, Monday to Friday`, right: false, choosen:false }],
+        info: "Die Antwort ist: E",
+        art: "sc"
+      },
+      {
+        id: 114,
+        txt: `If neither cron.allow nor cron.deny exist in /etc/, which of the following is true?`,
+        ans: [{txt:`A. Without additional configuration, all users may create user specific crontabs.`, right:false, choosen:false }, {txt:`B. Without additional configuration, only root may create user specific crontabs.`, right:true, choosen:false }, {txt:`C. The cron daemon will refuse to start and report missing files in the system's logfile.`, right: false, choosen:false }, {txt:`D. When a user creates a user specific crontab the system administrator must approve it explicitly.`, right: false, choosen:false }, {txt:`E. The default settings of /etc/crond.conf define whether or not user specific crontabs are generally allowed or not.`, right: false, choosen:false }],
+        info: "Die Antwort ist: B",
+        art: "sc"
+      },
+      {
+        id: 116,
+        txt: `QUESTION 116: Which character in the password field of /etc/passwd is used to indicate that the encrypted password
+        is stored in /etc/shadow?`,
+        ans: [{txt:`A. *`, right:false, choosen:false }, {txt:`B. !`, right: false, choosen:false }, {txt:`C. s`, right: false, choosen:false }, {txt:`D. #`, right: false, choosen:false }, {txt:`E. x`, right:true, choosen:false }],
+        info: "Die Antwort ist: E",
+        art: "sc"
+      },
+      {
+        id: 117,
+        txt: `QUESTION 117: What does the term Braille Display refer to?`,
+        ans: [{txt:`A. A standardized high contract graphical theme for desktop applications?`, right:false, choosen:false }, {txt:`B. A Linux desktop environment similar to KDE and GNOME.`, right: false, choosen:false }, {txt:`C. A legacy display technology superseded by LCD.`, right: false, choosen:false }, {txt:`D. A physical representation of characters using small dots.`, right: true, choosen:false }, {txt:`E. A standard file format for data exchange, similar to XML.`, right: false, choosen:false }],
+        info: "Die Antwort ist: D",
+        art: "sc"
+      },
+      {
+        id: 120,
+        txt: `Which of the following protocols is designed to access the video card output of a virtual machine?`,
+        ans: [{txt:`A. KDE`, right:false, choosen:false }, {txt:`B. X11`, right: false, choosen:false }, {txt:`C. Xfce`, right: false, choosen:false }, {txt:`D. SPICE`, right:true, choosen:false }, {txt:`E. XDMCP`, right: false, choosen:false }],
+        info: "Die Antwort ist: D",
         art: "sc"
       },
     ];
