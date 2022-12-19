@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FORMERR } from 'dns';
 import { LPIsimService } from '../shared/lpisim.service';
 import { fillQuestion, mcQuestion, scQuestion } from '../shared/questions';
 
@@ -331,7 +330,7 @@ export class ExamModusComponent implements OnInit {
   calc() { // Funktion für die Berechnung der Ergebnisse in Prozent
     if (this.multi == true) {
       this.trueProzent = (this.totalTrue * 100 / this.mcFragen.length).toFixed(2);
-      // this.falseProzent = (this.trys * 100 / this.mcFragen.length).toFixed(2);
+      this.falseProzent = (this.totalFalse * 100 / this.mcFragen.length).toFixed(2);
       this.skipProzent = (this.totalSkip * 100 / this.mcFragen.length).toFixed(2);
     }
     if (this.single == true) {

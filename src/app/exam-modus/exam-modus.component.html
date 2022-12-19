@@ -33,44 +33,38 @@
   <div *ngIf="this.multi == true">
     <h2>Multiple-Choice results:</h2>
     <h3 [ngStyle]="{'color':'green'}">
-      {{ this.totalTrue }} of {{ mcFragen.length }} correct!<br> {{ this.trueProzent }} %</h3><br>
-      <h3 *ngIf="this.falseProzent > 20" [ngStyle]="{'color':'green'}">
-        {{ this.totalFalse }} of {{ mcFragen.length }} wrong!<br> {{ this.falseProzent }} %</h3><br>
-      <h3 *ngIf="this.falseProzent <= 20" [ngStyle]="{'color':'red'}">
-        {{ this.totalFalse }} of {{ mcFragen.length }} wrong!<br> {{ this.falseProzent }} %</h3><br>
+      {{ this.totalTrue }} of {{ mcFragen.length }} richtig!<br> {{ this.trueProzent }} %</h3><br>
+      <h3 [ngStyle]="{'color':'red'}">
+        {{ this.totalFalse }} of {{ mcFragen.length }} geraten!<br> {{ this.falseProzent }} %</h3><br>
         <h3 [ngStyle]="{'color':'green'}">
-          {{ this.totalSkip }} of {{ mcFragen.length }} skipped!<br> {{ this.skipProzent }} %</h3><br>
+          {{ this.totalSkip }} of {{ mcFragen.length }} übersprungen!<br> {{ this.skipProzent }} %</h3><br>
   </div><br>
   <div *ngIf="this.single == true">
     <h2>Single-Choice:</h2>
-      <h3 [ngStyle]="{'color':'green'}">
-        {{ this.totalTrue }} of {{ scFragen.length }} correct!<br> {{ this.trueProzent }} %</h3><br>
-        <h3 *ngIf="this.falseProzent > 20" [ngStyle]="{'color':'green'}">
-          {{ this.totalFalse }} of {{ scFragen.length }} wrong!<br> {{ this.falseProzent }} %</h3><br>
-        <h3 *ngIf="this.falseProzent <= 20" [ngStyle]="{'color':'red'}">
-          {{ this.totalFalse }} of {{ scFragen.length }} wrong!<br> {{ this.falseProzent }} %</h3><br>
-          <h3 [ngStyle]="{'color':'green'}">
-            {{ this.totalSkip }} of {{ scFragen.length }} skipped!<br> {{ this.skipProzent }} %</h3><br>
+    <h3 [ngStyle]="{'color':'green'}">
+      {{ this.totalTrue }} of {{ mcFragen.length }} richtig!<br> {{ this.trueProzent }} %</h3><br>
+      <h3 [ngStyle]="{'color':'red'}">
+        {{ this.totalFalse }} of {{ mcFragen.length }} geraten!<br> {{ this.falseProzent }} %</h3><br>
+        <h3 [ngStyle]="{'color':'green'}">
+          {{ this.totalSkip }} of {{ mcFragen.length }} übersprungen!<br> {{ this.skipProzent }} %</h3><br>
   </div><br>
   <div *ngIf="this.fill == true">
     <h2>Fill-In:</h2>
-      <h3 [ngStyle]="{'color':'green'}">
-        {{ this.totalTrue }} of {{ fillFragen.length }} correct!<br> {{ this.trueProzent }} %</h3><br>
-        <h3 *ngIf="this.falseProzent > 20" [ngStyle]="{'color':'green'}">
-          {{ this.totalFalse }} of {{ fillFragen.length }} wrong!<br> {{ this.falseProzent }} %</h3><br>
-        <h3 *ngIf="this.falseProzent <= 20" [ngStyle]="{'color':'red'}">
-          {{ this.totalFalse }} of {{ fillFragen.length }} wrong!<br> {{ this.falseProzent }} %</h3><br>
-          <h3 [ngStyle]="{'color':'green'}">
-            {{ this.totalSkip }} of {{ fillFragen.length }} skipped!<br> {{ this.skipProzent }} %</h3><br>
+    <h3 [ngStyle]="{'color':'green'}">
+      {{ this.totalTrue }} of {{ mcFragen.length }} richtig!<br> {{ this.trueProzent }} %</h3><br>
+      <h3 [ngStyle]="{'color':'red'}">
+        {{ this.totalFalse }} of {{ mcFragen.length }} geraten!<br> {{ this.falseProzent }} %</h3><br>
+        <h3 [ngStyle]="{'color':'green'}">
+          {{ this.totalSkip }} of {{ mcFragen.length }} übersprungen!<br> {{ this.skipProzent }} %</h3><br>
   </div><br>
   <div *ngIf="this.all == true">
     <h2>All Questions:</h2>
     <h3 [ngStyle]="{'color':'green'}">
-      {{ this.totalTrue }} of {{ allQuest.length }} correct!<br> {{ this.trueProzent }} %</h3><br>
-      <h3 *ngIf="this.falseProzent > 20" [ngStyle]="{'color':'green'}">
-        {{ this.totalFalse }} of {{ allQuest.length }} wrong!<br> {{ this.falseProzent }} %</h3><br>
-      <h3 *ngIf="this.falseProzent <= 20" [ngStyle]="{'color':'red'}">
-        {{ this.totalFalse }} of {{ allQuest.length }} wrong!<br> {{ this.falseProzent }} %</h3><br>
+      {{ this.totalTrue }} of {{ mcFragen.length }} correct!<br> {{ this.trueProzent }} %</h3><br>
+      <h3 [ngStyle]="{'color':'red'}">
+        {{ this.totalFalse }} of {{ mcFragen.length }} wrong!<br> {{ this.falseProzent }} %</h3><br>
+        <h3 [ngStyle]="{'color':'green'}">
+          {{ this.totalSkip }} of {{ mcFragen.length }} skipped!<br> {{ this.skipProzent }} %</h3><br>
     </div><br>
   <button class="statistics" (click)="changeMode('default'); reload()">Zurück</button>
 </div>
