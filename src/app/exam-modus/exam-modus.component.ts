@@ -197,6 +197,7 @@ export class ExamModusComponent implements OnInit {
         this.bewertung.push('Richtig');
       } else {
         this.bewertung.push('Falsch');
+        this.tooMuchFalse += 1;
       }
     } else {
       this.bewertung.push('Skip');
@@ -280,6 +281,7 @@ export class ExamModusComponent implements OnInit {
           this.bewertung.push('Richtig');
         } else {
           this.bewertung.push('Falsch');
+          this.tooMuchFalse += 1;
         }
       } else {
         this.bewertung.push('Skip');
