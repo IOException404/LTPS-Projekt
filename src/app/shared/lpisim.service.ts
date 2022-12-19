@@ -16,14 +16,14 @@ export class LPIsimService {
       {
         id: 7,
         txt:"QUESTION 7: Which of the following connection types, as seen in nmcli connection show, may exist in NetworkManager? (Choose three.)",
-        ans: [ {txt:"A. tcp", right: false, choosen:false }, {txt:"B. ethernet", right: true, choosen:false }, {txt:"C. wifi", right: true, choosen:false }, {txt:"D. ipv6", right: false, choosen:false }, {txt:"E. bridge", right: true, choosen:false }],
+        ans: [ {txt:"A. tcp", right:false, choosen:false}, {txt:"B. ethernet", right:true, choosen:false}, {txt:"C. wifi", right:true, choosen:false}, {txt:"D. ipv6", right:false, choosen:false }, {txt:"E. bridge", right:true, choosen:false}],
         info: "Die Antworten sind: B-C-E",
         art: "mc"
       },
       {
         id: 10,
         txt:"QUESTION 10: Which of the following nmcli subcommands exist? (Choose two.)",
-        ans: [{txt:'A. nmcli ethernet', right:false, choosen:false  },  { txt:'B. nmcli device', right: true, choosen:false }, { txt:'C. nmcli wifi', right: false, choosen:false  }, { txt:'D. nmcli address', right: false, choosen:false  }, { txt:'E. nmcli connection', right:true, choosen:false  }],
+        ans: [{txt:'A. nmcli ethernet', right:false, choosen:false}, {txt:'B. nmcli device', right: true, choosen:false}, {txt:'C. nmcli wifi', right:false, choosen:false}, { txt:'D. nmcli address', right:false, choosen:false}, { txt:'E. nmcli connection', right:true, choosen:false}],
         info: "Die Antworten sind: B-E",
         art: "mc"
       },
@@ -83,6 +83,77 @@ export class LPIsimService {
         info: "Die Antworten sind: C-D",
         art: "mc"
       },
+      {
+        id: 60,
+        txt: "Which of the following features are provided by SPICE? (Choose two.)",
+        ans: [{txt: "A. Connecting local USB devices to remote applications.", right:true, choosen:false}, {txt: "B. Accessing graphical applications on a remote host.", right:true, choosen:false}, {txt: "C. Replacing Xorg as local X11 server.", right:false, choosen:false}, {txt: "D. Downloading and locally installing applications from a remote machine.", right:false, choosen:false}, {txt: "E. Uploading and running a binary program on a remote machine.", right:false, choosen:false}],
+        info: "Die Antworten sind: A-B",
+        art: "mc"
+      },
+      {
+        id: 40,
+        txt: "QUESTION 40: Which of the following comparison operators for test work on elements in the file system? (Choose two.)",
+        ans: [{txt: "A. -z", right:false, choosen:false}, {txt: "B. -eq", right:false, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "D. -f", right:true, choosen:false}, {txt: "E. -lt", right:false, choosen:false} ],
+        info: "Die Antworten sind: C-D",
+        art: "mc"
+      },
+      {
+        id: 50,
+        txt: "QUESTION 50: Given the following excerpt of the sudo configuration: Jane ANY=NOPASSWD: /bin/kill, /bin/id, PASSWD: /sbin/fdisk Which of the following statements are true? (Choose three.)",
+        ans: [{txt: "A. Jane can run /bin/id only after specifying her password.", right:false, choosen:false}, {txt: "B. Jane can run /sbin/fdisk after specifying root's password.", right:false, choosen:false}, {txt: "C. Jane can run /sbin/fdisk after specifying her password.", right:true, choosen:false}, {txt: "D. Jane can run /bin/kill without specifying a password.", right:true, choosen:false}, {txt: "E. Jane can run /bin/id without specifying her password.", right:true, choosen:false}],
+        info: "Die Antworten sind: C-D-E",
+        art: "mc"
+      },
+      {
+        id: 40,
+        txt: "QUESTION 40: Which of the following comparison operators for test work on elements in the file system? (Choose two.)",
+        ans: [{txt: "A. -z", right:false, choosen:false}, {txt: "B. -eq", right:false, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "D. -f", right:true, choosen:false}, {txt: "E. -lt", right:false, choosen:false} ],
+        info: "Die Antworten sind: C-D",
+        art: "mc"
+      },
+      {
+        id: 40,
+        txt: "QUESTION 40: Which of the following comparison operators for test work on elements in the file system? (Choose two.)",
+        ans: [{txt: "A. -z", right:false, choosen:false}, {txt: "B. -eq", right:false, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "D. -f", right:true, choosen:false}, {txt: "E. -lt", right:false, choosen:false} ],
+        info: "Die Antworten sind: C-D",
+        art: "mc"
+      },
+      {
+        id: 40,
+        txt: "QUESTION 40: Which of the following comparison operators for test work on elements in the file system? (Choose two.)",
+        ans: [{txt: "A. -z", right:false, choosen:false}, {txt: "B. -eq", right:false, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "D. -f", right:true, choosen:false}, {txt: "E. -lt", right:false, choosen:false} ],
+        info: "Die Antworten sind: C-D",
+        art: "mc"
+      },
+      {
+        id: 40,
+        txt: "QUESTION 40: Which of the following comparison operators for test work on elements in the file system? (Choose two.)",
+        ans: [{txt: "A. -z", right:false, choosen:false}, {txt: "B. -eq", right:false, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "D. -f", right:true, choosen:false}, {txt: "E. -lt", right:false, choosen:false} ],
+        info: "Die Antworten sind: C-D",
+        art: "mc"
+      },
+      {
+        id: 40,
+        txt: "QUESTION 40: Which of the following comparison operators for test work on elements in the file system? (Choose two.)",
+        ans: [{txt: "A. -z", right:false, choosen:false}, {txt: "B. -eq", right:false, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "D. -f", right:true, choosen:false}, {txt: "E. -lt", right:false, choosen:false} ],
+        info: "Die Antworten sind: C-D",
+        art: "mc"
+      },
+      {
+        id: 40,
+        txt: "QUESTION 40: Which of the following comparison operators for test work on elements in the file system? (Choose two.)",
+        ans: [{txt: "A. -z", right:false, choosen:false}, {txt: "B. -eq", right:false, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "D. -f", right:true, choosen:false}, {txt: "E. -lt", right:false, choosen:false} ],
+        info: "Die Antworten sind: C-D",
+        art: "mc"
+      },
+      {
+        id: 40,
+        txt: "QUESTION 40: Which of the following comparison operators for test work on elements in the file system? (Choose two.)",
+        ans: [{txt: "A. -z", right:false, choosen:false}, {txt: "B. -eq", right:false, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "C. -d", right:true, choosen:false}, {txt: "D. -f", right:true, choosen:false}, {txt: "E. -lt", right:false, choosen:false} ],
+        info: "Die Antworten sind: C-D",
+        art: "mc"
+      },
+
     ];
 
 
@@ -231,6 +302,83 @@ export class LPIsimService {
         txt:"QUESTION 46: What command list the aliases defined in the current Bash shell? (Specify only the command without any path or parameters.)",
         ans: "alias",
         info: "Answer: alias",
+        art: "fill"
+      },
+      {
+        id: 54,
+        txt:"QUESTION 54: When using X11 forwarding in SSH, what environment variable is automatically set in the remote shell in order to help applications to connect to the correct X11 server? (Specify only the environment variable without any additional commands or values.)",
+        ans: "DISPLAY",
+        info: "Answer: DISPLAY",
+        art: "fill"
+      },
+      {
+        id: 55,
+        txt:"QUESTION 55: The presence of what file will temporarily prevent all users except root from logging into a system?(Specify the full name of the file, including path.)",
+        ans: "/etc/nologin",
+        info: "Answer: /etc/nologin",
+        art: "fill"
+      },
+      {
+        id: 64,
+        txt:"QUESTION 64: Which file is processed by newaliases? (Specify the full name of the file, including path.)",
+        ans: "/etc/aliases",
+        info: "Answer: /etc/aliases",
+        art: "fill"
+      },
+      {
+        id: 71,
+        txt:"QUESTION 71: Which command is used to sync the hardware clock to the system clock? (Specify only the command without any path or parameters.)",
+        ans: "hwclock",
+        info: "Answer: hwclock",
+        art: "fill"
+      },
+      {
+        id: 87,
+        txt:"QUESTION 87: What command is used to add OpenSSH private keys to a running ssh-agent instance? (Specify the command name only without any path.)",
+        ans: "ssh-add",
+        info: "Answer: ssh-add",
+        art: "fill"
+      },
+      {
+        id: 88,
+        txt:"QUESTION 88: Which directory holds configuration files for xinetd services? (Specify the full path to the directory.)",
+        ans: "/etc/xinetd.d/",
+        info: "Answer: /etc/xinetd.d/",
+        art: "fill"
+      },
+      {
+        id: 94,
+        txt:"QUESTION 94: Which parameter is missing in the command ip link set ____ dev eth0 to activate the previously inactive network interface eth0? (Specify the parameter only without any command, path or additional options.)",
+        ans: "up",
+        info: "Answer: up",
+        art: "fill"
+      },
+      {
+        id: 90,
+        txt:"QUESTION 90:Which parameter of the ssh command specifies the location of the private key used for login attempts? (Specify only the option name without any values or parameters.)",
+        ans: "-i",
+        info: "Answer: -i",
+        art: "fill"
+      },
+      {
+        id: 102,
+        txt:"QUESTION 102: What command enables a network interface according to distribution-specific configuration, such as /etc/network/interfaces or /etc/sysconfig/network-scripts/ifcfg-eth0? (Specify only the command without any path or parameters.)",
+        ans: "ifup",
+        info: "Answer: ifup",
+        art: "fill"
+      },
+      {
+        id: 107,
+        txt:"QUESTION 107: What option to useradd creates a new user's home directory and provisions it with a set of standard files? (Specify only the option name without any values or parameters.)",
+        ans: "-m",
+        info: "Answer: -m",
+        art: "fill"
+      },
+      {
+        id: 118,
+        txt:"QUESTION 118: Which environment variable is used by an X11 client to determine the X Server to connect to? (Specify only the variable name without any preceding commands or values.)",
+        ans: "DISPLAY",
+        info: "Answer: DISPLAY",
         art: "fill"
       },
     ]

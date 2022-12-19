@@ -1,5 +1,7 @@
+import { isNgTemplate } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { INSPECT_MAX_BYTES } from 'buffer';
 import { LPIsimService } from '../shared/lpisim.service';
 import { fillQuestion, mcQuestion, scQuestion } from '../shared/questions';
 
@@ -34,6 +36,10 @@ export class LernModusComponent implements OnInit {
     }
     for (let ele of this.fillFragen) {
       this.allQuest.push(ele);
+    }
+    if(this.viewState == "Fragenliste") {
+      this.allQuest.sort(function (a, b) {
+         return a.id - b.id });
     }
   }
 

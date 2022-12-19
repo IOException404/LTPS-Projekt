@@ -103,7 +103,6 @@
     <tr>
       <th>
         <button *ngIf="back == true" (click)="prevFrage()">Zurück</button>
-        <button (click)="infoText()">Info</button>
       </th>
       <th>
         <button (click)="exit()">Abbrechen</button>
@@ -111,9 +110,6 @@
         <button *ngIf="targetReached" (click)="mcAnswersCheck(); results(); calc(); changeMode('Statistik')">Auswerten</button>
       </th>
     </tr>
-  </div>
-  <div class="solution" *ngIf="info">
-    {{ mcQuest.info }}
   </div>
 </div>
 <!-- ENDE -->
@@ -139,7 +135,6 @@
     <tr>
       <th>
         <button *ngIf="back == true" (click)="prevFrage()">Zurück</button>
-        <button (click)="infoText()">Info</button>
       </th>
       <th>
         <button (click)="exit()">Abbrechen</button>
@@ -147,9 +142,6 @@
         <button *ngIf="targetReached" (click)="scAnswersCheck(); results(); calc(); changeMode('Statistik')">Auswerten</button>
       </th>
     </tr>
-  </div>
-  <div class="solution" *ngIf="info">
-    {{ scQuest.info }}
   </div>
 </div>
 <!-- ENDE -->
@@ -175,7 +167,6 @@
     <tr>
       <th>
         <button *ngIf="back == true" (click)="prevFrage()">Zurück</button>
-        <button (click)="infoText()">Info</button>
       </th>
       <th>
         <button (click)="exit()">Abbrechen</button>
@@ -183,9 +174,6 @@
         <button *ngIf="targetReached" (click)="fillAnswerCheck(box.value); results(); calc(); changeMode('Statistik')">Auswerten</button>
       </th>
     </tr>
-  </div>
-  <div class="solution" *ngIf="info">
-    {{ fillQuest.info }}
   </div>
 </div>
 <!-- ENDE -->
@@ -235,7 +223,6 @@
       <tr>
         <th>
           <button *ngIf="back == true" (click)="prevFrage()">Zurück</button>
-          <button (click)="infoText()">Info</button>
         </th>
         <th>
           <button (click)="exit()">Abbrechen</button>
@@ -269,7 +256,6 @@
       <tr>
         <th>
           <button *ngIf="back == true" (click)="prevFrage()">Zurück</button>
-          <button (click)="infoText()">Info</button>
         </th>
         <th>
           <button (click)="exit()">Abbrechen</button>
@@ -281,9 +267,5 @@
       </tr>
     </div>
   </div>
-  <div class="solution" *ngIf="info">
-    {{ this.allQuest[currentArrayId].info }}
-  </div>
-  <!-- </div> -->
 </div>
 <!-- ENDE -->

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FORMERR } from 'dns';
 import { LPIsimService } from '../shared/lpisim.service';
 import { fillQuestion, mcQuestion, scQuestion } from '../shared/questions';
 
@@ -20,7 +21,6 @@ export class ExamModusComponent implements OnInit {
   scQuest: scQuestion; // Einzelne Single-Choice-Frage
   fillQuest: fillQuestion; // Einzelne Fill-In-Frage
   currentArrayId: number = 0;  // Klick prev und next Variable
-  info: boolean = false; // Info und Inhalt Variable
   bewertung = [];
   tooMuchFalse: number; // Abbruch-Variable, bei 20% wird der Prüfmodus beendet
   totalTrue = 0;
@@ -29,6 +29,9 @@ export class ExamModusComponent implements OnInit {
   trueProzent: string;
   falseProzent: string;
   skipProzent: string;
+  rightQuestions: string[] = [];
+  falseQuestions: string[] = [];
+  skippedQuestions: string[] = [];
 
 
   allQuest = []; // Leeres Alle Fragen Array
@@ -75,35 +78,35 @@ export class ExamModusComponent implements OnInit {
 
   youFailed() {
     let percent: number;
-    if(this.viewState == 'Multiple Choice') {
+    if (this.viewState == 'Multiple Choice') {
       percent = this.tooMuchFalse * 100 / this.mcFragen.length;
-      if(percent >= 20) {
-        let reload = window.confirm('Du hast mehr als 20% der Fragen falsch geraten. Du solltest mehr üben');
+      if (percent >= 20) {
+        let reload = window.confirm('Du hast mehr als 20% der Fragen geraten. Du solltest mehr üben');
         this.reload();
-        }
       }
-      if(this.viewState == 'Single Choice') {
-        percent = this.tooMuchFalse * 100 / this.scFragen.length;
-        if(percent >= 20) {
-          let reload = window.confirm('Du hast mehr als 20% der Fragen falsch geraten. Du solltest mehr üben');
-          this.reload();
-        }
+    }
+    if (this.viewState == 'Single Choice') {
+      percent = this.tooMuchFalse * 100 / this.scFragen.length;
+      if (percent >= 20) {
+        let reload = window.confirm('Du hast mehr als 20% der Fragen gerate. Du solltest mehr üben');
+        this.reload();
       }
-      if(this.viewState == 'Fill-In') {
-        percent = this.tooMuchFalse * 100 / this.fillFragen.length;
-        if(percent >= 20) {
-          let reload = window.confirm('Du hast mehr als 20% der Fragen falsch geraten. Du solltest mehr üben');
-          this.reload();
-        }
+    }
+    if (this.viewState == 'Fill-In') {
+      percent = this.tooMuchFalse * 100 / this.fillFragen.length;
+      if (percent >= 20) {
+        let reload = window.confirm('Du hast mehr als 20% der Fragen geraten. Du solltest mehr üben');
+        this.reload();
       }
-      if(this.viewState == 'Fill-In') {
-        percent = this.tooMuchFalse * 100 / this.allQuest.length;
-        if(percent >= 20) {
-          let reload = window.confirm('Du hast mehr als 20% der Fragen falsch geraten. Du solltest mehr üben');
-          this.reload();
-       }
-     }
-     console.log('Fehler: ', percent, '%')
+    }
+    if (this.viewState == 'Fill-In') {
+      percent = this.tooMuchFalse * 100 / this.allQuest.length;
+      if (percent >= 20) {
+        let reload = window.confirm('Du hast mehr als 20% der Fragen geraten. Du solltest mehr üben');
+        this.reload();
+      }
+    }
+    console.log('Fehler: ', percent, '%')
   }
 
 
@@ -135,7 +138,6 @@ export class ExamModusComponent implements OnInit {
         this.targetReached = true;
       }
     }
-    this.info = false; // Info Text ausblenden, Tipps gibt es nur bei Bedarf :)
     console.log(this.bewertung);
   }
 
@@ -146,7 +148,6 @@ export class ExamModusComponent implements OnInit {
       if (this.viewState == "Single Choice") { this.scQuest = this.scFragen[this.currentArrayId]; }
       if (this.viewState == "Fill-In") { this.fillQuest = this.fillFragen[this.currentArrayId]; }
       if (this.viewState == "Alle Fragen") { this.allQuest[this.currentArrayId]; }
-      this.info = false; // Info Text zurück setzen
       this.bewertung.pop(); // Variable rechnet richtige Antwort weg, ansonsten drohen zuviele richtige Antworten die nicht sein können!!!
     }
     if (this.currentArrayId < 1) { // <-- Zurück-Button wieder löschen
@@ -155,42 +156,56 @@ export class ExamModusComponent implements OnInit {
     this.targetReached = false;
   }
 
-  infoText() { // Info Text für die richtigen Antworten ein- und ausschalten
-    this.info = !this.info;
-  }
-
   toggleChoosen(answer: any) { // Hier werden in der Checkbox die Boolean-Werte beim auswählen ausgetauscht
     answer.choosen = !answer.choosen; // Beim Auswählen und abwählen werden die Werte jeweils auf 'true' oder 'false' gesetzt
   }
 
-  mcAnswersCheck() { // Richtig oder Falsch-Funktion der Fragen
-    let qAnswered: boolean = false;
-    let qCorrect: boolean = true;
-
-    // 2. Flags bestimmen
-    for (let antwort of this.mcQuest.ans) {
-      // default ist alle choosen sind false
-      if (antwort.choosen) {
-        // anwort wurde gegeben --> frage wurde beantwortet
-        qAnswered = true;
-        if (antwort.right != antwort.choosen) {
-          // antwort ist falsch --> frage ist falsch
-          qCorrect = false;
-        }
+  wasMcSkipped(quest: mcQuestion) {
+    let wasSkipped: boolean = true;
+    for (let ele of quest.ans) {
+      if (ele.choosen == true) {
+        wasSkipped = false;
       }
     }
-    // 3. aufgrund der Flags Actions durchführen
-    if(qAnswered) {
-      qAnswered = false;
-      if(qCorrect) {
+    return wasSkipped;
+  }
+
+  wasMcRight(quest: mcQuestion) {
+    let isRight: boolean = true;
+    for (let ele of quest.ans) {
+      if ((ele.choosen && !ele.right) || (!ele.choosen && ele.right)) {
+        isRight = false
+      }
+    }
+    return isRight;
+  }
+
+  mcAnswersCheck() { // Richtig oder Falsch-Funktion der Fragen
+    let qAnswered: boolean = false;
+    let qCorrect: boolean = false;
+
+    qAnswered = !this.wasMcSkipped(this.mcQuest);
+
+    if (qAnswered) {
+      qCorrect = this.wasMcRight(this.mcQuest);
+    }
+
+    //Stand hier
+    //qAnswered = true => Frage wurde beantwortet
+    //qAnswered=false => Frage wurde uebersprungen
+    //qCorrect= true => alle MC Antworten dieser Frage richtig gegeben
+    //qCorrect= false => mindestens eine Antwort war falsch
+
+    if (qAnswered == true) {
+      if (qCorrect == true) {
         this.bewertung.push('Richtig');
       } else {
         this.bewertung.push('Falsch');
-        this.tooMuchFalse += 1;
       }
     } else {
       this.bewertung.push('Skip');
     }
+
     this.nextFrage();
   }
 
@@ -214,10 +229,10 @@ export class ExamModusComponent implements OnInit {
       }
     }
 
-    if(qAnswered) {
+    if (qAnswered) {
       qAnswered = false;
       this.scAnswer = " ";
-      if(qCorrect) {
+      if (qCorrect) {
         this.bewertung.push('Richtig');
       } else {
         this.bewertung.push('Falsch');
@@ -227,20 +242,20 @@ export class ExamModusComponent implements OnInit {
       this.bewertung.push('Skip');
     }
     this.nextFrage();
-   }
+  }
 
   fillAnswerCheck(answerText: string) {
     let qAnswered: boolean = false;
     let qCorrect: boolean = true;
     if (answerText) {
-        qAnswered = true;
+      qAnswered = true;
       if (answerText != this.fillQuest.ans) {
-          qCorrect = false;
+        qCorrect = false;
       }
     }
 
-    if(qAnswered) {
-      if(qCorrect) {
+    if (qAnswered) {
+      if (qCorrect) {
         this.bewertung.push('Richtig');
       } else {
         this.bewertung.push('Falsch');
@@ -256,22 +271,19 @@ export class ExamModusComponent implements OnInit {
     // All-MC-Fragen
     if (this.allQuest[this.currentArrayId].art == 'mc') {
       let qAnswered: boolean = false;
-      let qCorrect: boolean = true;
+      let qCorrect: boolean = false;
 
-      for (let antwort of this.allQuest[this.currentArrayId].ans) {
-        if (antwort.choosen) {
-          qAnswered = true;
-          if (antwort.right != antwort.choosen) {
-            qCorrect = false;
-          }
-        }
+      qAnswered = !this.wasMcSkipped(this.allQuest[this.currentArrayId]);
+
+      if (qAnswered) {
+        qCorrect = this.wasMcRight(this.allQuest[this.currentArrayId]);
       }
-      if(qAnswered) {
-        if(qCorrect) {
+
+      if (qAnswered == true) {
+        if (qCorrect == true) {
           this.bewertung.push('Richtig');
         } else {
           this.bewertung.push('Falsch');
-          this.tooMuchFalse += 1;
         }
       } else {
         this.bewertung.push('Skip');
@@ -293,8 +305,8 @@ export class ExamModusComponent implements OnInit {
           qCorrect = false;
         }
       }
-      if(qAnswered) {
-        if(qCorrect) {
+      if (qAnswered) {
+        if (qCorrect) {
           this.bewertung.push('Richtig');
         } else {
           this.bewertung.push('Falsch');
@@ -341,13 +353,13 @@ export class ExamModusComponent implements OnInit {
 
   results() {
     this.bewertung.forEach(check => {
-      if(check == "Richtig") {
+      if (check == "Richtig") {
         this.totalTrue++;
       }
-      if(check == "Falsch") {
+      if (check == "Falsch") {
         this.totalFalse++;
       }
-      if(check == "Skip" ) {
+      if (check == "Skip") {
         this.totalSkip++;
       }
     });

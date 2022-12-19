@@ -28,8 +28,9 @@
 
 <!-- FRAGENLISTE -->
 <div *ngIf="viewState == 'Fragenliste'" class="list">
-  <div *ngFor="let ele of allQuest">
-    <p>{{ ele.txt }}</p><br>
+  <div *ngFor="let answer of allQuest">
+    <p><br>{{ answer.txt }}</p>
+    <p [ngStyle]="{'color':'green'}">{{ answer.info }}</p>
   </div>
   <div>
     <button class="statistics" (click)="reload()">Zurück</button>

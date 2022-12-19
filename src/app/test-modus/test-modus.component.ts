@@ -20,7 +20,6 @@ export class TestModusComponent implements OnInit {
   scQuest: scQuestion; // Einzelne Single-Choice-Frage
   fillQuest: fillQuestion; // Einzelne Fill-In-Frage
   currentArrayId: number = 0;  // Klick prev und next Variable
-  info: boolean = false; // Info und Inhalt Variable
   fehler: boolean = false; // Am Anfang gibt es weder richtig, noch falsch!
   try: number = 7; // Variable für den Testmodus, nach 7 abgezogenen Leben ist der Test vorbei
   trys: number = 0; // Spezielle Fehler-Variable die Statistik
@@ -104,7 +103,6 @@ export class TestModusComponent implements OnInit {
         this.targetReached = true;
       }
     }
-    this.info = false; // Info Text ausblenden, Tipps gibt es nur bei Bedarf :)
   }
 
   prevFrage() { // Vorherige Frage-Button
@@ -114,17 +112,12 @@ export class TestModusComponent implements OnInit {
       if (this.viewState == "Single Choice") { this.scQuest = this.scFragen[this.currentArrayId]; }
       if (this.viewState == "Fill-In") { this.fillQuest = this.fillFragen[this.currentArrayId]; }
       if (this.viewState == "Alle Fragen") { this.allQuest[this.currentArrayId]; }
-      this.info = false; // Info Text zurück setzen
       this.bewerten.pop();
     }
     if (this.currentArrayId < 1) { // <-- Zurück-Button wieder löschen
       this.back = false;  // <-- Zurück-Button wieder löschen
     }
     this.targetReached = false;
-  }
-
-  infoText() { // Info Text für die richtigen Antworten ein- und ausschalten
-    this.info = !this.info;
   }
 
   toggleChoosen(answer: any) { // Hier werden in der Checkbox die Boolean-Werte beim auswählen ausgetauscht
